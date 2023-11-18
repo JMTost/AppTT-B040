@@ -127,7 +127,7 @@ export default function RegistroPaciente() {
       Alert.alert("Error", "Rellene los campos faltantes");
     }else{
       //comprobamos que los tipos de datos y longitud se comprueben
-      const regexCorreo = "^(?!.{41})[a-z0-9]+(?:\.[a-z0-9]+)*@[a-z0-9-]+(?:\.[a-z0-9-]+)*\.[a-zA-Z]{2,6}$";
+      const regexCorreo = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$";//const regexCorreo = "^(?!.{41})[a-z0-9]+(?:\.[a-z0-9]+)*@[a-z0-9-]+(?:\.[a-z0-9-]+)*\.[a-zA-Z]{2,6}$";
       const regexFechaNacimiento = /^\d{4}[\/.]\d{1,2}[\/.]\d{1,2}$/; // caso para dd/mm/yyyy"/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/";
       if(nombre.length > 25 || apellidoPaterno.length > 25 || apellidoMaterno.length > 25 || (!email.match(regexCorreo) ||email.length > 40) || (edad < 0 && edad > 99) || !fechaNacimiento.match(regexFechaNacimiento) || (telefono.length < 0 || telefono.length > 20) || (contrasena.length < 0 || contrasena.length > 16) || (confirmacionContrasena.length < 0 || confirmacionContrasena.length > 16)){
         Alert.alert("Error", "Compruebe los campos de la entrada");

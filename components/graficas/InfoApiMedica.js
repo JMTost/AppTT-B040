@@ -26,7 +26,7 @@ const InfoApiMed = () =>{
     };
     if(loading){
       return(
-        <View style={{flex : 1, justifyContent: 'center', alignItems: 'center', paddingTop : 30}}>
+        <View style={{flex : 1, justifyContent: 'center', alignItems: 'center'}}>
           <Text>Graficas del paciente: </Text>
           {
             <GraficayTabla data = {data} />
@@ -35,10 +35,10 @@ const InfoApiMed = () =>{
       );
     }else{
       return (
-        <View style={{flex : 1, justifyContent: 'center', alignItems: 'center', paddingTop : 30}}>
+        <View style={{flex : 1, justifyContent: 'center', alignItems: 'center', paddingTop : 50}}>
         <Text>No hay información que mostrar</Text>
         {
-          console.log(infoApp)
+          //console.log(infoApp)
         }
     {
       /*

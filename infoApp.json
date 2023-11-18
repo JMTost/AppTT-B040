@@ -1,10 +1,21 @@
 {
     "APIurl" : "http://192.168.100.9:3000",
     "isLogged" : false,
+    "usuarioPaciente" : {
+        "nombreC" : "",
+        "idUsuario" : 0,
+        "urlImagen_usuario" : "",
+        "correo" : "",
+        "idVideosEjercicios" : []
+    },
+    "usuarioProfesional" : {
+        "nombreC" : "",
+        "idUsuario" : 0,
+        "urlImagen_usuario" : "",
+        "correo" : "",
+        "pacientes" : []
+    },
     "tipo" : "",
-    "nombreC" : "",
-    "idUsuario" : 0,
-    "urlImagen_usuario" : "",
     "comando" : "npx expo start --tunnel",
     "correo" : "voyecer531@bikedid.com"
 }

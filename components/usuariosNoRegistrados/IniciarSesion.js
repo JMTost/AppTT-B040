@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Pressable, TouchableOpacity, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Dropdown } from 'react-native-element-dropdown';
@@ -39,11 +39,21 @@ export default function IniciarSesion() {
   const [isFocus, setIsFocus] = useState(false);
     //
   const [isLogged, setIsLogged] = useState(false);
+  const [userType, setUserType] = useState(null);
 
   const data = [
     {label : "Profesional de la salud", value : 0},
     {label : "Paciente", value : 1},
   ];
+
+  useEffect( () => {
+    if(isLogged){
+      setUserType(value === 0 ? 'profesional' : 'paciente');
+      //navigation.navigate('home');
+    }else{
+      setIsLogged(false);
+    }
+  }, [isLogged, value]);
 
   const recuperarContrasena = () => {
     // Aquí puedes agregar la lógica de inicio de sesión
@@ -58,6 +68,7 @@ export default function IniciarSesion() {
     alert('Redireccinar a formulario para registrar a un usuario profesinal');
   };
 
+ 
 
   //COMPONENTES PARA EL HANDLER Y EL BOTON
     //BOTON PARA QUE EN LUGAR DE USARLO DE OTRO ARCHIVO, SE USE DIRECTO AQUI
@@ -80,7 +91,7 @@ export default function IniciarSesion() {
   const handleRegistro = () => {
     
     //verificamos que los datos esten dentro del rango
-    const regexCorreo = "^(?!.{41})[a-z0-9]+(?:\.[a-z0-9]+)*@[a-z0-9-]+(?:\.[a-z0-9-]+)*\.[a-zA-Z]{2,6}$";
+    const regexCorreo = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$";//const regexCorreo = "^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"; //"^(?!.{41})[a-z0-9]+(?:\.[a-z0-9]+)*@[a-z0-9-]+(?:\.[a-z0-9-]+)*\.[a-zA-Z]{2,6}$";
     if( (!email.match(regexCorreo) || email.length > 40) || (password.length < 0 || password.length > 16) ){
       //los datos son aceptados, realizamos la petición get
       console.log(email, password);
@@ -95,15 +106,31 @@ export default function IniciarSesion() {
         const response = await fetch(`${infoApp.APIurl}/login/${email}/${password}/${value}`);
         if(response.ok){
           const data_response = await response.json();
-          //console.log(data_response);
-          infoApp.idUsuario = data_response.id;
-          infoApp.tipo = data_response.tipo;
-          infoApp.nombreC = data_response.nombreC;
-          infoApp.isLogged = true; 
-          setIsLogged(infoApp.isLogged);
+          //console.log(data_response)
+          //actualización de la almacenamiento de la informmación
+          /*
+            infoApp.idUsuario = data_response.id;
+            infoApp.tipo = data_response.tipo;
+            infoApp.nombreC = data_response.nombreC;
+          */
+          if(data_response.tipo === "profesional"){
+            infoApp.usuarioProfesional.idUsuario = data_response.id;
+            infoApp.tipo = data_response.tipo;
+            infoApp.usuarioProfesional.nombreC = data_response.nombreC;
+            infoApp.usuarioProfesional.correo = dataGET.correo;
+            //infoApp.isLogged = true;
+          }else if(data_response.tipo === "paciente"){
+            infoApp.usuarioPaciente.idUsuario = data_response.id;
+            infoApp.tipo = data_response.tipo;
+            infoApp.usuarioPaciente.nombreC = data_response.nombreC;
+            infoApp.usuarioPaciente.correo = dataGET.correo;
+            //infoApp.isLogged = true; 
+          }
             //obtenemos y almacenamos la imagen de usuario
           await archivoImagen.almacenaImagen();
+          infoApp.isLogged = true;
           console.log(infoApp);
+          setIsLogged(true);
         }else{
           Alert.alert("Error", "Error en alguna parte");
         }
@@ -152,14 +179,32 @@ export default function IniciarSesion() {
     <View style={{flex :1}}>
       { isLogged ? (        
         //realizamos los casos para los tipos de usuario
-        infoApp.tipo === 'paciente' ? (
-          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <MenuUsuarioPaciente />
-            {
-              //<Text>Caso para paciente</Text>
-            }
-          </View>
-        ) : infoApp.tipo === 'profesional' ? (
+        userType === 'paciente' ? (
+          <Tab.Navigator screenOptions={({ route }) => ({
+                tabBarIcon: ({ focused, color, size }) => {
+                  let iconName;
+          
+                  if (route.name === 'home') {
+                    iconName = focused
+                      ? 'home'
+                      : 'home-outline';
+                  } else if(route.name === 'Pacient'){
+                    iconName = focused ? 'body' : 'body-outline';
+                  } else if (route.name === 'Settings') {
+                    iconName = focused ? 'person' : 'person-outline';
+                  }
+          
+                  // You can return any component that you like here!
+                  return <Ionicons name={iconName} size={15} color={color} />;
+                },
+                tabBarActiveTintColor: 'green',
+                tabBarInactiveTintColor: 'blue',
+            })}>
+              <Tab.Screen name= "home" component={HomeScreen} options={{title:"home"}} />
+              <Tab.Screen name= "Pacient" component={PacientScreen} options={{title:"Pacientes"}} />
+              <Tab.Screen name="Settings" component={SettingsScreen} options={{title:"Perfil"}} />
+          </Tab.Navigator>
+        ) : userType === 'profesional' ? (
           <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <Text>Caso para profesional</Text>
           </View>

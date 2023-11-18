@@ -10,9 +10,10 @@ const almacenaImagen = async () => {
     try {
         let url = ``;
         if(infoApp.tipo === "profesional"){
-            url = `${infoApp.APIurl}/obtenImgProfesional/${infoApp.idUsuario}`;
+            url = `${infoApp.APIurl}/obtenImgProfesional/${infoApp.usuarioProfesional.idUsuario}`;
+            console.log(`${infoApp.APIurl}/obtenImgProfesional/${infoApp.usuarioProfesional.idUsuario}`)
         }else if(infoApp.tipo === 'paciente'){
-            url = `${infoApp.APIurl}/obtenImgPaciente/${infoApp.idUsuario}`;
+            url = `${infoApp.APIurl}/obtenImgPaciente/${infoApp.usuarioPaciente.idUsuario}`;
         }
         //Verificamos que la carpeta exista
         await FileSystem.makeDirectoryAsync(carpetaDestino, {intermediates : true});
@@ -23,7 +24,11 @@ const almacenaImagen = async () => {
             const img = await respuesta.blob();
             const base64String = await blobToBase64(img);
             await FileSystem.writeAsStringAsync(rutaImg, base64String, {encoding : FileSystem.EncodingType.Base64});
-            infoApp.urlImagen_usuario = rutaImg;
+            if(infoApp.tipo === "profesional")
+                infoApp.usuarioProfesional.urlImagen_usuario = rutaImg;
+            else if(infoApp.tipo === 'paciente')
+                infoApp.usuarioPaciente.urlImagen_usuario = rutaImg;
+            
         }else{
             console.error("Error al realiza la solicitud de la API");
         }
