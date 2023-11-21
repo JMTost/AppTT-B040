@@ -20,7 +20,8 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 //archivos para caso de usuario registrado por ahora paciente
 import HomeScreen from '../home';
 import PacientScreen from '../pacientes';
-import SettingsScreen from '../usuario';
+import UserProfileScreenPaciente from '../usuariosRegistrados/pacientes/UserProfileScreen';
+import UserProfileScreenProfesional from '../usuariosRegistrados/profesionales/UserProfileScreen';
 //arcihvos para caso de usuario registrado profesional
 
 
@@ -130,7 +131,7 @@ export default function IniciarSesion() {
           await archivoImagen.almacenaImagen();
           infoApp.isLogged = true;
           console.log(infoApp);
-          setIsLogged(true);
+          setIsLogged(infoApp.isLogged);
         }else{
           Alert.alert("Error", "Error en alguna parte");
         }
@@ -163,7 +164,7 @@ export default function IniciarSesion() {
     })}>
       <Tab.Screen name= "home" component={HomeScreen} options={{title:"home"}} />
       <Tab.Screen name= "Pacient" component={PacientScreen} options={{title:"Pacientes"}} />
-      <Tab.Screen name="Settings" component={SettingsScreen} options={{title:"Perfil"}} />
+      <Tab.Screen name="UserScreen" component={UserProfileScreenPaciente} options={{title:"Perfil"}} />
     </Tab.Navigator>
     );
   }
@@ -177,6 +178,7 @@ export default function IniciarSesion() {
   }
   return (
     <View style={{flex :1}}>
+    
       { isLogged ? (        
         //realizamos los casos para los tipos de usuario
         userType === 'paciente' ? (
@@ -190,7 +192,7 @@ export default function IniciarSesion() {
                       : 'home-outline';
                   } else if(route.name === 'Pacient'){
                     iconName = focused ? 'body' : 'body-outline';
-                  } else if (route.name === 'Settings') {
+                  } else if (route.name === 'UserScreen') {
                     iconName = focused ? 'person' : 'person-outline';
                   }
           
@@ -202,12 +204,37 @@ export default function IniciarSesion() {
             })}>
               <Tab.Screen name= "home" component={HomeScreen} options={{title:"home"}} />
               <Tab.Screen name= "Pacient" component={PacientScreen} options={{title:"Pacientes"}} />
-              <Tab.Screen name="Settings" component={SettingsScreen} options={{title:"Perfil"}} />
+              <Tab.Screen name="UserScreen" component={UserProfileScreenPaciente} options={{title:"Perfil"}} />
+              {
+                //<Tab.Screen name="Settings" component={SettingsScreen} options={{title:"Perfil"}} />
+              }
           </Tab.Navigator>
         ) : userType === 'profesional' ? (
-          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>Caso para profesional</Text>
-          </View>
+          <Tab.Navigator screenOptions={({ route }) => ({
+                tabBarIcon: ({ focused, color, size }) => {
+                  let iconName;
+          
+                  if (route.name === 'home') {
+                    iconName = focused
+                      ? 'home'
+                      : 'home-outline';
+                  } else if(route.name === 'Pacient'){
+                    iconName = focused ? 'body' : 'body-outline';
+                  } else if (route.name === 'UserScreen') {
+                    iconName = focused ? 'person' : 'person-outline';
+                  }
+          
+                  // You can return any component that you like here!
+                  return <Ionicons name={iconName} size={15} color={color} />;
+                },
+                tabBarActiveTintColor: 'green',
+                tabBarInactiveTintColor: 'blue',
+            })}>
+              <Tab.Screen name="UserScreen" component={UserProfileScreenProfesional} options={{title:"Perfil"}} />
+              {
+                //<Tab.Screen name="Settings" component={SettingsScreen} options={{title:"Perfil"}} />
+              }
+          </Tab.Navigator>
         ) : null
           
     ) : (

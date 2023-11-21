@@ -11,7 +11,6 @@ const almacenaImagen = async () => {
         let url = ``;
         if(infoApp.tipo === "profesional"){
             url = `${infoApp.APIurl}/obtenImgProfesional/${infoApp.usuarioProfesional.idUsuario}`;
-            console.log(`${infoApp.APIurl}/obtenImgProfesional/${infoApp.usuarioProfesional.idUsuario}`)
         }else if(infoApp.tipo === 'paciente'){
             url = `${infoApp.APIurl}/obtenImgPaciente/${infoApp.usuarioPaciente.idUsuario}`;
         }

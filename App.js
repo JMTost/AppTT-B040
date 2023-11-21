@@ -6,7 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import HomeScreen from './components/home';
 import PacientScreen from './components/pacientes';
-import SettingsScreen from './components/usuario';
+
 //import de los archivos para usuarios no registrados
 import IniciarSesion from './components/usuariosNoRegistrados/IniciarSesion';
 import RegistroPaciente from './components/usuariosNoRegistrados/RegistroPaciente';
@@ -26,12 +26,12 @@ function Home() {
       </View>
   */
   return (
-        <Stack.Navigator initialRouteName='Inicio' screenOptions={{headerShown : false}}>
+        <Stack.Navigator screenOptions={{headerShown : false}} initialRouteName='InicioSesion'>
         {
           //de esta manera podemos dar servicio a ambos elementos previamente creados
           //este menu es para los usuarios no registrados 
         }
-          <Stack.Screen name="Inicio de Sesion" component={IniciarSesion} />
+          <Stack.Screen name="InicioSesion" component={IniciarSesion} />
           <Stack.Screen name="Registro de Paciente" component={RegistroPaciente}/>
           <Stack.Screen name="Registro de Profesional" component={RegistroProfesional} />
           <Stack.Screen name="Recuperar contraseña" component={recuperarContrasena} />
@@ -66,7 +66,7 @@ function MenuUsuario() {
   })}>
     <Tab.Screen name= "home" component={HomeScreen} options={{title:"home"}} />
     <Tab.Screen name= "Pacient" component={PacientScreen} options={{title:"Pacientes"}} />
-    <Tab.Screen name="Settings" component={SettingsScreen} options={{title:"Perfil"}} />
+    
   </Tab.Navigator>
   );
 }
@@ -86,9 +86,21 @@ function App(){
     
   };
   return (
-    <NavigationContainer>
+    <NavigationContainer >
       <Stack.Navigator>
-        {infoApp.isLogged ? (
+        {/*pantallas para usuarios no loggeados*/}
+        
+          <Stack.Screen name = "Inicio" component={Home} options={{headerShown : false}}/>
+
+      </Stack.Navigator>
+      
+    </NavigationContainer>
+  );
+};
+
+export default App;
+/*
+{infoApp.isLogged ? (
           infoApp.tipo === 'paciente' ? (
             //pantallas para los usuarios loggeados
             <Stack.Group>
@@ -98,21 +110,11 @@ function App(){
             <Stack.Screen name = "Menu usuario" component={MenuUsuarioProfesional}/>
           ) : null
         ) : (
-          //pantallas para usuarios no loggeados
-          <Stack.Group screenOptions={{headerShown : false}}>
-            <Stack.Screen name = "Inicio" component={Home} />
-          </Stack.Group>
+          
         )}
-      </Stack.Navigator>
-      
-    </NavigationContainer>
-  );
-};
+ */
 
-export default App;
-
-
-/* //header
+/*//header
 
 import * as React from 'react';
 import { View, Text } from 'react-native';
