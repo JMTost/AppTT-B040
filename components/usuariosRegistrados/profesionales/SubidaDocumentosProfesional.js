@@ -1,10 +1,41 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TextInput, Button, StyleSheet, Alert, ScrollView } from 'react-native';
 import infoApp from '../../../infoApp.json';
 import * as DocumentPicker from 'expo-document-picker';
 
 const SubidaDocumentosProfesional = () => {
+
+    //VARIABLES PARA VISUALIZAR SI CUENTA CON ARCHIVOS CARGADOS -- SOLO ES PARA INFORMACIÓN
+    const [dataArchivos, setDataArchivos] = useState([]);
+    const [loadingArchivos, setLoadingArchivos] = useState(false);
+
     const [archivoSeleccionado, setArchivoSeleccionado] = useState(null);
+
+    useEffect( () => {
+        obtenInfoArchivos();
+    }, []);
+
+    const obtenInfoArchivos = async () => {
+        try {
+          const responseArchivos = await fetch(`${infoApp.APIurl}/obtenListaArchivosProfesional/${infoApp.usuarioProfesional.idUsuario}`, {
+            method : 'GET'
+          });
+          if(responseArchivos.ok){
+            //console.log(responseArchivos);
+            const info = await responseArchivos.json();
+            setDataArchivos(info.objeto);
+            //console.log("json", info)
+            setLoadingArchivos(true);
+            //console.log("INFO ARCHIVOS: ", dataArchivos);
+          }else{
+            setLoadingArchivos(false);
+          }
+        } catch (error) {
+          console.log("error: ", error);
+          setLoadingArchivos(false);
+        }
+    };
+
     const tomaDocumento = async () => {
         try {
             const result = await DocumentPicker.getDocumentAsync({
@@ -57,15 +88,50 @@ const SubidaDocumentosProfesional = () => {
             console.warn("Archivo no seleccionado");
         }
     };
-    return(
-        <View style={{ alignContent : 'center', alignItems : 'center', justifyContent : 'center'}}>
-            <Button title="Selecciona un PDF" onPress={tomaDocumento} />
-            {archivoSeleccionado && (
-                <Text>Archivo Seleccionado: {archivoSeleccionado.assets[0].name}</Text>
-            )}
-            <Button title="Subir archivo" onPress={subidaArchivo} />
-        </View>
-    )
+    
+    if(loadingArchivos){
+        if(Object.keys(dataArchivos).includes("mensaje") ){
+            return(
+                <View style={{ alignContent : 'center', alignItems : 'center', justifyContent : 'center'}}>
+                <Text>{dataArchivos.mensaje}</Text>
+                    <Button title="Selecciona un PDF" onPress={tomaDocumento} />
+                    {archivoSeleccionado && (
+                        <Text>Archivo Seleccionado: {archivoSeleccionado.assets[0].name}</Text>
+                    )}
+                    <Button title="Subir archivo" onPress={subidaArchivo} />
+                </View>
+            );
+        }else if(Object.keys(dataArchivos).includes("archivos")){
+            //console.log(dataArchivos)
+            const elementos = [];
+            for(let i =0; i < dataArchivos.archivos.length; i++){
+                elementos.push(
+                    <Text key={i}>{dataArchivos.archivos[i].nombreArchivo}</Text>
+                );
+            }
+            return(
+                <ScrollView contentContainerStyle={{ alignContent : 'center', alignItems : 'center', justifyContent : 'center'}}>
+                    <Text>Archivos cargados: </Text>
+                    {elementos}
+                    <Button title="Selecciona un PDF" onPress={tomaDocumento} />
+                    {archivoSeleccionado && (
+                        <Text>Archivo Seleccionado: {archivoSeleccionado.assets[0].name}</Text>
+                    )}
+                    <Button title="Subir archivo" onPress={subidaArchivo} />
+                </ScrollView>
+            );
+        }
+    }else{
+        return(
+            <View style={{ alignContent : 'center', alignItems : 'center', justifyContent : 'center'}}>
+                <Button title="Selecciona un PDF" onPress={tomaDocumento} />
+                {archivoSeleccionado && (
+                    <Text>Archivo Seleccionado: {archivoSeleccionado.assets[0].name}</Text>
+                )}
+                <Button title="Subir archivo" onPress={subidaArchivo} />
+            </View>
+        )
+    }
 
 }
 

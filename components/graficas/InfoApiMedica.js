@@ -12,7 +12,7 @@ const InfoApiMed = () =>{
   
     const obtenMediciones = async () => {
       try {
-        const response = await fetch(`${infoApp.APIurl}/busquedaMediciones/2`, {
+        const response = await fetch(`${infoApp.APIurl}/busquedaMediciones/${infoApp.usuarioPaciente.idUsuario}`, {
           method : 'POST', headers : {'Content-Type' : 'application/json'}, body : JSON.stringify({id : 2})
         });
         if(response.status != 404){const info = await response.json();

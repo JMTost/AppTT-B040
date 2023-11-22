@@ -22,6 +22,8 @@ import HomeScreen from '../home';
 import PacientScreen from '../pacientes';
 import UserProfileScreenPaciente from '../usuariosRegistrados/pacientes/UserProfileScreen';
 import UserProfileScreenProfesional from '../usuariosRegistrados/profesionales/UserProfileScreen';
+import CargaVideosRutina from '../usuariosRegistrados/profesionales/CargaVideosRutina';
+import VisualizacionVideos from '../usuariosRegistrados/profesionales/VisualizacionVideos';
 //arcihvos para caso de usuario registrado profesional
 
 
@@ -218,7 +220,7 @@ export default function IniciarSesion() {
                     iconName = focused
                       ? 'home'
                       : 'home-outline';
-                  } else if(route.name === 'Pacient'){
+                  } else if(route.name === 'VideoScreen'){
                     iconName = focused ? 'body' : 'body-outline';
                   } else if (route.name === 'UserScreen') {
                     iconName = focused ? 'person' : 'person-outline';
@@ -231,6 +233,8 @@ export default function IniciarSesion() {
                 tabBarInactiveTintColor: 'blue',
             })}>
               <Tab.Screen name="UserScreen" component={UserProfileScreenProfesional} options={{title:"Perfil"}} />
+              <Tab.Screen name="VideoScreen" component={CargaVideosRutina} />
+              <Tab.Screen name="VisualizaVideo" component={VisualizacionVideos} />
               {
                 //<Tab.Screen name="Settings" component={SettingsScreen} options={{title:"Perfil"}} />
               }

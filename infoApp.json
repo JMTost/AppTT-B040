@@ -13,7 +13,10 @@
         "idUsuario" : 0,
         "urlImagen_usuario" : "",
         "correo" : "",
-        "pacientes" : []
+        "pacientes" : [],
+        "idVideos" : [],
+        "urisVideos" : [],
+        "nombreVideos" : []
     },
     "tipo" : "",
     "comando" : "npx expo start --tunnel",
