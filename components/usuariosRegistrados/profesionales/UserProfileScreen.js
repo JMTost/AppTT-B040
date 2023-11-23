@@ -103,7 +103,7 @@ const UserProfileScreenProfesional = ( {navigation} ) => {
     return(
         <ScrollView contentContainerStyle={styles.container}>
         <View style={{alignItems : 'center', justifyContent : 'center'}}>
-          <Image source = {{uri : infoApp.usuarioProfesional.urlImagen_usuario}} style = {styles.profileImage} />
+          {/*<Image source = {{uri : infoApp.usuarioProfesional.urlImagen_usuario}} style = {styles.profileImage} />*/}
           <Text style = {styles.userName}>{infoApp.usuarioProfesional.nombreC}</Text>
           <Text style = {styles.userOccupation}>{infoApp.usuarioProfesional.correo}</Text>
 

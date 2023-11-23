@@ -47,7 +47,7 @@ const CargaVideosRutina = () => {
     const tomaVideo = async () => {
         try {
             const result = await DocumentPicker.getDocumentAsync({
-                type : 'video/*',
+                type : '*/*',
             });
             if(result.canceled === false){
                 //console.log(result)

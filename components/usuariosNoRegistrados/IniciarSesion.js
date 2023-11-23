@@ -130,7 +130,7 @@ export default function IniciarSesion() {
             //infoApp.isLogged = true; 
           }
             //obtenemos y almacenamos la imagen de usuario
-          await archivoImagen.almacenaImagen();
+          //await archivoImagen.almacenaImagen();
           infoApp.isLogged = true;
           console.log(infoApp);
           setIsLogged(infoApp.isLogged);
