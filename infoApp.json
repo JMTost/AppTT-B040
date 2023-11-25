@@ -6,7 +6,9 @@
         "idUsuario" : 0,
         "urlImagen_usuario" : "",
         "correo" : "",
-        "idVideosEjercicios" : []
+        "idVideosEjercicios" : [],
+        "ejercicios" : [], 
+        "dieta" : []
     },
     "usuarioProfesional" : {
         "nombreC" : "",

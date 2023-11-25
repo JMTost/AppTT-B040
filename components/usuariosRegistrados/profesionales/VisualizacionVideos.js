@@ -36,7 +36,7 @@ const VisualizacionVideos = () => {
     if(Platform.OS === 'android'){
       return (
         <View style={{flex : 1, alignContent : 'center', alignItems : 'center', justifyContent : 'center'}}>
-            <Text>VER VIDIO</Text>
+            <Text>VER Video</Text>
             <Text style={{paddingTop : 10}}>Seleccione el tipo de usuario:</Text>
           <Dropdown
                 style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
@@ -79,7 +79,7 @@ const VisualizacionVideos = () => {
     }else if(Platform.OS === 'ios'){
       return(
         <View style={{flex : 1, alignContent : 'center', alignItems : 'center', justifyContent : 'center'}}>
-            <Text>VER VIDIO</Text>
+            <Text>VER Video</Text>
             <Text style={{paddingTop : 10}}>Seleccione el tipo de usuario:</Text>
           <Dropdown
                 style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}

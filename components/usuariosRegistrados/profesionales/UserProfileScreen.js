@@ -14,12 +14,74 @@ import SubidaDocumentosProfesional from './SubidaDocumentosProfesional';
 
 const UserProfileScreenProfesional = ( {navigation} ) => {
   //const navigation = useNavigation();
+  const [showCambioContrasenaForm, setShowCambioContrasenaForm] = useState(false);
+  const [showCambioIMG, setShowCambioIMG] = useState(false);
+  const [showSubidaArchivos, setSubidaArchivos] = useState(false);
 
-    const [showCambioContrasenaForm, setShowCambioContrasenaForm] = useState(false);
-    const [showCambioIMG, setShowCambioIMG] = useState(false);
-    const [showSubidaArchivos, setSubidaArchivos] = useState(false);
+    //
+  const [dataVideos, setDataVideos] = useState([]);
 
-    
+  useEffect( () => {
+    obtenInfoVideosCargados();
+    obtenPacientes();
+  }, []);
+
+  //FUNCIONES PARA LA OBTENCION DE INFORMACION DEL PROFESIONAL
+    //VIDEOS QUE CUENTE CARGADOS
+  const obtenInfoVideosCargados = async () => {
+    try {
+      const responseVideoInfo = await fetch(`${infoApp.APIurl}/obtenListaVideoProfesional/${infoApp.usuarioProfesional.idUsuario}`, {
+        method : 'GET'
+      });
+      if(responseVideoInfo.ok){
+        const info = await responseVideoInfo.json();
+        setDataVideos(info);
+        if(dataVideos != null && dataVideos.data.length > 0){
+          infoApp.usuarioProfesional.idVideos = [];
+          infoApp.usuarioProfesional.nombreVideos = [];
+          for(let i = 0; i < dataVideos.data.length; i++){
+              infoApp.usuarioProfesional.idVideos.push(dataVideos.data[i].id_video);
+              infoApp.usuarioProfesional.nombreVideos.push(dataVideos.data[i].nombre);
+          }
+        }
+      }else if(responseVideoInfo.status === 404){
+        const info = await responseVideoInfo.json();
+        setDataVideos(info);
+      }else{
+        const info = await responseVideoInfo.json();
+        setDataVideos(info);
+      }
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  }
+  const obtenPacientes = async () => {
+    try {
+      const responsePacientes = await fetch(`${infoApp.APIurl}/obtenPacientesProfesional/${infoApp.usuarioProfesional.idUsuario}`, {
+        method : 'GET',
+      });
+      if(responsePacientes.ok){
+        const info = await responsePacientes.json();
+        infoApp.usuarioProfesional.pacientes = [];
+        for(let i = 0; i < info.data.length; i++ ){
+          infoApp.usuarioProfesional.pacientes.push({
+            id : info.data[i].id,
+            nombreC : info.data[i].nombreC
+          });
+        }
+      }else if(responsePacientes.status === 404){
+        const info = await responsePacientes.json();
+        infoApp.usuarioProfesional.pacientes.push(info.mensaje);
+      }else{
+        const info = await responsePacientes.json();
+        infoApp.usuarioProfesional.pacientes.push(info.error);
+        console.log(info);
+      }
+    } catch (error) {
+      console.log("error: ", error); 
+    }
+  }
+  
 
     const handleChangeContrasena = () => {
         setShowCambioContrasenaForm(!showCambioContrasenaForm);
@@ -39,7 +101,7 @@ const UserProfileScreenProfesional = ( {navigation} ) => {
             onPress : () => {}
           }], {cancelable : false}
         );
-}
+    }
 
     const handleEliminaUsuarioAlert = () => {
       const relizaEliminacionAPI = async () => {
@@ -81,11 +143,12 @@ const UserProfileScreenProfesional = ( {navigation} ) => {
       infoApp.usuarioProfesional = {
         "nombreC" : "",
         "idUsuario" : 0,
-        //"urlImagen_usuario" : "",
+        "urlImagen_usuario" : "",
         "correo" : "",
         "pacientes" : [],
         "idVideos" : [],
-        "urisVideos" : []
+        "urisVideos" : [],
+        "nombreVideos" : []
     };
       navigation.push('InicioSesion');
       /*
@@ -99,11 +162,10 @@ const UserProfileScreenProfesional = ( {navigation} ) => {
       setShowCambioContrasenaForm(false);
       setShowCambioIMG(false);
     }
-
     return(
         <ScrollView contentContainerStyle={styles.container}>
         <View style={{alignItems : 'center', justifyContent : 'center'}}>
-          {/*<Image source = {{uri : infoApp.usuarioProfesional.urlImagen_usuario}} style = {styles.profileImage} />*/}
+          <Image source = {{uri : infoApp.usuarioProfesional.urlImagen_usuario}} style = {styles.profileImage} />
           <Text style = {styles.userName}>{infoApp.usuarioProfesional.nombreC}</Text>
           <Text style = {styles.userOccupation}>{infoApp.usuarioProfesional.correo}</Text>
 

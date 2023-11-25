@@ -19,13 +19,26 @@ import { useNavigation } from '@react-navigation/native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 //archivos para caso de usuario registrado por ahora paciente
 import HomeScreen from '../home';
+//archivos para caso de usuario registrado paciente
 import PacientScreen from '../pacientes';
 import UserProfileScreenPaciente from '../usuariosRegistrados/pacientes/UserProfileScreen';
+import PrincipalPaciente from '../usuariosRegistrados/pacientes/PrincipalPaciente';
+import RutinaPaciente from '../usuariosRegistrados/pacientes/RutinaPaciente';
+import VideoEjercicio from '../usuariosRegistrados/pacientes/VideoEjercicio';
+import DietaPaciente from '../usuariosRegistrados/pacientes/DietaPaciente';
+import ProgresoPaciente from '../usuariosRegistrados/pacientes/ProgresoPaciente';
+import CitaPaciente from '../usuariosRegistrados/pacientes/CitaPaciente';
+  import RutinaPierna from '../usuariosRegistrados/pacientes/componentesEjercicios/RutinaPierna';
+  import RutinaBrazo from '../usuariosRegistrados/pacientes/componentesEjercicios/RutinaBrazo';
+  import RutinaPecho from '../usuariosRegistrados/pacientes/componentesEjercicios/RutinaPecho';
+  import RutinaEspalda from '../usuariosRegistrados/pacientes/componentesEjercicios/RutinaEspalda';
+  import RutinaHombro from '../usuariosRegistrados/pacientes/componentesEjercicios/RutinaHombro';
+import * as ejercicioRutinaPaciente from '../usuariosRegistrados/obtenEjerciciosUsuarioPaciente';
+import * as dietaPacienteInfo from '../usuariosRegistrados/obtenDietaUsuarioPaciente';
+//arcihvos para caso de usuario registrado profesional
 import UserProfileScreenProfesional from '../usuariosRegistrados/profesionales/UserProfileScreen';
 import CargaVideosRutina from '../usuariosRegistrados/profesionales/CargaVideosRutina';
 import VisualizacionVideos from '../usuariosRegistrados/profesionales/VisualizacionVideos';
-//arcihvos para caso de usuario registrado profesional
-
 
 
 const Tab = createMaterialBottomTabNavigator();
@@ -130,8 +143,27 @@ export default function IniciarSesion() {
             //infoApp.isLogged = true; 
           }
             //obtenemos y almacenamos la imagen de usuario
-          //await archivoImagen.almacenaImagen();
+          await archivoImagen.almacenaImagen();
+
+          //obtenemos los datos de la rutina de ejercicio
+          await ejercicioRutinaPaciente.obtenEjercicioRutinas();
+
+          //obtenemos los datos de la dieta del paciente
+          await dietaPacienteInfo.obtenDietaUsuarioPaciente();
+          
           infoApp.isLogged = true;
+          
+          /*
+          await obtenInfoVideosCargados();
+          if(dataVideos != null){
+            infoApp.usuarioProfesional.idVideos = [];
+            infoApp.usuarioProfesional.nombreVideos = [];
+            for(let i = 0; i < dataVideos.data.length; i++){
+                infoApp.usuarioProfesional.idVideos.push(dataVideos.data[i].id_video);
+                infoApp.usuarioProfesional.nombreVideos.push(dataVideos.data[i].nombre);
+            }
+          }
+          */
           console.log(infoApp);
           setIsLogged(infoApp.isLogged);
         }else{
@@ -184,33 +216,23 @@ export default function IniciarSesion() {
       { isLogged ? (        
         //realizamos los casos para los tipos de usuario
         userType === 'paciente' ? (
-          <Tab.Navigator screenOptions={({ route }) => ({
-                tabBarIcon: ({ focused, color, size }) => {
-                  let iconName;
-          
-                  if (route.name === 'home') {
-                    iconName = focused
-                      ? 'home'
-                      : 'home-outline';
-                  } else if(route.name === 'Pacient'){
-                    iconName = focused ? 'body' : 'body-outline';
-                  } else if (route.name === 'UserScreen') {
-                    iconName = focused ? 'person' : 'person-outline';
-                  }
-          
-                  // You can return any component that you like here!
-                  return <Ionicons name={iconName} size={15} color={color} />;
-                },
-                tabBarActiveTintColor: 'green',
-                tabBarInactiveTintColor: 'blue',
-            })}>
-              <Tab.Screen name= "home" component={HomeScreen} options={{title:"home"}} />
-              <Tab.Screen name= "Pacient" component={PacientScreen} options={{title:"Pacientes"}} />
-              <Tab.Screen name="UserScreen" component={UserProfileScreenPaciente} options={{title:"Perfil"}} />
-              {
-                //<Tab.Screen name="Settings" component={SettingsScreen} options={{title:"Perfil"}} />
-              }
-          </Tab.Navigator>
+          <Stack.Navigator initialRouteName='PrincipalPaciente'>
+            <Stack.Screen name='PrincipalPaciente' component={PrincipalPaciente} options={{headerShown : false}} />
+            <Stack.Screen name='PerfilUsuario' component={UserProfileScreenPaciente} options={{title : 'Perfil del usuario'}} />
+            <Stack.Screen name='RutinaEjerciciosPaciente' component={RutinaPaciente} options={{title : 'Rutina de ejercicios'}} />
+            <Stack.Screen name='DietaPaciente' component={DietaPaciente} options={{title : 'Dieta'}} />
+            <Stack.Screen name='ProgresoPaciente' component={ProgresoPaciente} options={{title : 'Progreso'}} />
+            <Stack.Screen name='CitaPaciente' component={CitaPaciente} options={{title : 'Citas'}} />
+            <Stack.Screen name="RutinaPierna" component={RutinaPierna} />
+            <Stack.Screen name="RutinaBrazo" component={RutinaBrazo} />
+            <Stack.Screen name="RutinaPecho" component={RutinaPecho} />
+            <Stack.Screen name="RutinaEspalda" component={RutinaEspalda} />
+            <Stack.Screen name="RutinaHombro" component={RutinaHombro} />
+            {
+            <Stack.Screen name='VideoEjercicio' component={VideoEjercicio} options={{title : 'Video de ejercicio'}} />
+
+            }
+          </Stack.Navigator>
         ) : userType === 'profesional' ? (
           <Tab.Navigator screenOptions={({ route }) => ({
                 tabBarIcon: ({ focused, color, size }) => {

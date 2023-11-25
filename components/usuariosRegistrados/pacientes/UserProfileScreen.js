@@ -41,7 +41,8 @@ const UserProfileScreenPaciente = ( {navigation} ) => {
                 "idUsuario" : 0,
                 "urlImagen_usuario" : "",
                 "correo" : "",
-                "idVideosEjercicios" : []
+                "idVideosEjercicios" : [],
+                "ejercicios" : []
             };
               navigation.push('InicioSesion');
             }else{
@@ -68,7 +69,8 @@ const UserProfileScreenPaciente = ( {navigation} ) => {
         "idUsuario" : 0,
         "urlImagen_usuario" : "",
         "correo" : "",
-        "idVideosEjercicios" : []
+        "idVideosEjercicios" : [],
+        "ejercicios" : []
     };
       navigation.push('InicioSesion');
       /*
@@ -119,7 +121,7 @@ const styles = StyleSheet.create({
     container: {
         flexGrow: 1,
         alignItems: 'center',
-        justifyContent: 'center',
+        paddingTop : 10
       },
       profileImage: {
         width: 150,

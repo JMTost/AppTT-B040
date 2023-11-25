@@ -13,11 +13,14 @@ const InfoApiMed = () =>{
     const obtenMediciones = async () => {
       try {
         const response = await fetch(`${infoApp.APIurl}/busquedaMediciones/${infoApp.usuarioPaciente.idUsuario}`, {
-          method : 'POST', headers : {'Content-Type' : 'application/json'}, body : JSON.stringify({id : 2})
+          method : 'GET',
         });
-        if(response.status != 404){const info = await response.json();
+        //console.log(response)
+        if(response.status != 404){
+          const info = await response.json();
+          console.log("info", info)
           setData(info.objeto);
-          setLoading(true);
+          //setLoading(true);
         }else setLoading(false);
       } catch (error) {
         setLoading(false);

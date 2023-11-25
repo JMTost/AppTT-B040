@@ -1,5 +1,6 @@
 import  React, { useEffect, useState } from 'react';
-import { Text, View, Alert, Button, ScrollView} from 'react-native';
+import { Text, View, Alert, Button, ScrollView, StyleSheet} from 'react-native';
+import { Dropdown } from 'react-native-element-dropdown';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as DocumentPicker from 'expo-document-picker';
@@ -12,9 +13,12 @@ const CargaVideosRutina = () => {
     //VARIABLES PARA VISUALIZAR SI CUENTA CON VIDEOS CARGADOS
     const [dataVideos, setDataVideos] = useState([]);
     const [loadingVideos, setLoadingVideos] = useState(false);
+    //VARIABLES PARA ELIMINAR EL VIDEO
+    const [value, setValue] = useState(null);
+    const [isFocus, setIsFocus] = useState(false);
 
     const [archivoVideoSeleccionado, setArchivoVideoSeleccionado] = useState(null);
-
+ 
     useEffect( () => {
         obtenInfoVideosCargados();
     }, []);
@@ -40,7 +44,7 @@ const CargaVideosRutina = () => {
             }
         } catch (error) {
             console.log("error: ", error);
-            setLoadingArchivos(false); 
+            setLoadingVideos(false); 
         }
     };
 
@@ -114,6 +118,11 @@ const CargaVideosRutina = () => {
         }
     };
 
+    const handleEliminaVideo = async () => {
+        console.log(value);
+        //logica de eliminacion del video de la BD
+    }
+
     if(loadingVideos){
         if(Object.keys(dataVideos).includes("mensaje")){//no hay datos
             return(
@@ -127,7 +136,7 @@ const CargaVideosRutina = () => {
                 </View>
             );
         }else if(Object.keys(dataVideos).includes("data")){
-            const elementos = [];
+            const elementos = [], data = [];
             infoApp.usuarioProfesional.idVideos = [];
             infoApp.usuarioProfesional.nombreVideos = [];
             for(let i = 0; i < dataVideos.data.length; i++){
@@ -136,6 +145,10 @@ const CargaVideosRutina = () => {
                 elementos.push(
                     <Text key={i}>{dataVideos.data[i].nombre}</Text>
                 );
+                data.push({
+                    label : dataVideos.data[i].nombre,
+                    value : dataVideos.data[i].id_video
+                });
             }
             //console.log("Data de los id del infoApp", infoApp.usuarioProfesional.idVideos);
             //console.log(infoApp.usuarioProfesional)
@@ -143,11 +156,34 @@ const CargaVideosRutina = () => {
                 <ScrollView contentContainerStyle={{ alignContent : 'center', alignItems : 'center', justifyContent : 'center', flex : 1}}>
                     <Text>Archivos cargados: </Text>
                     {elementos}
+                    <Text style={{paddingTop : 10}}>Si desea eliminar un video, seleccionelo</Text>
+                    <Dropdown
+                        style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
+                        placeholderStyle={styles.placeholderStyle}
+                        selectedTextStyle={styles.selectedTextStyle}
+                        inputSearchStyle={styles.inputSearchStyle}
+                        data={data}
+                        search
+                        maxHeight={300}
+                        labelField="label"
+                        valueField="value"
+                        placeholder={!isFocus ? 'Selecciona el video' : '...'}
+                        searchPlaceholder="Buscar..."
+                        value={value}
+                        onFocus={() => setIsFocus(true)}
+                        onBlur={() => setIsFocus(false)}
+                        onChange={item => {
+                            //console.log(item)
+                            setValue(item.value);
+                            setIsFocus(false);
+                        }}
+                    />
+                    {setValue && <Button title='Eliminar' onPress={handleEliminaVideo}></Button>}
                     <Button title="Selecciona un video" onPress={tomaVideo} />
                     {archivoVideoSeleccionado && (
                         <Text>Archivo Seleccionado: {archivoVideoSeleccionado.assets[0].name}</Text>
                     )}
-                    <Button title="Subir archivo" onPress={subidaArchivoVideo} />
+                    {archivoVideoSeleccionado && <Button title="Subir archivo" onPress={subidaArchivoVideo} />}
                 </ScrollView>
             );
         }else{
@@ -163,6 +199,28 @@ const CargaVideosRutina = () => {
         console.log("nada")
     }
 };
+
+const styles = StyleSheet.create({
+    dropdown: {
+        height: 50,
+        width: 330,
+        backgroundColor: 'white', // Color de fondo del campo de entrada
+        paddingStart: 30,
+        borderRadius: 30,
+        paddingHorizontal: 20,
+        marginTop:10,
+      },
+      video: {
+        //alignSelf: 'center',
+        width: 200,
+        height: 300,
+      },
+      buttons: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+});
 
 
 export default CargaVideosRutina;

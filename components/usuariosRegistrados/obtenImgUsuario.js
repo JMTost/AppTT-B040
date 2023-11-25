@@ -8,6 +8,11 @@ const rutaImg = `${carpetaDestino}user.jpg`;
 
 const almacenaImagen = async () => {
     try {
+        //Comprobamos que si cuenta con una imagen esta se elimine
+        if((await FileSystem.getInfoAsync(rutaImg))){
+            await FileSystem.deleteAsync(rutaImg);
+        }
+
         let url = ``;
         if(infoApp.tipo === "profesional"){
             url = `${infoApp.APIurl}/obtenImgProfesional/${infoApp.usuarioProfesional.idUsuario}`;
