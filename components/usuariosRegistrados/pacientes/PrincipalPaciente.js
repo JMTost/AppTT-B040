@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { StyleSheet, Text, View, Image, Button, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, Image, Button, TouchableOpacity, ScrollView } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import infoApp from '../../../infoApp.json';
 
@@ -26,6 +26,7 @@ export default function PrincipalPaciente({navigation}) {
     }, [handleFocus, navigation]);
 
     return (
+        <ScrollView style={styles.container}>
         <View style={styles.container}>
             <View style={styles.content}>
                 <TouchableOpacity onPress={() => navigation.navigate('PerfilUsuario')} >
@@ -138,6 +139,7 @@ export default function PrincipalPaciente({navigation}) {
 
 
         </View>
+        </ScrollView>
     );
 };
 

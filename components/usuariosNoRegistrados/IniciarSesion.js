@@ -35,6 +35,7 @@ import CitaPaciente from '../usuariosRegistrados/pacientes/CitaPaciente';
   import RutinaHombro from '../usuariosRegistrados/pacientes/componentesEjercicios/RutinaHombro';
 import * as ejercicioRutinaPaciente from '../usuariosRegistrados/obtenEjerciciosUsuarioPaciente';
 import * as dietaPacienteInfo from '../usuariosRegistrados/obtenDietaUsuarioPaciente';
+import * as citasPaciente from '../usuariosRegistrados/obtenProximaCita';
 //arcihvos para caso de usuario registrado profesional
 import UserProfileScreenProfesional from '../usuariosRegistrados/profesionales/UserProfileScreen';
 import CargaVideosRutina from '../usuariosRegistrados/profesionales/CargaVideosRutina';
@@ -150,6 +151,9 @@ export default function IniciarSesion() {
 
           //obtenemos los datos de la dieta del paciente
           await dietaPacienteInfo.obtenDietaUsuarioPaciente();
+
+          //obtenemos los datos de las citas del paciente
+          await citasPaciente.obtenProximaCita();
           
           infoApp.isLogged = true;
           
@@ -164,7 +168,7 @@ export default function IniciarSesion() {
             }
           }
           */
-          console.log(infoApp);
+          //console.log(infoApp);
           setIsLogged(infoApp.isLogged);
         }else{
           Alert.alert("Error", "Error en alguna parte");

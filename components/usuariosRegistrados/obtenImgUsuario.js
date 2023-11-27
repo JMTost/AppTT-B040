@@ -9,7 +9,7 @@ const rutaImg = `${carpetaDestino}user.jpg`;
 const almacenaImagen = async () => {
     try {
         //Comprobamos que si cuenta con una imagen esta se elimine
-        if((await FileSystem.getInfoAsync(rutaImg))){
+        if(((await FileSystem.getInfoAsync(rutaImg)).exists)){
             await FileSystem.deleteAsync(rutaImg);
         }
 

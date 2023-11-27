@@ -70,7 +70,9 @@ const UserProfileScreenPaciente = ( {navigation} ) => {
         "urlImagen_usuario" : "",
         "correo" : "",
         "idVideosEjercicios" : [],
-        "ejercicios" : []
+        "ejercicios" : [], 
+        "dieta" : [],
+        "citas" : []
     };
       navigation.push('InicioSesion');
       /*

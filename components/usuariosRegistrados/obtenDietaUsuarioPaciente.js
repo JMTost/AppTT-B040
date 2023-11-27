@@ -6,12 +6,13 @@ const obtenDietaUsuarioPaciente = async () => {
     const respuesta = await fetch(`${infoApp.APIurl}/alimentodieta/busqueda/paciente/${infoApp.usuarioPaciente.idUsuario}`);
     if(respuesta.ok){
         const salida = await respuesta.json();
-        console.log("Dieta: ", salida.objeto);
-        infoApp.usuarioPaciente.dieta.push(salida.objeto.comidas);
-
+        //console.log("Dieta: ", salida.objeto);
+        for(let i = 0; i < salida.objeto.comidas.length; i++){
+            infoApp.usuarioPaciente.dieta.push(salida.objeto.comidas[i]);
+        }
     }else if(respuesta.status === 404){
         const salida = await respuesta.json();
-        infoApp.usuarioPaciente.dieta.push(salida.mensaje);
+        infoApp.usuarioPaciente.dieta = salida.mensaje;
     }
 };
 

@@ -8,7 +8,8 @@
         "correo" : "",
         "idVideosEjercicios" : [],
         "ejercicios" : [], 
-        "dieta" : []
+        "dieta" : [],
+        "citas" : []
     },
     "usuarioProfesional" : {
         "nombreC" : "",
@@ -18,7 +19,9 @@
         "pacientes" : [],
         "idVideos" : [],
         "urisVideos" : [],
-        "nombreVideos" : []
+        "nombreVideos" : [],
+        "citas" : [],
+        "dieta" : []
     },
     "tipo" : "",
     "comando" : "npx expo start --tunnel",
