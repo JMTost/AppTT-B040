@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@pietile-native-kit/expandable-view": "^1.2.0",
     "@react-native-community/datetimepicker": "7.2.0",
     "@react-native-picker/picker": "^2.4.10",
     "@react-navigation/drawer": "^6.6.6",

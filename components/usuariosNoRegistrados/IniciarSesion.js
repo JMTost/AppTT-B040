@@ -40,7 +40,8 @@ import * as citasPaciente from '../usuariosRegistrados/obtenProximaCita';
 import UserProfileScreenProfesional from '../usuariosRegistrados/profesionales/UserProfileScreen';
 import CargaVideosRutina from '../usuariosRegistrados/profesionales/CargaVideosRutina';
 import VisualizacionVideos from '../usuariosRegistrados/profesionales/VisualizacionVideos';
-
+import FormularioExpedienteClinico from '../usuariosRegistrados/profesionales/FormularioExpedienteClinico';
+import InfoMPaciente from '../usuariosRegistrados/profesionales/formulariosPaciente/InfoMPaciente';
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -142,11 +143,7 @@ export default function IniciarSesion() {
             infoApp.usuarioPaciente.nombreC = data_response.nombreC;
             infoApp.usuarioPaciente.correo = dataGET.correo;
             //infoApp.isLogged = true; 
-          }
-            //obtenemos y almacenamos la imagen de usuario
-          await archivoImagen.almacenaImagen();
-
-          //obtenemos los datos de la rutina de ejercicio
+            //obtenemos los datos de la rutina de ejercicio
           await ejercicioRutinaPaciente.obtenEjercicioRutinas();
 
           //obtenemos los datos de la dieta del paciente
@@ -154,6 +151,11 @@ export default function IniciarSesion() {
 
           //obtenemos los datos de las citas del paciente
           await citasPaciente.obtenProximaCita();
+          }
+            //obtenemos y almacenamos la imagen de usuario
+          await archivoImagen.almacenaImagen();
+
+          
           
           infoApp.isLogged = true;
           
@@ -261,6 +263,8 @@ export default function IniciarSesion() {
               <Tab.Screen name="UserScreen" component={UserProfileScreenProfesional} options={{title:"Perfil"}} />
               <Tab.Screen name="VideoScreen" component={CargaVideosRutina} />
               <Tab.Screen name="VisualizaVideo" component={VisualizacionVideos} />
+              {/*<Tab.Screen name="Formulario" component={FormularioExpedienteClinico} />*/}
+              <Tab.Screen name="FormularioInfoMPaciente" component={InfoMPaciente} />
               {
                 //<Tab.Screen name="Settings" component={SettingsScreen} options={{title:"Perfil"}} />
               }
