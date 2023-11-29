@@ -21,7 +21,8 @@
         "urisVideos" : [],
         "nombreVideos" : [],
         "citas" : [],
-        "dieta" : []
+        "dieta" : [],
+        "ejercicios" : []
     },
     "tipo" : "",
     "comando" : "npx expo start --tunnel",

@@ -9,7 +9,6 @@ export default function PacientScreen(){//pagina principal
     return (
         <ScrollView>
             <View style={{flex : 1, justifyContent:'center', alignItems : 'center', paddingTop : 50}}>
-                <Text>Pagina de pacientes otro archivo</Text>
                 <InfoApiMed />
             </View>
         </ScrollView>

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import { Text, View, StyleSheet, Image, TouchableOpacity, ScrollView, Alert} from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
@@ -6,6 +6,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import {MaterialIcons} from '@expo/vector-icons';
 import {AntDesign} from '@expo/vector-icons';
 import infoApp from '../../../infoApp.json';
+import * as archivoImagen from '../obtenImgUsuario';
 //formulario 
 import CambioContrasenaFormulario from './CambioContrasenaFormulario';
 import CambioImagenUsuario from './CambioImagenUsuario';
@@ -13,6 +14,13 @@ import SubidaDocumentosProfesional from './SubidaDocumentosProfesional';
 //navigation
 
 const UserProfileScreenProfesional = ( {navigation} ) => {
+  const [imagenPerfil, setImagenPerfil] = useState(infoApp.usuarioProfesional.urlImagen_usuario);
+  useEffect( () => {
+    const obtenImg = async () => {
+      await archivoImagen.almacenaImagen();
+    };
+    obtenImg();
+  }, [imagenPerfil]);
   //const navigation = useNavigation();
   const [showCambioContrasenaForm, setShowCambioContrasenaForm] = useState(false);
   const [showCambioIMG, setShowCambioIMG] = useState(false);
@@ -21,11 +29,24 @@ const UserProfileScreenProfesional = ( {navigation} ) => {
     //
   const [dataVideos, setDataVideos] = useState([]);
 
-  useEffect( () => {
-    obtenInfoVideosCargados();
-    obtenPacientes();
+  const [user, setUser] = useState({
+    name: infoApp.usuarioProfesional.nombreC,
+  });
+  
+  const handleFocus = useCallback( () => {
+    setImagenPerfil(infoApp.usuarioProfesional.urlImagen_usuario);
   }, []);
 
+  
+  useEffect( () => {
+    const unsubscribeFocus = navigation.addListener('focus', handleFocus);
+    return () => {
+      unsubscribeFocus();
+    };
+    //obtenInfoVideosCargados();
+    //obtenPacientes();
+  }, [handleFocus, navigation]);
+  
   //FUNCIONES PARA LA OBTENCION DE INFORMACION DEL PROFESIONAL
     //VIDEOS QUE CUENTE CARGADOS
   const obtenInfoVideosCargados = async () => {
@@ -148,9 +169,12 @@ const UserProfileScreenProfesional = ( {navigation} ) => {
         "pacientes" : [],
         "idVideos" : [],
         "urisVideos" : [],
-        "nombreVideos" : []
+        "nombreVideos" : [],
+        "citas" : [],
+        "dieta" : []
     };
-      navigation.push('InicioSesion');
+    setImagenPerfil(null);
+    navigation.push('InicioSesion');
       /*
       infoApp.isLogged = false;
       infoApp.tipo = "";
@@ -165,8 +189,8 @@ const UserProfileScreenProfesional = ( {navigation} ) => {
     return(
         <ScrollView contentContainerStyle={styles.container}>
         <View style={{alignItems : 'center', justifyContent : 'center'}}>
-          <Image source = {{uri : infoApp.usuarioProfesional.urlImagen_usuario}} style = {styles.profileImage} />
-          <Text style = {styles.userName}>{infoApp.usuarioProfesional.nombreC}</Text>
+          <Image source = {{uri : imagenPerfil}} style = {styles.profileImage} />
+          <Text style = {styles.userName}>{user.name}</Text>
           <Text style = {styles.userOccupation}>{infoApp.usuarioProfesional.correo}</Text>
 
           <TouchableOpacity style={styles.button} onPress={handleChangeContrasena}>

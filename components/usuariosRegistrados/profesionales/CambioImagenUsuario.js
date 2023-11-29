@@ -73,6 +73,7 @@ const CambioImagenUsuario = ( ) => {
                     setImagen(null);
                     setNombreImagen(null);
                     //AQUI REALIZAR LA RECARGA DEL COMPONENTE
+                    infoApp.usuarioProfesional.urlImagen_usuario = nombreImagen.uri;
                     navigation.navigate("UserScreen");
                 }else{
                     const error = await response.text();

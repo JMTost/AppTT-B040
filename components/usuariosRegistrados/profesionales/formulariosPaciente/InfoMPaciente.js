@@ -123,7 +123,8 @@ const InfoMPaciente = () => {
             </TouchableOpacity>
           );
     };
-
+    //!TERMINAR DE PROGRAMAR LA CARGA Y CREAR EL CASO PARA CUANDO SE TIENE QUE ACTUALIZAR
+        //!DE IGUAL MANERA AGREGAR A LA FUNCIONALIDAD DEL USAURIO PROFESIONAL
     const handleCargaAPI = () => {
         if(dataApi === "No hay registro"){
             console.log("boton");

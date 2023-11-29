@@ -10,6 +10,7 @@ const obtenDietaUsuarioPaciente = async () => {
         for(let i = 0; i < salida.objeto.comidas.length; i++){
             infoApp.usuarioPaciente.dieta.push(salida.objeto.comidas[i]);
         }
+        infoApp.usuarioPaciente.dieta.sort((a, b) => a.idTipo - b.idTipo);//hacemos el ordenamiento medainte el id del tipo de comida
     }else if(respuesta.status === 404){
         const salida = await respuesta.json();
         infoApp.usuarioPaciente.dieta = salida.mensaje;

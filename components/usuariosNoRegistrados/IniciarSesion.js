@@ -4,6 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Dropdown } from 'react-native-element-dropdown';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 //import Svg ,{Path, Defs, LinearGradient,Stop} from 'react-native-svg';
 //const {width, height} = Dimension.get('window')
@@ -37,13 +38,20 @@ import * as ejercicioRutinaPaciente from '../usuariosRegistrados/obtenEjercicios
 import * as dietaPacienteInfo from '../usuariosRegistrados/obtenDietaUsuarioPaciente';
 import * as citasPaciente from '../usuariosRegistrados/obtenProximaCita';
 //arcihvos para caso de usuario registrado profesional
-import UserProfileScreenProfesional from '../usuariosRegistrados/profesionales/UserProfileScreen';
+import PrincipalProfesional from '../usuariosRegistrados/profesionales/PrincipalProfesional';
+import UserProfileScreen from '../usuariosRegistrados/profesionales/UserProfileScreen';
 import CargaVideosRutina from '../usuariosRegistrados/profesionales/CargaVideosRutina';
 import VisualizacionVideos from '../usuariosRegistrados/profesionales/VisualizacionVideos';
 import FormularioExpedienteClinico from '../usuariosRegistrados/profesionales/FormularioExpedienteClinico';
 import InfoMPaciente from '../usuariosRegistrados/profesionales/formulariosPaciente/InfoMPaciente';
+import ListaPacientes from '../usuariosRegistrados/profesionales/ListaPacientes';
+import * as pacientesProfesional from '../usuariosRegistrados/obtenPacientesUsuarioProfesional';
+import CitasProfesional from '../usuariosRegistrados/profesionales/CitasProfesional';
+import ExpedientePaciente from '../usuariosRegistrados/profesionales/ExpedientePaciente';
+import * as RutinaEjercicioPaciente from '../usuariosRegistrados/obtenEjerciciosUsuarioPaciente';
+import RutinaPaciente from '../usuariosRegistrados/profesionales/RutinaPaciente';
 
-const Tab = createMaterialBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 
@@ -137,23 +145,31 @@ export default function IniciarSesion() {
             infoApp.usuarioProfesional.nombreC = data_response.nombreC;
             infoApp.usuarioProfesional.correo = dataGET.correo;
             //infoApp.isLogged = true;
+            //obtenemos y almacenamos la imagen de usuario
+            await archivoImagen.almacenaImagen();
+            await pacientesProfesional.obtenPacientesParaProfesional();
+            //obtenemos los datos de las citas del profesional
+            await citasPaciente.obtenProximaCita();
+            await RutinaEjercicioPaciente.obtenEjercicioRutinas();
+            //!Agreagar los elementos que hagan falta
           }else if(data_response.tipo === "paciente"){
             infoApp.usuarioPaciente.idUsuario = data_response.id;
             infoApp.tipo = data_response.tipo;
             infoApp.usuarioPaciente.nombreC = data_response.nombreC;
             infoApp.usuarioPaciente.correo = dataGET.correo;
+            //obtenemos y almacenamos la imagen de usuario
+            await archivoImagen.almacenaImagen();
             //infoApp.isLogged = true; 
             //obtenemos los datos de la rutina de ejercicio
-          await ejercicioRutinaPaciente.obtenEjercicioRutinas();
+            await ejercicioRutinaPaciente.obtenEjercicioRutinas();
 
-          //obtenemos los datos de la dieta del paciente
-          await dietaPacienteInfo.obtenDietaUsuarioPaciente();
+            //obtenemos los datos de la dieta del paciente
+            await dietaPacienteInfo.obtenDietaUsuarioPaciente();
 
-          //obtenemos los datos de las citas del paciente
-          await citasPaciente.obtenProximaCita();
+            //obtenemos los datos de las citas del paciente
+            await citasPaciente.obtenProximaCita();
           }
-            //obtenemos y almacenamos la imagen de usuario
-          await archivoImagen.almacenaImagen();
+            
 
           
           
@@ -240,35 +256,15 @@ export default function IniciarSesion() {
             }
           </Stack.Navigator>
         ) : userType === 'profesional' ? (
-          <Tab.Navigator screenOptions={({ route }) => ({
-                tabBarIcon: ({ focused, color, size }) => {
-                  let iconName;
+
+          <Stack.Navigator initialRouteName='PrincipalProfesional'>
+            <Stack.Screen name='PrincipalProfesional' component={PrincipalProfesional} options={{headerShown : false}} />
+            <Stack.Screen name='UserScreen' component={UserProfileScreen} options={{title : 'Perfil'}} />
+            <Stack.Screen name='CitasProfesional' component={CitasProfesional} options={{title : 'Citas profesional'}} />
+            <Stack.Screen name='ExpedientePaciente' component={ExpedientePaciente} options={{title : 'Expediente del paciente'}} />
+            <Stack.Screen name='RutinaPaciente' component={RutinaPaciente} options={{title : 'Rutian del paciente'}} />
+          </Stack.Navigator>
           
-                  if (route.name === 'home') {
-                    iconName = focused
-                      ? 'home'
-                      : 'home-outline';
-                  } else if(route.name === 'VideoScreen'){
-                    iconName = focused ? 'body' : 'body-outline';
-                  } else if (route.name === 'UserScreen') {
-                    iconName = focused ? 'person' : 'person-outline';
-                  }
-          
-                  // You can return any component that you like here!
-                  return <Ionicons name={iconName} size={15} color={color} />;
-                },
-                tabBarActiveTintColor: 'green',
-                tabBarInactiveTintColor: 'blue',
-            })}>
-              <Tab.Screen name="UserScreen" component={UserProfileScreenProfesional} options={{title:"Perfil"}} />
-              <Tab.Screen name="VideoScreen" component={CargaVideosRutina} />
-              <Tab.Screen name="VisualizaVideo" component={VisualizacionVideos} />
-              {/*<Tab.Screen name="Formulario" component={FormularioExpedienteClinico} />*/}
-              <Tab.Screen name="FormularioInfoMPaciente" component={InfoMPaciente} />
-              {
-                //<Tab.Screen name="Settings" component={SettingsScreen} options={{title:"Perfil"}} />
-              }
-          </Tab.Navigator>
         ) : null
           
     ) : (
