@@ -4,7 +4,8 @@ import { ScrollView, View, Text, TextInput, Button, Alert, StyleSheet, FlatList}
 import {Dropdown} from 'react-native-element-dropdown';
 import {ExpandableView} from '@pietile-native-kit/expandable-view';
 
-const FormularioExpedienteClinico = () => {
+const FormularioExpedienteClinico = ({route}) => {
+
     const [isFocus, setIsFocus] = useState(false);
     const [show, setShow] = useState(false);//enfermedades paciente
     const [showFam, setShowFam] = useState(false);//enfermedades familiar
@@ -34,7 +35,10 @@ const FormularioExpedienteClinico = () => {
     const [horaDesayuno, setHoraDesayuno] = useState('');
     const [horaComida, setHoraComida] = useState('');
     const [horaCena, setHoraCena] = useState('');
-    
+    return (
+      <Text>Hola</Text>
+    );
+    /*
     useEffect( () => {
         const fetchEnfermedades = async () => {
             try {
@@ -82,136 +86,9 @@ const FormularioExpedienteClinico = () => {
             });
         }
         //console.log(enfermedadesAPI)
-    return (
-        <ScrollView style = {styles.container}>
-            <View style={styles.content}>
-            {/*DATOS PARA infompaciente */}
-                <Text style={styles.subtitle}>Datos para crear el expediente clinico</Text>
-                <Text style={styles.textoCampo}>Estatura : </Text>
-                <TextInput style={styles.input} value={estatura} onChangeText={text => setEstatura(text)} keyboardType="numeric" />
-                <Text style={styles.textoCampo}>Ocupación : </Text>
-                <TextInput style={styles.input} value={ocupacion} onChangeText={text => setOcupacion(text)} keyboardType="default" />
-                <Text style={styles.textoCampo}>IMC : </Text>
-                <TextInput style={styles.input} value={imc} onChangeText={text => setImc(text)} keyboardType="numeric" />
-                <Text style={styles.textoCampo}>Objetivo : </Text>
-                <TextInput style={styles.input} value={objetivo} onChangeText={text => setObjetivo(text)} keyboardType="default" />
-                <Text style={styles.textoCampo}>Alergias : </Text>
-                <TextInput style={styles.input} value={alergias} onChangeText={text => setAlergias(text)} keyboardType="default" />
-                <Text style={styles.textoCampo}>Medicamentos : </Text>
-                <TextInput style={styles.input} value={medicamentos} onChangeText={text => setMedicamentos(text)} keyboardType="default" />
-                <Text style={styles.textoCampo}>Enfermedades que padece : </Text>
-                <Dropdown 
-                    style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
-                    placeholderStyle={styles.placeholderStyle}
-                    selectedTextStyle={styles.selectedTextStyle}
-                    inputSearchStyle={styles.inputSearchStyle}
-                    data={enfermedadesAPI}
-                    search
-                    maxHeight={300}
-                    labelField="label"
-                    valueField="value"
-                    placeholder={!isFocus ? 'Selecciona una opción' : '...'}
-                    searchPlaceholder="Buscar..."
-                    value={enfermedades}
-                    onFocus={() => setIsFocus(true)}
-                    onBlur={() => setIsFocus(false)}
-                    onChange={item => {
-                        console.log(item)
-                         //agregamos la enfermedad seleccionada a la lista
-                        setEnfermedades([...enfermedades, {"enfermedad" : item.label, "id" : item.value}]);
-                        //limpiamos la seleccion actual
-                        setEnfermedadSeleccionada('');
-                    }}
-                    
-                />
-                <Text style={styles.textoCampoBoton} onPress={() => setShow(!show)}>Mostrar enfermedades seleccionadas</Text>
-                <ExpandableView show={show} style={styles.contenedorDesplegable}>
-                    <Text style={styles.textoDesplegable}>Enfermedades Seleccionadas : </Text>
-                    {enfermedades.map((item)=> <Text style={styles.textoDesplegable}>{item.enfermedad}</Text> )}
-                    <Button title="Quitar ultimo elemento" onPress={eliminaUltimoElemento} />
-                </ExpandableView>
-                <Text style={styles.textoCampo}>Enfermedades familiares : </Text>
-                <Dropdown 
-                    style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
-                    placeholderStyle={styles.placeholderStyle}
-                    selectedTextStyle={styles.selectedTextStyle}
-                    inputSearchStyle={styles.inputSearchStyle}
-                    data={enfermedadesAPI}
-                    search
-                    maxHeight={300}
-                    labelField="label"
-                    valueField="value"
-                    placeholder={!isFocus ? 'Selecciona una opción' : '...'}
-                    searchPlaceholder="Buscar..."
-                    value={enfermedadesFam}
-                    onFocus={() => setIsFocus(true)}
-                    onBlur={() => setIsFocus(false)}
-                    onChange={item => {
-                        console.log(item)
-                         //agregamos la enfermedad seleccionada a la lista
-                        setEnfermedadesFam([...enfermedadesFam, {"enfermedad" : item.label, "id" : item.value}]);
-                        //limpiamos la seleccion actual
-                        setEnfermedadSeleccionadaFam('');
-                    }}
-                />
-                <Text style={styles.textoCampoBoton} onPress={() => setShowFam(!showFam)}>Mostrar enfermedades seleccionadas</Text>
-                <ExpandableView show={showFam} style={styles.contenedorDesplegable}>
-                    <Text style={styles.textoDesplegable}>Enfermedades Seleccionadas : </Text>
-                    {enfermedadesFam.map((item)=> <Text style={styles.textoDesplegable}>{item.enfermedad}</Text> )}
-                    <Button title="Quitar ultimo elemento" onPress={eliminaUltimoElemento} />
-                </ExpandableView>
-                {/*DATOS PARA habitoPersonal */}
-                <Text style={styles.textoCampo}>Hora en la que despierta</Text>
-                <TextInput style={styles.input} value={horaD} onChangeText={text => setHoraD(text)} keyboardType="numbers-and-punctuation" placeholder="Coloca la hora en formato de 24 hrs"/>
-                <Text style={styles.textoCampo}>Hora en la que duerme</Text>
-                <TextInput style={styles.input} value={horaS} onChangeText={text => setHoraS(text)} keyboardType="numbers-and-punctuation" placeholder="Coloca la hora en formato de 24 hrs"/>
-                <Text style={styles.textoCampo}>Descripción física</Text>
-                <TextInput
-                    style={styles.desc}
-                    multiline={true}
-                    numberOfLines={3} // Puedes ajustar la cantidad de líneas visibles
-                    value={TextdescFisica}
-                    placeholder="Escribe aquí la descripción física"
-                    onChangeText={(text) => setTextdescFisica(text)}
-                />
-                <Text style={styles.textoCampo}>Rutina del día que tiene</Text>
-                <TextInput
-                    style={styles.desc}
-                    multiline={true}
-                    numberOfLines={3} // Puedes ajustar la cantidad de líneas visibles
-                    value={TextdescRutina}
-                    placeholder="Escribe aquí la rutina del día"
-                    onChangeText={(text) => setTextdescRutina(text)}
-                />
-                {/*DATOS PARA habitoAlimenticio */}
-                //mas consumidos
-                <Text style={styles.textoCampo}>Coloca los alimentos más consumidos: </Text>
-                <TextInput style={styles.input} keyboardType="default" value={alimentosMconsumidos} onChange={text => setAlimentoMconsumidos(text)} />
-                //alimentos alergias
-                <Text style={styles.textoCampo}>Coloca los alimentos a los que es alergico: </Text>
-                <TextInput style={styles.input} keyboardType="default" value={alimentosAlergia} onChange={text => setAlimentosAlegia(text)} />
-                //cantidad de agua
-                <Text style={styles.textoCampo}>Coloca la cantidad de agua que consumes: </Text>
-                <TextInput style={styles.input} keyboardType="default" value={cantidadAgua} onChange={text => setCantidadAgua} />
-                //cantidad de comidas
-                <Text style={styles.textoCampo}>Coloca la cantidad de comidas que realizas: </Text>
-                <TextInput style={styles.input} keyboardType="default" value={cantidadComidas} onChange={text => setCantidadComidas(text)} />
-                //cantidad de colaciones
-                <Text style={styles.textoCampo}>Coloca la cantidad de colacioes que realizas: </Text>
-                <TextInput style={styles.input} keyboardType="default" value={cantidadColaciones} onChange={text => setCantidadColaciones(text)} />
-                //hora de desayuno
-                <Text style={styles.textoCampo}>Coloca la hora en la que realizas el desayuno: </Text>
-                <TextInput style={styles.input} keyboardType="default" values={horaDesayuno} onChange={text => setHoraDesayuno(text)}/>
-                //hora de comida
-                <Text style={styles.textoCampo}>Coloca la hora en la que realizas la comida: </Text>
-                <TextInput style={styles.input} keyboardType="default" values={horaComida} onChange={text => setHoraComida(text)} />
-                //hora de cena
-                <Text style={styles.textoCampo}>Coloca la hora en la que realizas la cena: </Text>
-                <TextInput style={styles.input} keyboardType="default" values={horaCena} onChange={text => setHoraCena(text)} />
-            </View>
-        </ScrollView>
-    );
-}
+    
+    }
+    */
 };
 
 const styles = StyleSheet.create({
@@ -361,3 +238,140 @@ const styles = StyleSheet.create({
   });
 
 export default FormularioExpedienteClinico;
+
+/*
+return (
+        <ScrollView style = {styles.container}>
+            <View style={styles.content}>
+            {//DATOS PARA infompaciente 
+            }
+            <Text style={styles.subtitle}>Datos para crear el expediente clinico</Text>
+            <Text style={styles.textoCampo}>Estatura : </Text>
+            <TextInput style={styles.input} value={estatura} onChangeText={text => setEstatura(text)} keyboardType="numeric" />
+            <Text style={styles.textoCampo}>Ocupación : </Text>
+            <TextInput style={styles.input} value={ocupacion} onChangeText={text => setOcupacion(text)} keyboardType="default" />
+            <Text style={styles.textoCampo}>IMC : </Text>
+            <TextInput style={styles.input} value={imc} onChangeText={text => setImc(text)} keyboardType="numeric" />
+            <Text style={styles.textoCampo}>Objetivo : </Text>
+            <TextInput style={styles.input} value={objetivo} onChangeText={text => setObjetivo(text)} keyboardType="default" />
+            <Text style={styles.textoCampo}>Alergias : </Text>
+            <TextInput style={styles.input} value={alergias} onChangeText={text => setAlergias(text)} keyboardType="default" />
+            <Text style={styles.textoCampo}>Medicamentos : </Text>
+            <TextInput style={styles.input} value={medicamentos} onChangeText={text => setMedicamentos(text)} keyboardType="default" />
+            <Text style={styles.textoCampo}>Enfermedades que padece : </Text>
+            <Dropdown 
+                style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
+                placeholderStyle={styles.placeholderStyle}
+                selectedTextStyle={styles.selectedTextStyle}
+                inputSearchStyle={styles.inputSearchStyle}
+                data={enfermedadesAPI}
+                search
+                maxHeight={300}
+                labelField="label"
+                valueField="value"
+                placeholder={!isFocus ? 'Selecciona una opción' : '...'}
+                searchPlaceholder="Buscar..."
+                value={enfermedades}
+                onFocus={() => setIsFocus(true)}
+                onBlur={() => setIsFocus(false)}
+                onChange={item => {
+                    console.log(item)
+                     //agregamos la enfermedad seleccionada a la lista
+                    setEnfermedades([...enfermedades, {"enfermedad" : item.label, "id" : item.value}]);
+                    //limpiamos la seleccion actual
+                    setEnfermedadSeleccionada('');
+                }}
+                
+            />
+            <Text style={styles.textoCampoBoton} onPress={() => setShow(!show)}>Mostrar enfermedades seleccionadas</Text>
+            <ExpandableView show={show} style={styles.contenedorDesplegable}>
+                <Text style={styles.textoDesplegable}>Enfermedades Seleccionadas : </Text>
+                {enfermedades.map((item)=> <Text style={styles.textoDesplegable}>{item.enfermedad}</Text> )}
+                <Button title="Quitar ultimo elemento" onPress={eliminaUltimoElemento} />
+            </ExpandableView>
+            <Text style={styles.textoCampo}>Enfermedades familiares : </Text>
+            <Dropdown 
+                style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
+                placeholderStyle={styles.placeholderStyle}
+                selectedTextStyle={styles.selectedTextStyle}
+                inputSearchStyle={styles.inputSearchStyle}
+                data={enfermedadesAPI}
+                search
+                maxHeight={300}
+                labelField="label"
+                valueField="value"
+                placeholder={!isFocus ? 'Selecciona una opción' : '...'}
+                searchPlaceholder="Buscar..."
+                value={enfermedadesFam}
+                onFocus={() => setIsFocus(true)}
+                onBlur={() => setIsFocus(false)}
+                onChange={item => {
+                    console.log(item)
+                     //agregamos la enfermedad seleccionada a la lista
+                    setEnfermedadesFam([...enfermedadesFam, {"enfermedad" : item.label, "id" : item.value}]);
+                    //limpiamos la seleccion actual
+                    setEnfermedadSeleccionadaFam('');
+                }}
+            />
+            <Text style={styles.textoCampoBoton} onPress={() => setShowFam(!showFam)}>Mostrar enfermedades seleccionadas</Text>
+            <ExpandableView show={showFam} style={styles.contenedorDesplegable}>
+                <Text style={styles.textoDesplegable}>Enfermedades Seleccionadas : </Text>
+                {enfermedadesFam.map((item)=> <Text style={styles.textoDesplegable}>{item.enfermedad}</Text> )}
+                <Button title="Quitar ultimo elemento" onPress={eliminaUltimoElemento} />
+            </ExpandableView>
+            {
+              //DATOS PARA habitoPersonal 
+            }
+            <Text style={styles.textoCampo}>Hora en la que despierta</Text>
+            <TextInput style={styles.input} value={horaD} onChangeText={text => setHoraD(text)} keyboardType="numbers-and-punctuation" placeholder="Coloca la hora en formato de 24 hrs"/>
+            <Text style={styles.textoCampo}>Hora en la que duerme</Text>
+            <TextInput style={styles.input} value={horaS} onChangeText={text => setHoraS(text)} keyboardType="numbers-and-punctuation" placeholder="Coloca la hora en formato de 24 hrs"/>
+            <Text style={styles.textoCampo}>Descripción física</Text>
+            <TextInput
+                style={styles.desc}
+                multiline={true}
+                numberOfLines={3} // Puedes ajustar la cantidad de líneas visibles
+                value={TextdescFisica}
+                placeholder="Escribe aquí la descripción física"
+                onChangeText={(text) => setTextdescFisica(text)}
+            />
+            <Text style={styles.textoCampo}>Rutina del día que tiene</Text>
+            <TextInput
+                style={styles.desc}
+                multiline={true}
+                numberOfLines={3} // Puedes ajustar la cantidad de líneas visibles
+                value={TextdescRutina}
+                placeholder="Escribe aquí la rutina del día"
+                onChangeText={(text) => setTextdescRutina(text)}
+            />
+            {
+              //DATOS PARA habitoAlimenticio 
+            }
+            //mas consumidos
+            <Text style={styles.textoCampo}>Coloca los alimentos más consumidos: </Text>
+            <TextInput style={styles.input} keyboardType="default" value={alimentosMconsumidos} onChange={text => setAlimentoMconsumidos(text)} />
+            //alimentos alergias
+            <Text style={styles.textoCampo}>Coloca los alimentos a los que es alergico: </Text>
+            <TextInput style={styles.input} keyboardType="default" value={alimentosAlergia} onChange={text => setAlimentosAlegia(text)} />
+            //cantidad de agua
+            <Text style={styles.textoCampo}>Coloca la cantidad de agua que consumes: </Text>
+            <TextInput style={styles.input} keyboardType="default" value={cantidadAgua} onChange={text => setCantidadAgua} />
+            //cantidad de comidas
+            <Text style={styles.textoCampo}>Coloca la cantidad de comidas que realizas: </Text>
+            <TextInput style={styles.input} keyboardType="default" value={cantidadComidas} onChange={text => setCantidadComidas(text)} />
+            //cantidad de colaciones
+            <Text style={styles.textoCampo}>Coloca la cantidad de colacioes que realizas: </Text>
+            <TextInput style={styles.input} keyboardType="default" value={cantidadColaciones} onChange={text => setCantidadColaciones(text)} />
+            //hora de desayuno
+            <Text style={styles.textoCampo}>Coloca la hora en la que realizas el desayuno: </Text>
+            <TextInput style={styles.input} keyboardType="default" values={horaDesayuno} onChange={text => setHoraDesayuno(text)}/>
+            //hora de comida
+            <Text style={styles.textoCampo}>Coloca la hora en la que realizas la comida: </Text>
+            <TextInput style={styles.input} keyboardType="default" values={horaComida} onChange={text => setHoraComida(text)} />
+            //hora de cena
+            <Text style={styles.textoCampo}>Coloca la hora en la que realizas la cena: </Text>
+            <TextInput style={styles.input} keyboardType="default" values={horaCena} onChange={text => setHoraCena(text)} />
+        </View>
+    </ScrollView>
+);
+ */

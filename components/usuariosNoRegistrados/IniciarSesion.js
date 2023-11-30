@@ -49,7 +49,8 @@ import * as pacientesProfesional from '../usuariosRegistrados/obtenPacientesUsua
 import CitasProfesional from '../usuariosRegistrados/profesionales/CitasProfesional';
 import ExpedientePaciente from '../usuariosRegistrados/profesionales/ExpedientePaciente';
 import * as RutinaEjercicioPaciente from '../usuariosRegistrados/obtenEjerciciosUsuarioPaciente';
-import RutinaPaciente from '../usuariosRegistrados/profesionales/RutinaPaciente';
+//import RutinaPaciente from '../usuariosRegistrados/profesionales/RutinaPaciente';
+//import InfoMPaciente from '../usuariosRegistrados/profesionales/formulariosPaciente/InfoMPaciente';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -262,7 +263,8 @@ export default function IniciarSesion() {
             <Stack.Screen name='UserScreen' component={UserProfileScreen} options={{title : 'Perfil'}} />
             <Stack.Screen name='CitasProfesional' component={CitasProfesional} options={{title : 'Citas profesional'}} />
             <Stack.Screen name='ExpedientePaciente' component={ExpedientePaciente} options={{title : 'Expediente del paciente'}} />
-            <Stack.Screen name='RutinaPaciente' component={RutinaPaciente} options={{title : 'Rutian del paciente'}} />
+            <Stack.Screen name="InfoMpaciente" component={InfoMPaciente} options={{title : 'Información médica del paciente'}} />
+            {/*<Stack.Screen name='RutinaPacienteProfesional' component={RutinaPaciente} options={{title : 'Rutian del paciente'}} />*/}
           </Stack.Navigator>
           
         ) : null
