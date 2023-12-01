@@ -34,7 +34,7 @@ const obtenEjercicioRutinas = async () => {
         }
         //console.log("fuera del if")
     } catch (error) {
-        console.error("Error en la función almacenaImagen: ", error);
+        console.error("Error en la función de obtención de rutina de ejercicios: ", error);
         throw error;
     }
     /*

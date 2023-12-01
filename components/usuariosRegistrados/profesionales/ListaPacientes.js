@@ -36,7 +36,7 @@ const ListaPacientes = ({navigation}) => {
                             <Image source={require('../../../Imagenes/expediente.png')} style={styles.iconOption2} />
                         </TouchableOpacity>
     
-                        <TouchableOpacity style={styles.iconOption3} onPress={ () => navigation.navigate('RutinaPaciente', {id : item.id})}>
+                        <TouchableOpacity style={styles.iconOption3} onPress={ () => navigation.navigate('RutinaPacienteProfesional', {id : item.id})}>
                             <Image source={require('../../../Imagenes/ejercicio.png')} style={styles.iconOption3} />
                         </TouchableOpacity>
     

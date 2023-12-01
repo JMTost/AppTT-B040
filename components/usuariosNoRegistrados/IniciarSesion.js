@@ -49,7 +49,10 @@ import * as pacientesProfesional from '../usuariosRegistrados/obtenPacientesUsua
 import CitasProfesional from '../usuariosRegistrados/profesionales/CitasProfesional';
 import ExpedientePaciente from '../usuariosRegistrados/profesionales/ExpedientePaciente';
 import * as RutinaEjercicioPaciente from '../usuariosRegistrados/obtenEjerciciosUsuarioPaciente';
-//import RutinaPaciente from '../usuariosRegistrados/profesionales/RutinaPaciente';
+import HabitoPersonal from '../usuariosRegistrados/profesionales/formulariosPaciente/HabitoPersonal';
+import HabitoAlimenticio from '../usuariosRegistrados/profesionales/formulariosPaciente/HabitoAlimenticio';
+import RutinaPacienteProfesional from '../usuariosRegistrados/profesionales/RutinaPaciente';
+import MuestraGraficasProfesioanl from '../graficas/MuestraGraficasProfesional';
 //import InfoMPaciente from '../usuariosRegistrados/profesionales/formulariosPaciente/InfoMPaciente';
 
 const Tab = createBottomTabNavigator();
@@ -61,7 +64,7 @@ export default function IniciarSesion() {
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-    //selector del tipo de usuario
+    //selector del tipo del usuario
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
     //
@@ -264,6 +267,10 @@ export default function IniciarSesion() {
             <Stack.Screen name='CitasProfesional' component={CitasProfesional} options={{title : 'Citas profesional'}} />
             <Stack.Screen name='ExpedientePaciente' component={ExpedientePaciente} options={{title : 'Expediente del paciente'}} />
             <Stack.Screen name="InfoMpaciente" component={InfoMPaciente} options={{title : 'Información médica del paciente'}} />
+            <Stack.Screen name="HabitoPersonal" component={HabitoPersonal} options={{title : 'Habito personal del paciente'}} />
+            <Stack.Screen name="HabitoAlimenticio" component={HabitoAlimenticio} options={{title : 'Habito alimenticio del paciente'}} />
+            <Stack.Screen name="RutinaPacienteProfesional" component={RutinaPacienteProfesional} options={{title : 'Rutinas del paciente'}} />
+            <Stack.Screen name="VerProgresoPacienteProfesional" component={MuestraGraficasProfesioanl} options={{title : 'Progreso del paciente'}} />
             {/*<Stack.Screen name='RutinaPacienteProfesional' component={RutinaPaciente} options={{title : 'Rutian del paciente'}} />*/}
           </Stack.Navigator>
           

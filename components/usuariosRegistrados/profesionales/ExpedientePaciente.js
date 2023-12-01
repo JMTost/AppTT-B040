@@ -11,7 +11,7 @@ const ExpedientePaciente = ({route, navigation}) => {
     const [dataExpediente, setDataExpediente] = useState(null);
     //!agregar la funcionalidad de los expedientes, lo de los formularios para crearlos
     //!AGREAR LOS DEMAS FORMULARIOS Y TERMINAR LA FUNCIONALIDAD DEL OTRO
-    //const {id} = route.params;
+    const {id} = route.params;
     console.log(id);
     useEffect( () => {
         //Función para hacer la API
@@ -20,7 +20,13 @@ const ExpedientePaciente = ({route, navigation}) => {
                 const response = await fetch(`${infoApp.APIurl}/obtenReporteMedico/${id}`);
                 if(response.ok){
                     const data = await response.json();
-                    setDataExpediente(data.objeto);
+                    console.log("DATA: ", data.objeto);
+                    if(  JSON.stringify(data.objeto.mediciones) === '{}' || JSON.stringify(data.objeto.habitoAlimenticio) === '{}'  || JSON.stringify(data.objeto.habitoPersonal) === '{}' || JSON.stringify(data.objeto.mediciones) === '{}'){
+                      //console.log("info API: ", data);
+                      setDataExpediente({mensaje : "No se cuenta con toda la información para realizar el reporte de este usuario, llene los elementos que falten, compruebe que el paciente cuente con mediciones (al menos dos) o si es un error pongase en contacto con el administrado."});
+                    }else{
+                      setDataExpediente(data.objeto);
+                    }
                 }else if(response.status === 404){
                     const data = await response.json();
                     setDataExpediente(data);
@@ -31,18 +37,30 @@ const ExpedientePaciente = ({route, navigation}) => {
         };
         obtenReporteMed();
     }, []);
+    
     if(!dataExpediente){
         return <Text>Cargando la información</Text>
     }
     if(dataExpediente.hasOwnProperty('mensaje')){
+      //console.log(dataExpediente.mensaje)
         {/*<View style={{flex : 1, alignContent : 'center', alignItems : 'center', justifyContent : 'center'}}>*/}
                     {/*<Text style={{fontWeight: 'bold'}}>{dataExpediente.mensaje}</Text>*/}
                 {/*</View>*/}
         return(
                 <View style={{flex : 1, alignContent : 'center', alignItems : 'center', justifyContent : 'center'}}>
+                <Text>{dataExpediente.mensaje}</Text>
+                <View style={styles.sectionEnlace}>
                     <TouchableOpacity onPress={() => navigation.navigate('InfoMpaciente', {id : id})}>
-                        <Text>Ir al formulario de información médica</Text>
+                        <Text style={styles.textEnlace}>Ir al formulario de información médica</Text>
                     </TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('HabitoPersonal', {id : id})}>
+                        <Text style={styles.textEnlace}>Ir al formulario de habito personal</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('HabitoAlimenticio', {id : id})}>
+                        <Text style={styles.textEnlace}>Ir al formulario de habito alimenticio</Text>
+                    </TouchableOpacity>
+                </View>
+                    
                 </View>
             
         );
@@ -142,6 +160,15 @@ const ExpedientePaciente = ({route, navigation}) => {
                     <TouchableOpacity onPress={() => navigation.navigate('InfoMpaciente', {id : id})}>
                         <Text style={styles.textEnlace}>Ir al formulario de información médica</Text>
                     </TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('HabitoPersonal', {id : id})}>
+                        <Text style={styles.textEnlace}>Ir al formulario de habito personal</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('HabitoAlimenticio', {id : id})}>
+                        <Text style={styles.textEnlace}>Ir al formulario de habito alimenticio</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('VerProgresoPacienteProfesional', {id : id, nombreC : dataExpediente.nombreCompleto})}>
+                      <Text style={styles.textEnlace}>Mostrar progreso del paciente</Text>
+                    </TouchableOpacity>
                 </View>
 
             </ScrollView>
@@ -204,11 +231,13 @@ const styles = StyleSheet.create({
       },
       sectionEnlace : {
         marginBottom: 20,
-        paddingBottom : 20
+        paddingBottom : 20, 
+        paddingTop : 10
       },
       textEnlace : {
         fontWeight : 'bold',
-        color : 'blue'
+        color : 'blue', 
+        paddingTop: 10, 
       }
   });
 

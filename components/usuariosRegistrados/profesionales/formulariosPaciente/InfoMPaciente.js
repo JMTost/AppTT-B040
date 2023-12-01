@@ -167,6 +167,7 @@ const InfoMPaciente = ({navigation, route}) => {
                 const data = {
                     "id_paciente" : id,
                     "estatura" : estatura,
+                    "ocupacion" : ocupacion,
                     "imc" : imc,
                     "objetivo" : objetivo,
                     "alergias" : alergias,
@@ -174,7 +175,28 @@ const InfoMPaciente = ({navigation, route}) => {
                     "enferm" : enfermedadesIDS,
                     "enfermFam" : enfermedadesFamIDS
                 };
+                const realizaCargaAPIsubida = async () => {
+                    const response = await fetch(`${infoApp.APIurl}/infoMed/alta`, {
+                        method : 'POST',
+                        headers : {
+                            'Content-Type' : 'application/json',
+                        }, body : JSON.stringify(data),
+                    });
+                    if(response.ok){
+                        Alert.alert("Exito", "Creación correcta de información", [
+                            {
+                                text : 'OK',
+                                onPress : () => navigation.navigate('PrincipalProfesional')
+                            }
+                        ], {cancelable : false});
+                    }else{
+                        let mensaje  = await response.json();
+                        console.log("Info : error ", mensaje);
+                        Alert.alert("Error", mensaje);
+                    }
+                };
                 console.log(data);
+                realizaCargaAPIsubida();
             }
         }else{
             let regFloat = /\d+\.\d+/;
@@ -183,7 +205,6 @@ const InfoMPaciente = ({navigation, route}) => {
                 Alert.alert("Error", "Verifica los campos solicitados");
             }else{
                 let enfermedadesIDS = [], enfermedadesFamIDS = [];
-                console.log(enfermedades);
                 if(Array.isArray(enfermedades) && enfermedades.length > 0){
                     for(let i = 0; i < enfermedades.length; i++){
                         enfermedadesIDS.push(enfermedades[i].id);
@@ -209,7 +230,28 @@ const InfoMPaciente = ({navigation, route}) => {
                         "enferm" : enfermedadesIDS,
                         "enfermFam" : enfermedadesFamIDS
                 };
+                const realizaCargaAPI = async () => {
+                    const response = await fetch(`${infoApp.APIurl}/infoMed/actualiza`, {
+                        method : 'PUT',
+                        headers : {
+                            'Content-Type' : 'application/json',
+                        }, body : JSON.stringify(data),
+                    });
+                    if(response.ok){
+                        Alert.alert("Exito", "Actualización correcta de información", [
+                            {
+                                text : 'OK',
+                                onPress : () => navigation.navigate('PrincipalProfesional')
+                            }
+                        ], {cancelable : false});
+                    }else{
+                        console.log("Info : error ", await response.text);
+                        Alert.alert("Error", await response.text);
+                    }
+                };
                 console.log(data);
+                realizaCargaAPI();
+
             }
         }
     }
@@ -582,6 +624,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
       },
     //
-  });
+});
 
 export default InfoMPaciente;

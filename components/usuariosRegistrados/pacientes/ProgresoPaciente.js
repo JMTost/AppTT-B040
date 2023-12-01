@@ -8,7 +8,7 @@ import InfoApiMed from '../../graficas/InfoApiMedica';
 export default function PacientScreen(){//pagina principal
     return (
         <ScrollView>
-            <View style={{flex : 1, justifyContent:'center', alignItems : 'center', paddingTop : 50}}>
+            <View style={{flex : 1, justifyContent:'center', alignItems : 'center', paddingTop : 50, backgroundColor: 'white'}}>
                 <InfoApiMed />
             </View>
         </ScrollView>
