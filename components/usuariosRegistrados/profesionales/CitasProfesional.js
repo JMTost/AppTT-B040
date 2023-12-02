@@ -1,14 +1,25 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, ScrollView , Image} from "react-native";
+import { StyleSheet, Text, View, ScrollView , Image, TouchableOpacity} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import infoApp from '../../../infoApp.json';
 
-const CitasProfesional = () => {
+const CitasProfesional = ({navigation}) => {
     //console.log(infoApp.usuarioProfesional.citas)
     if(infoApp.usuarioProfesional.citas === "Informacíón no encontrada"){
         return (
             <View style={{flex : 1, alignContent : 'center', alignItems : 'center', justifyContent : 'center'}}>
                 <Text style={{fontSize : 20, fontWeight : 'bold'}}>{infoApp.usuarioProfesional.citas}</Text>
+                <TouchableOpacity style={styles.containerButton} onPress={() => navigation.navigate('CrearCitas')}>
+                    <LinearGradient
+                        // Button Linear Gradient
+                        colors={['#c66900', '#e28000']}
+                        start={{ x: 0, y: 0 }}
+                        end={{ x: 1, y: 1 }}
+                        style={styles.button}
+                    >
+                        <Text style={styles.text}>NUEVA CITA</Text>
+                    </LinearGradient>
+                </TouchableOpacity>
             </View>
         );
 
@@ -45,6 +56,17 @@ const CitasProfesional = () => {
         return (
             <ScrollView contentContainerStyle={styles.fullContainer}>
                 {elementos}
+                <TouchableOpacity style={styles.containerButton} onPress={() => navigation.navigate('CrearCitas', {id : infoApp.usuarioProfesional.idUsuario})}>
+                    <LinearGradient
+                        // Button Linear Gradient
+                        colors={['#c66900', '#e28000']}
+                        start={{ x: 0, y: 0 }}
+                        end={{ x: 1, y: 1 }}
+                        style={styles.button}
+                    >
+                        <Text style={styles.text}>NUEVA CITA</Text>
+                    </LinearGradient>
+                </TouchableOpacity>
             </ScrollView>
         );
     }
@@ -52,16 +74,16 @@ const CitasProfesional = () => {
 
 const styles = StyleSheet.create({
     fullContainer: {
-        flex: 1,
+        //flex: 1, //ASI FUNCIONA EL SCROLLVIEW
         backgroundColor: 'white',
         padding: 20,
     },
-    container:{
-        paddingBottom : 10,
-        //flex: 1,
+    container: {
         backgroundColor: "white",
+        marginBottom: 15,
+
     },
-    containerCita : {
+    containerCita: {
         width: 370,
         height: 120,
         borderRadius: 15,
@@ -75,7 +97,7 @@ const styles = StyleSheet.create({
         right: 40,
         zIndex: 10,
     },
-    textNombreProfesional : {
+    textNombreProfesional: {
         fontSize: 15,
         textAlign: "left",
         position: "absolute",
@@ -84,7 +106,7 @@ const styles = StyleSheet.create({
         left: 60,
         zIndex: 10,
     },
-    textNombrePaciente : {
+    textNombrePaciente: {
         fontSize: 15,
         textAlign: "left",
         position: "absolute",
@@ -93,7 +115,7 @@ const styles = StyleSheet.create({
         left: 60,
         zIndex: 10,
     },
-    textDataCita : {
+    textDataCita: {
         fontSize: 15,
         textAlign: "left",
         position: "absolute",
@@ -108,7 +130,7 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         position: "absolute",
         top: 30,
-        right: 40,
+        right: 25,
         zIndex: 10,
     },
     iconDoc: {
@@ -137,6 +159,27 @@ const styles = StyleSheet.create({
         top: 85,
         left: 20,
         zIndex: 10,
+    },
+    containerButton: {
+        alignItems: 'center',
+        width: 250,
+        marginTop: 40,
+        marginLeft: "auto",
+        marginRight: "auto",
+    },
+
+    text: {
+        fontSize: 14,
+        color: 'white',
+        fontWeight: 'bold',
+    },
+    button: {
+        width: '80%',
+        height: 50,
+        borderRadius: 25,
+        padding: 10,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
 });
 

@@ -9,7 +9,9 @@ import infoApp from '../../../infoApp.json';
 import DescargaVideos from './ios_videos/DescargaVideos';
 import {Video, ResizeMode} from 'expo-av';
 
-const VisualizacionVideos = () => {
+const VisualizacionVideos = ({route, navigation}) => {
+  const {id} = route.params;
+
     const [selectedVideo, setSelectedVideo] = useState(null);
     const [value, setValue] = useState(null);
     const [isFocus, setIsFocus] = useState(false);
@@ -33,6 +35,35 @@ const VisualizacionVideos = () => {
     }
     //handleObtencion();
     //console.log(infoApp.usuarioProfesional)
+    if(Platform.OS === 'android' && id != 0){
+      return (
+          <View style={{flex : 1, alignItems : 'center', alignContent : 'center',  justifyContent : 'center', backgroundColor : 'gray'}}>
+              {id && (
+                  <Video key={id} ref={videoRef} style={styles.video} source={{ uri : `${infoApp.APIurl}/obtenVideoPorId/${id}` }}
+                      useNativeControls
+                      resizeMode={ResizeMode.STRETCH}
+                      shouldPlay
+                      />
+              )
+              }
+          </View>
+      );
+    }else if(Platform.OS === 'ios' && id != 0){
+        return (
+            <View style={{flex : 1, alignItems : 'center', alignContent : 'center', justifyContent : 'center', backgroundColor : 'gray'}}>
+                {
+                    id && <DescargaVideos key={value} videoUrl={`${infoApp.APIurl}/obtenVideoPorId/${value}`} />
+                }
+            </View>
+        );
+    }else if(id == 0){
+        return (
+            <View style={{flex : 1, alignItems : 'center', alignContent : 'center',  justifyContent : 'center', backgroundColor : 'white'}}>
+                <Text>Este ejercicio no cuenta con video que mostrar</Text>
+            </View>
+        );
+    }
+    /*
     if(Platform.OS === 'android'){
       return (
         <View style={{flex : 1, alignContent : 'center', alignItems : 'center', justifyContent : 'center'}}>
@@ -108,6 +139,7 @@ const VisualizacionVideos = () => {
         </View>
       );
     }
+    */
 }
 
 const styles = StyleSheet.create({
@@ -122,8 +154,8 @@ const styles = StyleSheet.create({
       },
       video: {
         //alignSelf: 'center',
-        width: 200,
-        height: 300,
+        width: 300,
+        height: 450,
       },
       buttons: {
         flexDirection: 'row',

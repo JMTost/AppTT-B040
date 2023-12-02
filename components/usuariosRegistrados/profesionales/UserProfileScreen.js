@@ -222,6 +222,11 @@ const UserProfileScreenProfesional = ( {navigation} ) => {
               <MaterialIcons name = 'upload-file' size={20} color="white" />
               <Text style={styles.buttonText}>Subida de documentos</Text>
           </TouchableOpacity>
+
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('PantallaSubidaVideos')}>
+              <MaterialIcons name = 'upload-file' size={20} color="white" />
+              <Text style={styles.buttonText}>Subida de videos</Text>
+          </TouchableOpacity>
           
           {showSubidaArchivos && <SubidaDocumentosProfesional />}
           </View>

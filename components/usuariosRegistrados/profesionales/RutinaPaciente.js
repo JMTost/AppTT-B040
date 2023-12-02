@@ -32,7 +32,7 @@ const RutinaPaciente = ({navigation, route}) => {
         return (
             <View style={{ alignItems: "center", flex: 1, marginTop: 320 }}>
                 <Text style={{ fontWeight: "bold" }}>No existe rutina creada</Text>
-                <TouchableOpacity style={styles.containerButton} onPress={() => navigation.navigate('Creación de Rutina')} >
+                <TouchableOpacity style={styles.containerButton} onPress={() => navigation.navigate('CrearRutinas', {id : id})} >
                     <LinearGradient
                         // Button Linear Gradient
                         colors={['#9d9f89', '#bcbfa3']}
@@ -76,22 +76,36 @@ const RutinaPaciente = ({navigation, route}) => {
                 <SafeAreaView style={styles.container}>
                     <FlatList data={ejercicios} renderItem={({item}) =>
                         <ScrollView style={styles.containerScroll}>
-                            <View style={styles.imageContainer}>
-                                <View style={{alignItems : 'center', justifyContent : 'center'}}>
-                                    <Image source={require("../../../Imagenes/Desplantes.jpg")}
-                                        opacity={.3} style={styles.excerciseImage}/>
-                                    <Text style={styles.excerciseTitle}>{item.nombreEjercicio}</Text>
-                                    <Text style={styles.excerciseDescription}>Cantidad a realizar : {item.cantidad} Musculo : {item.musculo} {item.fechaI} al {item.fechaFin}</Text>
-                                    <TouchableOpacity style={styles.icon} onPress={() => console.log("video")}>
-                                        <Image source={require('./../../../Imagenes/video.png')} style={styles.icon} />
-                                    </TouchableOpacity>
-                                    <TouchableOpacity style={styles.iconEditar} onPress={() => console.log("Editar")}>
-                                        <Image source={require('../../../Imagenes/edit.png')} style={styles.iconEditar} />
-                                    </TouchableOpacity>
+                                <View style={styles.imageContainer}>
+                                    <View style={{alignItems : 'center', justifyContent : 'center'}}>
+                                        <Image source={require("../../../Imagenes/Desplantes.jpg")}
+                                            opacity={.3} style={styles.excerciseImage}/>
+                                        <Text style={styles.excerciseTitle}>{item.nombreEjercicio}</Text>
+                                        <Text style={styles.excerciseDescription}>Cantidad a realizar : {item.cantidad} Musculo : {item.musculo} {item.fechaI} al {item.fechaFin}</Text>
+                                        <TouchableOpacity style={styles.icon} onPress={() => navigation.navigate('VisualizaVideos', {id : item.id_video})}>
+                                            <Image source={require('./../../../Imagenes/video.png')} style={styles.icon} />
+                                        </TouchableOpacity>
+                                        <TouchableOpacity style={styles.iconEditar} onPress={() => navigation.navigate('ModificaRutinaPaciente', {idPaciente : id, idProfesional : infoApp.usuarioProfesional.idUsuario, idRutina : item.id_rutina, dataRutina : item})}>
+                                            <Image source={require('../../../Imagenes/edit.png')} style={styles.iconEditar} />
+                                        </TouchableOpacity>
+                                    </View>
                                 </View>
-                            </View>
                         </ScrollView>
+                        
                         } keyExtractor={(item) => item.id} ListEmptyComponent={ListaVacia} />
+                        <View style={{ alignItems: "center", marginTop: 50 }}>
+                                <TouchableOpacity style={styles.containerButton} onPress={() => navigation.navigate('CrearRutinas', {id : id})} >
+                                    <LinearGradient
+                                        // Button Linear Gradient
+                                        colors={['#9d9f89', '#bcbfa3']}
+                                        start={{ x: 0, y: 0 }}
+                                        end={{ x: 1, y: 1 }}
+                                        style={styles.button}
+                                    >
+                                        <Text style={styles.text}>Crear Rutina</Text>
+                                    </LinearGradient>
+                                </TouchableOpacity>
+                            </View>
                 </SafeAreaView>
             );
         }

@@ -53,6 +53,9 @@ import HabitoPersonal from '../usuariosRegistrados/profesionales/formulariosPaci
 import HabitoAlimenticio from '../usuariosRegistrados/profesionales/formulariosPaciente/HabitoAlimenticio';
 import RutinaPacienteProfesional from '../usuariosRegistrados/profesionales/RutinaPaciente';
 import MuestraGraficasProfesioanl from '../graficas/MuestraGraficasProfesional';
+import ModificaRutinaPaciente from '../usuariosRegistrados/profesionales/ModificaRutinaPaciente';
+import CrearCita from '../usuariosRegistrados/profesionales/CrearCita';
+import CrearRutina from '../usuariosRegistrados/profesionales/CrearRutina';
 //import InfoMPaciente from '../usuariosRegistrados/profesionales/formulariosPaciente/InfoMPaciente';
 
 const Tab = createBottomTabNavigator();
@@ -271,6 +274,11 @@ export default function IniciarSesion() {
             <Stack.Screen name="HabitoAlimenticio" component={HabitoAlimenticio} options={{title : 'Habito alimenticio del paciente'}} />
             <Stack.Screen name="RutinaPacienteProfesional" component={RutinaPacienteProfesional} options={{title : 'Rutinas del paciente'}} />
             <Stack.Screen name="VerProgresoPacienteProfesional" component={MuestraGraficasProfesioanl} options={{title : 'Progreso del paciente'}} />
+            <Stack.Screen name="ModificaRutinaPaciente" component={ModificaRutinaPaciente} options={{title : 'Modifica rutina del paciente'}} />
+            <Stack.Screen name="VisualizaVideos" component={VisualizacionVideos} options={{title : 'Visualiza video'}} />
+            <Stack.Screen name="PantallaSubidaVideos" component={CargaVideosRutina} options={{title : 'Carga de videos'}} />
+            <Stack.Screen name="CrearCitas" component={CrearCita} options={{title : "Crear citas paciente"}} />
+            <Stack.Screen name="CrearRutinas" component={CrearRutina} options={{title : "Crear rutinas paciente"}} />
             {/*<Stack.Screen name='RutinaPacienteProfesional' component={RutinaPaciente} options={{title : 'Rutian del paciente'}} />*/}
           </Stack.Navigator>
           
