@@ -40,7 +40,7 @@ const ListaPacientes = ({navigation}) => {
                             <Image source={require('../../../Imagenes/ejercicio.png')} style={styles.iconOption3} />
                         </TouchableOpacity>
     
-                        <TouchableOpacity style={styles.iconOption4} onPress={ () => navigation.navigate('Dieta')}>
+                        <TouchableOpacity style={styles.iconOption4} onPress={ () => navigation.navigate('VisualizarDieta', {id : item.id})}>
                             <Image source={require('../../../Imagenes/dieta.png')} style={styles.iconOption4} />
                         </TouchableOpacity>
     

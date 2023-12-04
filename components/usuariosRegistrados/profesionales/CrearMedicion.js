@@ -6,8 +6,9 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import infoApp from '../../../infoApp.json';
 
 const CrearMedicion = ({navigation, route}) => {
+    //!TERMINAR FUNCIONALIDAD Y PROBARLA 
     const {id} = route.params;
-    console.log("ID; ", id);
+    //console.log("ID; ", id);
     //ESTADOS DE LOS DATOS OBTENIDOS DE LA PANTALLA ANTERIOR
     const [abdominal, setAdbominal] = useState('');
     const [axiliar, setAxiliar] = useState('');
@@ -41,8 +42,29 @@ const CrearMedicion = ({navigation, route}) => {
                 "toracica": toracica,
                 "pantorrilla_medial": pantorrilla,
                 "cintura": cintura,
-                "fecha": fecha
-            }
+                "fecha": fecha.getFullYear()+"/"+(fecha.getMonth()+1)+"/"+fecha.getDate()
+            };
+            const realizaCarga = async () => {
+                const response = await fetch(`${infoApp.APIurl}/altaMedicion`, {
+                    method : 'POST',
+                    headers : {
+                        "Content-Type": "application/json"
+                    }, body : JSON.stringify(data),
+                });
+                if(response.ok){
+                    const respuesta = await response.json();
+                    Alert.alert("Exito", respuesta.mensaje, [
+                        {
+                            text : 'OK',
+                            onPress : () => navigation.navigate('PrincipalProfesional')
+                        }
+                    ], {cancelable : false});
+                }else{
+                    const data = await response.json();
+                    Alert.alert("Error", data);
+                }
+            };
+            realizaCarga();
         }
     }
 
