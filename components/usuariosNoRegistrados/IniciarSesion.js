@@ -56,6 +56,9 @@ import MuestraGraficasProfesioanl from '../graficas/MuestraGraficasProfesional';
 import ModificaRutinaPaciente from '../usuariosRegistrados/profesionales/ModificaRutinaPaciente';
 import CrearCita from '../usuariosRegistrados/profesionales/CrearCita';
 import CrearRutina from '../usuariosRegistrados/profesionales/CrearRutina';
+import VisualizaMedicionesPaciente from '../usuariosRegistrados/profesionales/VisualizaMedicionesPaciente';
+import EditarMedicionPaciente from '../usuariosRegistrados/profesionales/EditarMedicionPaciente';
+import CrearMedicion from '../usuariosRegistrados/profesionales/CrearMedicion';
 //import InfoMPaciente from '../usuariosRegistrados/profesionales/formulariosPaciente/InfoMPaciente';
 
 const Tab = createBottomTabNavigator();
@@ -279,6 +282,9 @@ export default function IniciarSesion() {
             <Stack.Screen name="PantallaSubidaVideos" component={CargaVideosRutina} options={{title : 'Carga de videos'}} />
             <Stack.Screen name="CrearCitas" component={CrearCita} options={{title : "Crear citas paciente"}} />
             <Stack.Screen name="CrearRutinas" component={CrearRutina} options={{title : "Crear rutinas paciente"}} />
+            <Stack.Screen name='VisualizaMediciones' component={VisualizaMedicionesPaciente} options={{title : 'Visualiza mediciones'}} />
+            <Stack.Screen name='EditarMedicionPaciente' component={EditarMedicionPaciente} options={{title : 'Editar medición'}} />
+            <Stack.Screen name='CrearMedicion' component={CrearMedicion} options={{title:  'Crear medición paciente'}} />
             {/*<Stack.Screen name='RutinaPacienteProfesional' component={RutinaPaciente} options={{title : 'Rutian del paciente'}} />*/}
           </Stack.Navigator>
           

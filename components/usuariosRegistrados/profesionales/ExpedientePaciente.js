@@ -169,6 +169,9 @@ const ExpedientePaciente = ({route, navigation}) => {
                     <TouchableOpacity onPress={() => navigation.navigate('VerProgresoPacienteProfesional', {id : id, nombreC : dataExpediente.nombreCompleto})}>
                       <Text style={styles.textEnlace}>Mostrar progreso del paciente</Text>
                     </TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('VisualizaMediciones', {id : id})}>
+                      <Text style={styles.textEnlace}>Mostrar mediciones del paciente</Text>
+                    </TouchableOpacity>
                 </View>
 
             </ScrollView>
