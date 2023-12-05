@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, version } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, ScrollView, Pressable, Platform, Touchable, TouchableOpacity, Image, picker, SafeAreaView, FlatList, ViewBase, Alert} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import RNPickerSelect from 'react-native-picker-select';
@@ -346,186 +346,155 @@ const ModificarDieta = ({navigation, route}) => {
       }
 
       const handleAgregarAlimento = (nuevoAlimento, nuevasCantidades) => {
-      //!ARREGLAR METODO
-      //console.log("Nuevo alumento: ", nuevoAlimento);
-      for(let i = 0; i < nuevoAlimento.length; i++){
-        if(nuevoAlimento[i].tipo === 'proteinas' && nuevoAlimento[i].alimento != null){
-            nuevasCantidades.cantidades.proteinas.push(nuevoAlimento[i].cantidad);
-            let dato  = proteinasAPI.find((dato) => dato.value === nuevoAlimento[i].alimento);
-            alimentoComidas.proteinas.push(dato.label);
-            dataDieta.comidasproteinas.push(dato.value)
-            dataDieta.cantidadesproteinas.push(nuevoAlimento[i].cantidad.toString());
-        }
-        if(nuevoAlimento[i].tipo === 'verduras' && nuevoAlimento[i].alimento != null){
-            nuevasCantidades.cantidades.verduras.push(nuevoAlimento[i].cantidad);
-            let dato  = verdurasAPI.find((dato) => dato.value === nuevoAlimento[i].alimento);
-            alimentoComidas.verduras.push(dato.label);
-            dataDieta.comidasVerduras.push(dato.value.toString())
-            dataDieta.cantidadesverduras.push(nuevoAlimento[i].cantidad.toString());
-        }
-        if(nuevoAlimento[i].tipo === 'lacteos' && nuevoAlimento[i].alimento != null){
-            nuevasCantidades.cantidades.lacteos.push(nuevoAlimento[i].cantidad);
-            let dato  = lacteosAPI.find((dato) => dato.value === nuevoAlimento[i].alimento);
-            alimentoComidas.lacteos.push(dato.label);
-            dataDieta.comidasLacteos.push(dato.value.toString())
-            dataDieta.cantidadesLacteos.push(nuevoAlimento[i].cantidad.toString());
-        }
-        if(nuevoAlimento[i].tipo === 'frutas' && nuevoAlimento[i].alimento != null){
-            
-            nuevasCantidades.cantidades.frutas.push(nuevoAlimento[i].cantidad);
-            let dato  = frutasAPI.find((dato) => dato.value === nuevoAlimento[i].alimento);
-            alimentoComidas.frutas.push(dato.label);
-            dataDieta.comidasfrutas.push(dato.value.toString())
-            dataDieta.cantidadesFrutas.push(nuevoAlimento[i].cantidad.toString());
-        }
-        if(nuevoAlimento[i].tipo === 'granos' && nuevoAlimento[i].alimento != null){
-            
-            nuevasCantidades.cantidades.granos.push(nuevoAlimento[i].cantidad);
-            let dato  = granosAPI.find((dato) => dato.value === nuevoAlimento[i].alimento);
-            alimentoComidas.granos.push(dato.label);
-            dataDieta.comidasgranos.push(dato.value.toString())
-            dataDieta.cantidadesGranos.push(nuevoAlimento[i].cantidad.toString());
-        }
-      }
-        /*
-        console.log("Nuevo alumento: ", nuevoAlimento);
-        console.log("cantidades: ", nuevasCantidades);
-        */
-        
-        /*
-        console.log("ALIMENTOS COMIDAS ",alimentoComidas);
-        console.log("Alimentos dieta: ", dataDieta);
-        */
-        let proteinas = [], verduras = [], lacteos = [], frutas = [], granod = [];
-        let comidasProteinas = dataDieta.comidasproteinas[0].toString();
-        
-        if(comidasProteinas.includes(',')){
-            let comidasArr = dataDieta.comidasproteinas[0].split(',');
-            //console.log(comidasArr);
-            for (const alimento of comidasArr) {
-                let alimentoData;
-                //console.log("dato", alimento);
-                if(alimento != 0){
-                    const dato = proteinasAPI.find((data) => data.label === alimento || data.value === alimento);
-                    if(dato){
-                        proteinas.push(dato.value.toString());
-                    }
-                }
-            }
-        }else{
-            for (const alimento of dataDieta.comidasproteinas) {
-                let alimentoData;
-                //console.log("dato", alimento);
-                if(alimento != 0){
-                    const dato = proteinasAPI.find((data) => data.label === alimento || data.value === alimento);
-                    if(dato){
-                        proteinas.push(dato.value.toString());
-                    }
-                }
+        //console.log("NUEVO ALIMENTO: ", nuevoAlimento);
+        //console.log("nuevasCantidades: ", nuevasCantidades);
+        let idsNuevos = [];
+        for(let i = 0; i < nuevoAlimento.length; i++){
+            //console.log(nuevoAlimento[i]);
+            if(nuevoAlimento[i].alimento != null){
+                idsNuevos.push(nuevoAlimento[i]);
             }
         }
-    
-        if(dataDieta.comidasVerduras[0].includes(',')){
-            let comidasArr = dataDieta.comidasVerduras[0].split(',');
-            for (const alimento of comidasArr) {
-                let alimentoData;
-                if(alimento != 0){
-                    const dato = verdurasAPI.find((data) => data.label === alimento || data.value === alimento);
-                    if(dato){
-                        verduras.push(dato.value.toString());
-                    }
-                }
-            }
-        }else{
-            for (const alimento of dataDieta.comidasVerduras) {
-                let alimentoData;
-                if(alimento != 0){
-                    const dato = verdurasAPI.find((data) => data.label === alimento || data.value === alimento);
-                    if(dato){
-                        verduras.push(dato.value.toString());
-                    }
-                }
-            }
+        console.log("nuevasCantidades: ", nuevasCantidades.cantidades);
+        let proteinasCantidades = [], VerdurasCantidades = [], lacteosCantidades = [], frutasCantidades=  [], granosCantidades = [];
+        let idsProteinas = [], idsVerduras = [], idsLacteos = [], idsFrutas = [], idsGranos = [];
+        let auxiliar = dataDieta.comidasproteinas.toString().split(',') || "";
+       for(let i = 0; i < nuevasCantidades.cantidades.proteinas.length; i++){
+        const dato = proteinasAPI.find((data) => data.label === auxiliar[i] || data.value === auxiliar[i]);
+        if(dato != undefined){
+            idsProteinas.push(dato.value.toString());
         }
-        if(dataDieta.comidasfrutas[0].includes(',')){
-            let comidasArr = dataDieta.comidasfrutas[0].split(',');
-            for (const alimento of comidasArr) {
-                let alimentoData;
-                if(alimento != 0){
-                    const dato = frutasAPI.find((data) => data.label === alimento || data.value === alimento);
-                    if(dato){
-                        frutas.push(dato.value.toString());
-                    }
+        proteinasCantidades.push(nuevasCantidades.cantidades.proteinas[i]);
+       }
+        auxiliar = dataDieta.comidasVerduras.toString().split(',') || "";
+       for(let i = 0; i < nuevasCantidades.cantidades.verduras.length; i++){
+        const dato = verdurasAPI.find((data) => data.label === auxiliar[i] || data.value === auxiliar[i]);
+        if(dato != undefined){
+            idsVerduras.push(dato.value.toString());
+        }
+        VerdurasCantidades.push(nuevasCantidades.cantidades.verduras[i]);
+       }
+        auxiliar = dataDieta.comidasLacteos.toString().split(',');
+       for(let i = 0; i < nuevasCantidades.cantidades.lacteos.length; i++){
+        const dato = lacteosAPI.find((data) => data.label === auxiliar[i] || data.value === auxiliar[i]);
+        if(dato != undefined){
+            idsLacteos.push(dato.value.toString());
+        }
+        lacteosCantidades.push(nuevasCantidades.cantidades.lacteos[i]);
+       }
+        auxiliar = dataDieta.comidasfrutas.toString().split(',');
+       for(let i = 0; i < nuevasCantidades.cantidades.frutas.length; i++){
+        const dato = frutasAPI.find((data) => data.label === auxiliar[i] || data.value === auxiliar[i]);
+        if(dato != undefined){
+            idsFrutas.push(dato.value.toString());
+        }
+        frutasCantidades.push(nuevasCantidades.cantidades.frutas[i]);
+       }
+        auxiliar = dataDieta.comidasgranos.toString().split(',');
+       for(let i = 0; i < nuevasCantidades.cantidades.granos.length; i++){
+        const dato = granosAPI.find((data) => data.label === auxiliar[i] || data.value === auxiliar[i]);
+        if(dato != undefined){
+            idsGranos.push(dato.value.toString());
+        }
+        granosCantidades.push(nuevasCantidades.cantidades.granos[i]);
+       }
+       console.log(proteinasCantidades, VerdurasCantidades, lacteosCantidades, frutasCantidades, granosCantidades)
+       console.log(idsProteinas, idsVerduras, idsLacteos, idsFrutas, idsGranos)
+       console.log("IDs capturados: ", idsNuevos)
+       if(idsNuevos.length <= 0){
+        Alert.alert("Error", "Agrega el elemento deseado con cantidad");
+       }else{
+        for(let i = 0; i < idsNuevos.length; i++){
+            if(idsNuevos[i].tipo === 'proteinas'){
+                if(idsProteinas.length > 0 ){
+                    proteinasCantidades.push(idsNuevos[i].cantidad.toString());
+                    idsProteinas.push(idsNuevos[i].alimento.toString());
+                }else{//lo colocamos en el elemento 0
+                    proteinasCantidades.pop();
+                    proteinasCantidades.push(idsNuevos[i].cantidad.toString());
+                    idsProteinas.push(idsNuevos[i].alimento.toString());
                 }
-            }
-        }else{
-            for (const alimento of dataDieta.comidasfrutas) {
-                let alimentoData;
-                if(alimento != 0){
-                    const dato = frutasAPI.find((data) => data.label === alimento || data.value === alimento);
-                    if(dato){
-                        frutas.push(dato.value.toString());
-                    }
+            }else if(idsNuevos[i].tipo === 'verduras'){
+                if(idsVerduras.length > 0 ){
+                    VerdurasCantidades.push(idsNuevos[i].cantidad.toString());
+                    idsVerduras.push(idsNuevos[i].alimento.toString());
+                }else{//lo colocamos en el elemento 0
+                    VerdurasCantidades.pop();
+                    VerdurasCantidades.push(idsNuevos[i].cantidad.toString());
+                    idsVerduras.push(idsNuevos[i].alimento.toString());
+                }
+            }else if(idsNuevos[i].tipo === 'lacteos'){
+                if(idsLacteos.length > 0 ){
+                    lacteosCantidades.push(idsNuevos[i].cantidad.toString());
+                    idsLacteos.push(idsNuevos[i].alimento.toString());
+                }else{//lo colocamos en el elemento 0
+                    lacteosCantidades.pop();
+                    lacteosCantidades.push(idsNuevos[i].cantidad.toString());
+                    idsLacteos.push(idsNuevos[i].alimento.toString());
+                }
+            }else if(idsNuevos[i].tipo === 'frutas'){
+                if(idsFrutas.length > 0 ){
+                    frutasCantidades.push(idsNuevos[i].cantidad.toString());
+                    idsFrutas.push(idsNuevos[i].alimento.toString());
+                }else{//lo colocamos en el elemento 0
+                    frutasCantidades.pop();
+                    frutasCantidades.push(idsNuevos[i].cantidad.toString());
+                    idsFrutas.push(idsNuevos[i].alimento.toString());
+                }
+            }else if(idsNuevos[i].tipo === 'granos'){
+                if(idsGranos.length > 0 ){
+                    granosCantidades.push(idsNuevos[i].cantidad.toString());
+                    idsGranos.push(idsNuevos[i].alimento.toString());
+                }else{//lo colocamos en el elemento 0
+                    granosCantidades.pop();
+                    granosCantidades.push(idsNuevos[i].cantidad.toString());
+                    idsGranos.push(idsNuevos[i].alimento.toString());
                 }
             }
         }
-        if(dataDieta.comidasLacteos[0].includes(',')){
-            let comidasArr = dataDieta.comidasLacteos[0].split(',');
-            for (const alimento of comidasArr) {
-                let alimentoData;
-                if(alimento != 0){
-                    const dato = lacteosAPI.find((data) => data.label === alimento || data.value === alimento);
-                    if(dato){
-                        lacteos.push(dato.value.toString());
+        //!REALIZAMOS EL METODO DE ENVIO DE INFORMACIÓN
+        console.log("FINALES: ", proteinasCantidades, VerdurasCantidades, lacteosCantidades, frutasCantidades, granosCantidades)
+        console.log("FINALES: ", idsProteinas, idsVerduras, idsLacteos, idsFrutas, idsGranos)
+        let data = {
+            "idProfesional": infoApp.usuarioProfesional.idUsuario,
+            "idPaciente": dataDieta.idpaciente,
+            "idComida": dataDieta.idComida,
+            "proteinas": idsProteinas !== undefined && idsProteinas.length > 0 ? idsProteinas : ["0"],
+            "cantidadesProteinas": proteinasCantidades !== undefined && proteinasCantidades.length > 0 ? proteinasCantidades: ["0"],
+            "lacteos": idsLacteos !== undefined && idsLacteos.length > 0 ? idsLacteos : ["0"],
+            "cantidadesLacteos": lacteosCantidades !== undefined && lacteosCantidades.length > 0 ? lacteosCantidades : ["0"],
+            "frutas": idsFrutas !== undefined && idsFrutas.length > 0 ? idsFrutas : ["0"],
+            "cantidadesFrutas": frutasCantidades !== undefined && frutasCantidades.length > 0 ? frutasCantidades : ["0"],
+            "verduras": idsVerduras !== undefined && idsVerduras.length > 0 ? idsVerduras : ["0"],
+            "cantidadesVerduras": VerdurasCantidades !== undefined && VerdurasCantidades.length > 0 ? VerdurasCantidades : ["0"],
+            "granos": idsGranos !== undefined && idsGranos.length > 0 ? idsGranos : ["0"],
+            "cantidadesGranos": granosCantidades !== undefined && granosCantidades.length > 0 ? granosCantidades : ["0"],
+            "duracion": nuevasCantidades.duracion,
+            "vigencia": nuevasCantidades.vigencia
+          };
+          const realizaActualizacionCantidades = async () => {
+            const response = await fetch(`${infoApp.APIurl}/alimentodieta/actualiza`, {
+                method : 'PUT',
+                headers : {
+                    'Content-Type' : 'application/json',
+                }, body : JSON.stringify(data),
+            });
+            if(response.ok){
+                const data = await response.json();
+                Alert.alert("Exito", data.mensaje, [
+                    {
+                      text : 'OK',
+                      onPress : () => navigation.navigate('PrincipalProfesional')
                     }
-                }
-            }        
-        }else{
-            for (const alimento of dataDieta.comidasLacteos) {
-                let alimentoData;
-                if(alimento != 0){
-                    const dato = lacteosAPI.find((data) => data.label === alimento || data.value === alimento);
-                    if(dato){
-                        lacteos.push(dato.value.toString());
-                    }
-                }
+                  ], {cancelable : false});
+            }else{
+                let mensaje = await response.json();
+                console.log("info : error", mensaje);
+                Alert.alert("Error", response.statusText);
             }
-        }
-        if(dataDieta.comidasgranos[0].includes(',')){
-            let comidasArr = dataDieta.comidasgranos[0].split(',');
-            for (const alimento of comidasArr) {
-                let alimentoData;
-                if(alimento != 0){
-                    console.log(alimento);
-                    const dato = granosAPI.find((data) => data.label === alimento || data.value === alimento);
-                    if(dato){
-                        granos.push(dato.value.toString());
-                    }
-                }
-            }
-        }else{
-            for (const alimento of dataDieta.comidasgranos) {
-                console.log("dato que entra: ", alimento);
-                if(alimento != 0){
-                    const dato = granosAPI.find((data) => {//data.label === alimento || data.value === alimento
-                    console.log(alimento === data.label);
-                    //console.log(data.label === alimento || data.value === alimento);
-                    });
-                    console.log(dato);
-                    if(dato){
-                    console.log(dato);
-                        granos.push(dato.value.toString());
-                    }
-                }
-            }
-        }
-        
-        console.log(proteinas, verduras, frutas, lacteos, granos);
-        
-        /*
-        console.warn("nuevascantidades: ", nuevasCantidades);
-        console.log("alimentos: ", dataDieta);
-        */
+          };
+          realizaActualizacionCantidades();
+       }
       }
 
       function eliminarElementosPorCantidadYAlimento(array, cantidad, nombreAlimento) {
