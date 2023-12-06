@@ -31,7 +31,7 @@ const VerDietaPaciente = ({navigation, route}) => {
         return (
             <View style={{ alignItems: "center", flex: 1, marginTop: 320 }}>
                 <Text style={{ fontWeight: "bold" }}>No existe dieta creada</Text>
-                <TouchableOpacity style={styles.containerButton} onPress={() => navigation.navigate('Crear Dieta')} >
+                <TouchableOpacity style={styles.containerButton} onPress={() => navigation.navigate('CrearDieta')} >
                     <LinearGradient
                         // Button Linear Gradient
                         colors={['#9d9f89', '#bcbfa3']}
@@ -51,7 +51,7 @@ const VerDietaPaciente = ({navigation, route}) => {
             return( //caso de no terner una dieta
                 <View style={{ alignItems: "center", flex: 1, marginTop: 320 }}>
                     <Text style={{ fontWeight: "bold" }}>No existe dieta creada</Text>
-                    <TouchableOpacity style={styles.containerButton} onPress={() => navigation.navigate('Crear Dieta')} >
+                    <TouchableOpacity style={styles.containerButton} onPress={() => navigation.navigate('CrearDieta', {id : id})} >
                         <LinearGradient
                             // Button Linear Gradient
                             colors={['#9d9f89', '#bcbfa3']}
@@ -130,6 +130,20 @@ const VerDietaPaciente = ({navigation, route}) => {
                         ListEmptyComponent={myListEmpty}
         
                     />
+                    <View style={{ alignItems: "center", marginTop: 50 }}>
+                      <Text style={{ fontWeight: "bold" }}>No existe dieta creada</Text>
+                      <TouchableOpacity style={styles.containerButton} onPress={() => navigation.navigate('CrearDieta', {id : id})} >
+                          <LinearGradient
+                              // Button Linear Gradient
+                              colors={['#9d9f89', '#bcbfa3']}
+                              start={{ x: 0, y: 0 }}
+                              end={{ x: 1, y: 1 }}
+                              style={styles.button}
+                          >
+                              <Text style={styles.text}>Crear Dieta</Text>
+                          </LinearGradient>
+                      </TouchableOpacity>
+                  </View>
                 </SafeAreaView >
             );
         }

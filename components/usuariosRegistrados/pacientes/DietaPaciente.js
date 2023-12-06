@@ -107,10 +107,12 @@ const DietaPaciente = () => {
 
 const descripcion = (texto) => {
   let cadena = "";
+  console.log(texto)
+  console.log(texto.comidasLacteos[0] === "0" )
   //console.log(texto.comidasproteinas[0])
   let proteinas = [], verduras = [], lacteos = [], frutas = [], granos = [];
   if(Platform.OS === 'android'){
-  if(texto.comidasproteinas[0] != 'no aplica'){
+  if(texto.comidasproteinas[0] != 'no aplica' && texto.comidasproteinas[0] !== '0'){
     cadena += "Proteinas: \n";
     if(texto.comidasproteinas[0].includes(',')){
       let alimentosProteinas = texto.comidasproteinas[0].split(',');
@@ -128,7 +130,7 @@ const descripcion = (texto) => {
     }
   }else proteinas = "";
 
-  if(texto.comidasVerduras[0] != 'no aplica'){
+  if(texto.comidasVerduras[0] != 'no aplica' && texto.comidasVerduras[0] !== '0'){
     cadena += "Verduras: \n";
     if(texto.comidasVerduras[0].includes(',')){
       let alimentosVerduras = texto.comidasVerduras[0].split(',');
@@ -145,7 +147,7 @@ const descripcion = (texto) => {
     }
   }else verduras = "";
 
-  if(texto.comidasLacteos[0] != 'no aplica'){
+  if(texto.comidasLacteos[0] != 'no aplica' && texto.comidasLacteos[0] !== '0'){
     cadena += "Lacteos: \n";
     if(texto.comidasLacteos[0].includes(',')){
       let alimentosLacteos = texto.comidasLacteos[0].split(',');
@@ -162,7 +164,7 @@ const descripcion = (texto) => {
     }
   }else lacteos = "";
 
-  if(texto.comidasfrutas[0] != 'no aplica'){
+  if(texto.comidasfrutas[0] != 'no aplica' && texto.comidasfrutas[0] !== '0'){
     cadena += "Frutas: \n";
     if(texto.comidasfrutas[0].includes(',')){
       let alimentosFrutas = texto.comidasfrutas[0].split(',');
@@ -179,7 +181,7 @@ const descripcion = (texto) => {
     }
   }else frutas = "";
 
-  if(texto.comidasgranos[0] != 'no aplica'){
+  if(texto.comidasgranos[0] != 'no aplica' && texto.comidasgranos[0] !== '0'){
     cadena += "Granos: \n";
     if(texto.comidasgranos[0].includes(',')){
       let alimentosGranos = texto.comidasgranos[0].split(',');
@@ -197,7 +199,7 @@ const descripcion = (texto) => {
   }else granos = "";
     Alert.alert("Descripción.", cadena, [{text : 'Cerrar'}]);
   }else if(Platform.OS === 'ios'){
-    if(texto.comidasproteinas[0] != 'no aplica'){
+    if(texto.comidasproteinas[0] != 'no aplica' && texto.comidasproteinas[0] !== '0'){
       cadena += "Proteinas: \n";
       if(texto.comidasproteinas[0].includes(',')){
         console.log("data")
@@ -216,7 +218,7 @@ const descripcion = (texto) => {
       }
     }else proteinas = "";
   
-    if(texto.comidasVerduras[0] != 'no aplica'){
+    if(texto.comidasVerduras[0] != 'no aplica' && texto.comidasVerduras[0] !== '0'){
       cadena += "Verduras: \n";
       if(texto.comidasVerduras[0].includes(',')){
         let alimentosVerduras = texto.comidasVerduras[0].split(',');
@@ -233,7 +235,7 @@ const descripcion = (texto) => {
       }
     }else verduras = "";
   
-    if(texto.comidasLacteos[0] != 'no aplica'){
+    if(texto.comidasLacteos[0] != 'no aplica' && texto.comidasLacteos[0] !== '0'){
       cadena += "Lacteos: \n";
       if(texto.comidasLacteos[0].includes(',')){
         let alimentosLacteos = texto.comidasLacteos[0].split(',');
@@ -250,7 +252,7 @@ const descripcion = (texto) => {
       }
     }else lacteos = "";
   
-    if(texto.comidasfrutas[0] != 'no aplica'){
+    if(texto.comidasfrutas[0] != 'no aplica' && texto.comidasfrutas[0] !== '0'){
       cadena += "Frutas: \n";
       if(texto.comidasfrutas[0].includes(',')){
         let alimentosFrutas = texto.comidasfrutas[0].split(',');
@@ -267,7 +269,7 @@ const descripcion = (texto) => {
       }
     }else frutas = "";
   
-    if(texto.comidasgranos[0] != 'no aplica'){
+    if(texto.comidasgranos[0] != 'no aplica' && texto.comidasgranos[0] !== '0'){
       cadena += "Granos: \n";
       if(texto.comidasgranos[0].includes(',')){
         let alimentosGranos = texto.comidasgranos[0].split(',');

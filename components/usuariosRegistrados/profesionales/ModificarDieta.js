@@ -240,16 +240,74 @@ const ModificarDieta = ({navigation, route}) => {
 
       const handleModificarComida = (nuevasCantidades) =>{
         //comprobamos que no haya elementos vacios 
-        
+        console.log("nuevas: ", nuevasCantidades);
+        console.log("alimentosCOMIDAS: ", alimentoComidas);
+        let nCantidades = {
+            cantidades : {
+                frutas : [],
+                lacteos : [],
+                proteinas : [],
+                verduras : [],
+                granos : [],
+            },
+            duracion : 0,
+            vigencia : ''
+        };
+        let alimentosComida_final = {
+            frutas : [],
+            granos : [],
+            lacteos : [],
+            proteinas : [],
+            verduras : []
+        };
+        nCantidades.duracion = nuevasCantidades.duracion;
+        nCantidades.vigencia = nuevasCantidades.vigencia;
+        for(let i = 0; i < nuevasCantidades.cantidades.frutas.length; i++){
+            if(nuevasCantidades.cantidades.frutas[i] > 0){
+                //console.log("nueva cantidad "+i, nuevasCantidades.cantidades.frutas[i])
+                nCantidades.cantidades.frutas.push(nuevasCantidades.cantidades.frutas[i]);
+                alimentosComida_final.frutas.push(alimentoComidas.frutas[i]);
+            }
+        }
+        for(let i = 0; i < nuevasCantidades.cantidades.lacteos.length; i++){
+            if(nuevasCantidades.cantidades.lacteos[i] > 0){
+                //console.log("nueva cantidad "+i, nuevasCantidades.cantidades.lacteos[i])
+                nCantidades.cantidades.lacteos.push(nuevasCantidades.cantidades.lacteos[i]);
+                alimentosComida_final.lacteos.push(alimentoComidas.lacteos[i]);
+            }
+        }
+        for(let i = 0; i < nuevasCantidades.cantidades.granos.length; i++){
+            if(nuevasCantidades.cantidades.granos[i] > 0){
+                //console.log("nueva cantidad "+i, nuevasCantidades.cantidades.granos[i])
+                nCantidades.cantidades.granos.push(nuevasCantidades.cantidades.granos[i]);
+                alimentosComida_final.granos.push(alimentoComidas.granos[i]);
+            }
+        }
+        for(let i = 0; i < nuevasCantidades.cantidades.proteinas.length; i++){
+            if(nuevasCantidades.cantidades.proteinas[i] > 0){
+                //console.log("nueva cantidad "+i, nuevasCantidades.cantidades.proteinas[i])
+                nCantidades.cantidades.proteinas.push(nuevasCantidades.cantidades.proteinas[i]);
+                alimentosComida_final.proteinas.push(alimentoComidas.proteinas[i]);
+            }
+        }
+        for(let i = 0; i < nuevasCantidades.cantidades.verduras.length; i++){
+            if(nuevasCantidades.cantidades.verduras[i] > 0){
+                //console.log("nueva cantidad "+i, nuevasCantidades.cantidades.verduras[i])
+                nCantidades.cantidades.verduras.push(nuevasCantidades.cantidades.verduras[i]);
+                alimentosComida_final.verduras.push(alimentoComidas.verduras[i]);
+            }
+        }
+        // console.log("ncantidades filtradas: ", nCantidades)
+        // console.log("alimentosComida_final: ", alimentosComida_final)
         let cantidadesMOD= {}, idsComidasNoCero = {};
-        for (const [tipo, cantidades] of Object.entries(nuevasCantidades.cantidades)) {
+        for (const [tipo, cantidades] of Object.entries(nCantidades.cantidades)) {
             const cantidadesFiltradas = cantidades.filter((cantidad) => parseFloat(cantidad) !== 0);
             if (cantidadesFiltradas.length > 0) {
               cantidadesMOD[tipo] = cantidadesFiltradas;
             }
           }
         
-        for (const [tipo, alimentos] of Object.entries(alimentoComidas)) {
+        for (const [tipo, alimentos] of Object.entries(alimentosComida_final)) {
             //console.log("alimentos: ", alimentos)
             
             const tipoLowerCase = tipo.toLowerCase();
@@ -319,7 +377,8 @@ const ModificarDieta = ({navigation, route}) => {
             "duracion": nuevasCantidades.duracion,
             "vigencia": nuevasCantidades.vigencia
           };
-        
+        //console.log("IDS: ", idsComidasNoCero);
+        //console.log("cantidades: ", cantidadesMOD);
         const realizaModificacion = async () => {
             const response = await fetch(`${infoApp.APIurl}/alimentodieta/actualiza`, {
                 method : 'PUT',
@@ -346,8 +405,8 @@ const ModificarDieta = ({navigation, route}) => {
       }
 
       const handleAgregarAlimento = (nuevoAlimento, nuevasCantidades) => {
-        //console.log("NUEVO ALIMENTO: ", nuevoAlimento);
-        //console.log("nuevasCantidades: ", nuevasCantidades);
+        console.log("NUEVO ALIMENTO: ", nuevoAlimento);
+        console.log("nuevasCantidades: ", nuevasCantidades);
         let idsNuevos = [];
         for(let i = 0; i < nuevoAlimento.length; i++){
             //console.log(nuevoAlimento[i]);
@@ -355,7 +414,7 @@ const ModificarDieta = ({navigation, route}) => {
                 idsNuevos.push(nuevoAlimento[i]);
             }
         }
-        console.log("nuevasCantidades: ", nuevasCantidades.cantidades);
+        //console.log("nuevasCantidades: ", nuevasCantidades.cantidades);
         let proteinasCantidades = [], VerdurasCantidades = [], lacteosCantidades = [], frutasCantidades=  [], granosCantidades = [];
         let idsProteinas = [], idsVerduras = [], idsLacteos = [], idsFrutas = [], idsGranos = [];
         let auxiliar = dataDieta.comidasproteinas.toString().split(',') || "";
@@ -398,7 +457,7 @@ const ModificarDieta = ({navigation, route}) => {
         }
         granosCantidades.push(nuevasCantidades.cantidades.granos[i]);
        }
-       console.log(proteinasCantidades, VerdurasCantidades, lacteosCantidades, frutasCantidades, granosCantidades)
+       console.log("proteinas", proteinasCantidades,"verduras", VerdurasCantidades, "lacteos", lacteosCantidades, "frutas", frutasCantidades,"granos",  granosCantidades)
        console.log(idsProteinas, idsVerduras, idsLacteos, idsFrutas, idsGranos)
        console.log("IDs capturados: ", idsNuevos)
        if(idsNuevos.length <= 0){
@@ -407,48 +466,48 @@ const ModificarDieta = ({navigation, route}) => {
         for(let i = 0; i < idsNuevos.length; i++){
             if(idsNuevos[i].tipo === 'proteinas'){
                 if(idsProteinas.length > 0 ){
-                    proteinasCantidades.push(idsNuevos[i].cantidad.toString());
-                    idsProteinas.push(idsNuevos[i].alimento.toString());
+                    proteinasCantidades.push(idsNuevos[i].cantidad);
+                    idsProteinas.push(idsNuevos[i].alimento);
                 }else{//lo colocamos en el elemento 0
                     proteinasCantidades.pop();
-                    proteinasCantidades.push(idsNuevos[i].cantidad.toString());
-                    idsProteinas.push(idsNuevos[i].alimento.toString());
+                    proteinasCantidades.push(idsNuevos[i].cantidad);
+                    idsProteinas.push(idsNuevos[i].alimento);
                 }
             }else if(idsNuevos[i].tipo === 'verduras'){
                 if(idsVerduras.length > 0 ){
-                    VerdurasCantidades.push(idsNuevos[i].cantidad.toString());
-                    idsVerduras.push(idsNuevos[i].alimento.toString());
+                    VerdurasCantidades.push(idsNuevos[i].cantidad);
+                    idsVerduras.push(idsNuevos[i].alimento);
                 }else{//lo colocamos en el elemento 0
                     VerdurasCantidades.pop();
-                    VerdurasCantidades.push(idsNuevos[i].cantidad.toString());
-                    idsVerduras.push(idsNuevos[i].alimento.toString());
+                    VerdurasCantidades.push(idsNuevos[i].cantidad);
+                    idsVerduras.push(idsNuevos[i].alimento);
                 }
             }else if(idsNuevos[i].tipo === 'lacteos'){
                 if(idsLacteos.length > 0 ){
-                    lacteosCantidades.push(idsNuevos[i].cantidad.toString());
-                    idsLacteos.push(idsNuevos[i].alimento.toString());
+                    lacteosCantidades.push(idsNuevos[i].cantidad);
+                    idsLacteos.push(idsNuevos[i].alimento);
                 }else{//lo colocamos en el elemento 0
                     lacteosCantidades.pop();
-                    lacteosCantidades.push(idsNuevos[i].cantidad.toString());
-                    idsLacteos.push(idsNuevos[i].alimento.toString());
+                    lacteosCantidades.push(idsNuevos[i].cantidad);
+                    idsLacteos.push(idsNuevos[i].alimento);
                 }
             }else if(idsNuevos[i].tipo === 'frutas'){
                 if(idsFrutas.length > 0 ){
-                    frutasCantidades.push(idsNuevos[i].cantidad.toString());
-                    idsFrutas.push(idsNuevos[i].alimento.toString());
+                    frutasCantidades.push(idsNuevos[i].cantidad);
+                    idsFrutas.push(idsNuevos[i].alimento);
                 }else{//lo colocamos en el elemento 0
                     frutasCantidades.pop();
-                    frutasCantidades.push(idsNuevos[i].cantidad.toString());
-                    idsFrutas.push(idsNuevos[i].alimento.toString());
+                    frutasCantidades.push(idsNuevos[i].cantidad);
+                    idsFrutas.push(idsNuevos[i].alimento);
                 }
             }else if(idsNuevos[i].tipo === 'granos'){
                 if(idsGranos.length > 0 ){
-                    granosCantidades.push(idsNuevos[i].cantidad.toString());
-                    idsGranos.push(idsNuevos[i].alimento.toString());
+                    granosCantidades.push(idsNuevos[i].cantidad);
+                    idsGranos.push(idsNuevos[i].alimento);
                 }else{//lo colocamos en el elemento 0
                     granosCantidades.pop();
-                    granosCantidades.push(idsNuevos[i].cantidad.toString());
-                    idsGranos.push(idsNuevos[i].alimento.toString());
+                    granosCantidades.push(idsNuevos[i].cantidad);
+                    idsGranos.push(idsNuevos[i].alimento);
                 }
             }
         }
@@ -459,19 +518,20 @@ const ModificarDieta = ({navigation, route}) => {
             "idProfesional": infoApp.usuarioProfesional.idUsuario,
             "idPaciente": dataDieta.idpaciente,
             "idComida": dataDieta.idComida,
-            "proteinas": idsProteinas !== undefined && idsProteinas.length > 0 ? idsProteinas : ["0"],
-            "cantidadesProteinas": proteinasCantidades !== undefined && proteinasCantidades.length > 0 ? proteinasCantidades: ["0"],
-            "lacteos": idsLacteos !== undefined && idsLacteos.length > 0 ? idsLacteos : ["0"],
-            "cantidadesLacteos": lacteosCantidades !== undefined && lacteosCantidades.length > 0 ? lacteosCantidades : ["0"],
-            "frutas": idsFrutas !== undefined && idsFrutas.length > 0 ? idsFrutas : ["0"],
-            "cantidadesFrutas": frutasCantidades !== undefined && frutasCantidades.length > 0 ? frutasCantidades : ["0"],
-            "verduras": idsVerduras !== undefined && idsVerduras.length > 0 ? idsVerduras : ["0"],
-            "cantidadesVerduras": VerdurasCantidades !== undefined && VerdurasCantidades.length > 0 ? VerdurasCantidades : ["0"],
-            "granos": idsGranos !== undefined && idsGranos.length > 0 ? idsGranos : ["0"],
-            "cantidadesGranos": granosCantidades !== undefined && granosCantidades.length > 0 ? granosCantidades : ["0"],
+            "proteinas": idsProteinas !== undefined && idsProteinas.length > 0 ? idsProteinas : [0],
+            "cantidadesProteinas": proteinasCantidades !== undefined && proteinasCantidades.length > 0 ? proteinasCantidades: [0],
+            "lacteos": idsLacteos !== undefined && idsLacteos.length > 0 ? idsLacteos : [0],
+            "cantidadesLacteos": lacteosCantidades !== undefined && lacteosCantidades.length > 0 ? lacteosCantidades : [0],
+            "frutas": idsFrutas !== undefined && idsFrutas.length > 0 ? idsFrutas : [0],
+            "cantidadesFrutas": frutasCantidades !== undefined && frutasCantidades.length > 0 ? frutasCantidades : [0],
+            "verduras": idsVerduras !== undefined && idsVerduras.length > 0 ? idsVerduras : [0],
+            "cantidadesVerduras": VerdurasCantidades !== undefined && VerdurasCantidades.length > 0 ? VerdurasCantidades : [0],
+            "granos": idsGranos !== undefined && idsGranos.length > 0 ? idsGranos : [0],
+            "cantidadesGranos": granosCantidades !== undefined && granosCantidades.length > 0 ? granosCantidades : [0],
             "duracion": nuevasCantidades.duracion,
             "vigencia": nuevasCantidades.vigencia
           };
+
           const realizaActualizacionCantidades = async () => {
             const response = await fetch(`${infoApp.APIurl}/alimentodieta/actualiza`, {
                 method : 'PUT',

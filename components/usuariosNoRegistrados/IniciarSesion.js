@@ -61,6 +61,7 @@ import EditarMedicionPaciente from '../usuariosRegistrados/profesionales/EditarM
 import CrearMedicion from '../usuariosRegistrados/profesionales/CrearMedicion';
 import VerDietaPaciente from '../usuariosRegistrados/profesionales/VerDietaPaciente';
 import ModificarDieta from '../usuariosRegistrados/profesionales/ModificarDieta';
+import CrearDieta from '../usuariosRegistrados/profesionales/CrearDieta';
 //import InfoMPaciente from '../usuariosRegistrados/profesionales/formulariosPaciente/InfoMPaciente';
 
 const Tab = createBottomTabNavigator();
@@ -201,7 +202,7 @@ export default function IniciarSesion() {
           //console.log(infoApp);
           setIsLogged(infoApp.isLogged);
         }else{
-          Alert.alert("Error", "Error en alguna parte");
+          Alert.alert("Error", "Verifique los datos porporcionados o no cuenta con conexión a la API");
         }
        };
        realizaPeticionAPI();
@@ -289,6 +290,7 @@ export default function IniciarSesion() {
             <Stack.Screen name='CrearMedicion' component={CrearMedicion} options={{title:  'Crear medición paciente'}} />
             <Stack.Screen name='VisualizarDieta' component={VerDietaPaciente} options={{title : 'Visualizar dieta del paciente'}} />
             <Stack.Screen name='ModificarDieta' component={ModificarDieta} options={{title : 'Modificar dieta'}} />
+            <Stack.Screen name='CrearDieta' component={CrearDieta} options={{title : 'Crear dieta'}} />
             {/*<Stack.Screen name='RutinaPacienteProfesional' component={RutinaPaciente} options={{title : 'Rutian del paciente'}} />*/}
           </Stack.Navigator>
           
