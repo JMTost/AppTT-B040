@@ -24,37 +24,49 @@ const UserProfileScreenPaciente = ( {navigation} ) => {
 
     const handleEliminaUsuario = () => {
         console.log("Logica de eliminacion de usuario");
-        const relizaEliminacionAPI = async () => {
-          try {
-            const response  = await fetch(`${infoApp.APIurl}/borraPaciente`, {
-              method : 'DELETE',
-              headers : {
-                'Content-Type' : 'application/json',
-              },
-              body : JSON.stringify({idPaciente : infoApp.usuarioPaciente.idUsuario}),
-            });
-            if(response.ok){
-              const json = await response.json();
-              Alert.alert("Exito", "Eliminación exitosa de usuario.");
-              infoApp.usuarioPaciente = {
-                "nombreC" : "",
-                "idUsuario" : 0,
-                "urlImagen_usuario" : "",
-                "correo" : "",
-                "idVideosEjercicios" : [],
-                "ejercicios" : []
-            };
-              navigation.push('InicioSesion');
-            }else{
-              const json = await response.json();
-              console.log(json);
-              Alert.alert("Error", "");
-            }
-          } catch (error) {
-            
+        Alert.alert("Eliminación de usuario", "¿Estás seguro de realiza la opción?",
+        [{
+          text : 'OK',
+          onPress : handleEliminaUsuarioAlert
+        }, {
+          text : "Cancelar", 
+          onPress : () => {}
+        }], {cancelable : false})
+        
+        //relizaEliminacionAPI();
+    }
+
+    const handleEliminaUsuarioAlert = () => {
+      const relizaEliminacionAPI = async () => {
+        try {
+          const response  = await fetch(`${infoApp.APIurl}/borraPaciente`, {
+            method : 'DELETE',
+            headers : {
+              'Content-Type' : 'application/json',
+            },
+            body : JSON.stringify({idPaciente : infoApp.usuarioPaciente.idUsuario}),
+          });
+          if(response.ok){
+            const json = await response.json();
+            Alert.alert("Exito", "Eliminación exitosa de usuario.");
+            infoApp.usuarioPaciente = {
+              "nombreC" : "",
+              "idUsuario" : 0,
+              "urlImagen_usuario" : "",
+              "correo" : "",
+              "idVideosEjercicios" : [],
+              "ejercicios" : []
+          };
+            navigation.push('InicioSesion');
+          }else{
+            const json = await response.json();
+            console.log(json);
+            Alert.alert("Error", "");
           }
-        };
-        relizaEliminacionAPI();
+        } catch (error) {
+          
+        }
+      };
     }
 
     const handleChangeImagenUsuario = () => {

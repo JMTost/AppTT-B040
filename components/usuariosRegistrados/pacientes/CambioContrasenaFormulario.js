@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import infoApp from '../../../infoApp.json';
 
 export default function CambioContrasenaFormulario() {
+    const navigation = useNavigation();
     const [currentContrasena, setCurrentContrasena] = useState('');
     const [nuevaContrasena, setNuevaContrasena] = useState('');
     const handleCambiaContrasena = () => {
@@ -24,7 +26,12 @@ export default function CambioContrasenaFormulario() {
           });
           if(response.ok){
             const data = await response.json();
-            Alert.alert("Exito", "Actualización de contraseña");
+            Alert.alert("Exito", "Actualización de contraseña", [
+              {
+                text : 'OK',
+                onPress : () => {navigation.navigate('PrincipalPaciente')}
+              }
+            ], {cancelable : false});
           }else{
             console.log("info : error", response.statusText);
             Alert.alert("Error", response.statusText);
