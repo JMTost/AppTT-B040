@@ -23,7 +23,7 @@ const SubidaDocumentosProfesional = () => {
           if(responseArchivos.ok){
             //console.log(responseArchivos);
             const info = await responseArchivos.json();
-            setDataArchivos(info.objeto);
+            setDataArchivos(info);
             //console.log("json", info)
             setLoadingArchivos(true);
             //console.log("INFO ARCHIVOS: ", dataArchivos);
@@ -101,12 +101,12 @@ const SubidaDocumentosProfesional = () => {
                     <Button title="Subir archivo" onPress={subidaArchivo} />
                 </View>
             );
-        }else if(Object.keys(dataArchivos).includes("archivos")){
+        }else if(Object.keys(dataArchivos).includes("objeto")){
             //console.log(dataArchivos)
             const elementos = [];
-            for(let i =0; i < dataArchivos.archivos.length; i++){
+            for(let i =0; i < dataArchivos.objeto.archivos.length; i++){
                 elementos.push(
-                    <Text key={i}>{dataArchivos.archivos[i].nombreArchivo}</Text>
+                    <Text key={i}>{dataArchivos.objeto.archivos[i].nombreArchivo}</Text>
                 );
             }
             return(
@@ -132,6 +132,7 @@ const SubidaDocumentosProfesional = () => {
             </View>
         )
     }
+
 
 }
 

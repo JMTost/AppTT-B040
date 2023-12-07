@@ -2,6 +2,7 @@ import React from "react";
 import { Text, View, StyleSheet, Image, TouchableOpacity, ScrollView, Alert} from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 import ListaPacientes from "./ListaPacientes";
 import UserProfileScreenProfesional from "./UserProfileScreen";
 import CitasProfesional from "./CitasProfesional";
@@ -17,10 +18,10 @@ const  PrincipalProfesional = ({navigation}) => {
       
               if (route.name === 'ListaPacientes') {
                 iconName = focused
-                  ? 'home'
-                  : 'home-outline';
+                  ? 'list-sharp'
+                  : 'list-outline';
               } else if(route.name === 'CitasProfesional'){
-                iconName = focused ? 'body' : 'body-outline';
+                iconName = focused ? 'calendar-o' : 'calendar';
               } else if (route.name === 'UserScreen') {
                 iconName = focused ? 'person' : 'person-outline';
               }
@@ -29,7 +30,10 @@ const  PrincipalProfesional = ({navigation}) => {
                 navigation.setOptions({tabBarVisiable : false});
               }
 
-              return <Ionicons name={iconName} size={15} color={color} />;
+              if(route.name === 'CitasProfesional')
+                return <FontAwesome name={iconName} size={15} color={color} />;
+              else 
+                return <Ionicons name={iconName} size={15} color={color} />;
             },
             tabBarActiveTintColor: 'black',
             tabBarInactiveTintColor: 'black',

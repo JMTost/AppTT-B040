@@ -64,7 +64,7 @@ const CargaVideosRutina = ({navigation}) => {
                 if(duracion <= 31){
                     setArchivoVideoSeleccionado(result);
                 }else{
-                    Alert.alert("Error", "El video debe ser menor o igual a 15 segundos");
+                    Alert.alert("Error", "El video debe ser menor o igual a 30 segundos");
                 }
             }
         } catch (error) {
