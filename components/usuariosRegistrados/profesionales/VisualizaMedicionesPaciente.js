@@ -53,9 +53,23 @@ const VisualizaMedicionesPaciente = ({navigation, route}) => {
         if(dataApi.hasOwnProperty('mensaje')){
             //No se cuenta con dato que mostrar
             return(
-                <View style={styles.container}>
-                    <Text>{dataApi.mensaje}</Text>
-                </View>
+                <View style={{ alignItems: "center", flex: 1, marginTop: 320 }}>
+                <Text style={{ fontWeight: "bold" }}>No existen mediciones </Text>
+                <TouchableOpacity style={styles.containerButton} onPress={
+                    //console.log("Creación de medición")
+                    () => navigation.navigate('CrearMedicion', {id : id})
+                } >
+                    <LinearGradient
+                        // Button Linear Gradient
+                        colors={['#9d9f89', '#bcbfa3']}
+                        start={{ x: 0, y: 0 }}
+                        end={{ x: 1, y: 1 }}
+                        style={styles.button}
+                    >
+                        <Text style={styles.text}>Crear Medición</Text>
+                    </LinearGradient>
+                </TouchableOpacity>
+            </View>
             );
         }else{
             const mediciones = [];

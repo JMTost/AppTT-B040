@@ -11,12 +11,14 @@ const DietaPaciente = () => {
       </View>
   );
   }else{
+    //console.log(infoApp.usuarioPaciente.dieta)
     const elementos = [];
     let IMGname = "";
     for(let i = 0; i < infoApp.usuarioPaciente.dieta.length; i++){
       //console.log(infoApp.usuarioPaciente.dieta[i]);
 
       for(let j = 0; j < infoApp.usuarioPaciente.dieta[i].comida.length; j++){
+        //console.log(infoApp.usuarioPaciente.dieta[i].comida[0].duracion);
         const comidasfrutas = [], comidasgranos=  [], comidasproteinas = [], comidasLacteos = [], comidasVerduras = [];
         const cantidadesFrutas = [], cantidadesGranos = [], cantidadesproteinas = [], cantidadesLacteos = [], cantidadesverduras = [];
         comidasproteinas.push(infoApp.usuarioPaciente.dieta[i].comida[j].proteinas);
@@ -38,6 +40,7 @@ const DietaPaciente = () => {
                 <Image source={require('../../../Imagenes/desayuno.jpg')}
                   opacity={.3} style={styles.excerciseImage} />
                 <Text style={styles.excerciseTitle}>{infoApp.usuarioPaciente.dieta[i].tipoComida}</Text>
+                <Text style={styles.excerciseDescription}>{infoApp.usuarioPaciente.dieta[i].comida[0].duracion} semanas</Text>
                 <TouchableOpacity style={styles.icon} onPress={() => descripcion({comidasproteinas, cantidadesproteinas, comidasVerduras, cantidadesverduras, comidasLacteos, cantidadesLacteos, comidasfrutas, cantidadesFrutas, comidasgranos, cantidadesGranos})}>
                   <Image source={require('../../../Imagenes/ojo.png')}
                   style={styles.icon}
@@ -53,6 +56,7 @@ const DietaPaciente = () => {
                 <Image source={require('../../../Imagenes/comida.jpg')}
                   opacity={.3} style={styles.excerciseImage} />
                 <Text style={styles.excerciseTitle}>{infoApp.usuarioPaciente.dieta[i].tipoComida}</Text>
+                <Text style={styles.excerciseDescription}>{infoApp.usuarioPaciente.dieta[i].comida[0].duracion} semanas</Text>
                 <TouchableOpacity style={styles.icon} onPress={() => descripcion({comidasproteinas, cantidadesproteinas, comidasVerduras, cantidadesverduras, comidasLacteos, cantidadesLacteos, comidasfrutas, cantidadesFrutas, comidasgranos, cantidadesGranos})}>
                   <Image source={require('../../../Imagenes/ojo.png')}
                   style={styles.icon}
@@ -68,6 +72,7 @@ const DietaPaciente = () => {
                 <Image source={require('../../../Imagenes/cena.jpg')}
                   opacity={.3} style={styles.excerciseImage} />
                 <Text style={styles.excerciseTitle}>{infoApp.usuarioPaciente.dieta[i].tipoComida}</Text>
+                <Text style={styles.excerciseDescription}>{infoApp.usuarioPaciente.dieta[i].comida[0].duracion} semanas</Text>
                 <TouchableOpacity style={styles.icon} onPress={() => descripcion({comidasproteinas, cantidadesproteinas, comidasVerduras, cantidadesverduras, comidasLacteos, cantidadesLacteos, comidasfrutas, cantidadesFrutas, comidasgranos, cantidadesGranos})}>
                   <Image source={require('../../../Imagenes/ojo.png')}
                   style={styles.icon}
@@ -83,6 +88,7 @@ const DietaPaciente = () => {
                 <Image source={require('../../../Imagenes/colacion1.jpg')}
                   opacity={.3} style={styles.excerciseImage} />
                 <Text style={styles.excerciseTitle}>{infoApp.usuarioPaciente.dieta[i].tipoComida}</Text>
+                <Text style={styles.excerciseDescription}>{infoApp.usuarioPaciente.dieta[i].comida[0].duracion} semanas</Text>
                 <TouchableOpacity style={styles.icon} onPress={() => descripcion({comidasproteinas, cantidadesproteinas, comidasVerduras, cantidadesverduras, comidasLacteos, cantidadesLacteos, comidasfrutas, cantidadesFrutas, comidasgranos, cantidadesGranos})}>
                   <Image source={require('../../../Imagenes/ojo.png')}
                   style={styles.icon}

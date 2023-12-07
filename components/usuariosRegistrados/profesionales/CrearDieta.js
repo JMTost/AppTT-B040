@@ -490,7 +490,7 @@ const CrearDieta = ({navigation, route}) => {
                             <Text style={styles.labelS}>Duración:</Text>
                             <TextInput
                                 style={styles.input}
-                                placeholder="Duración"
+                                placeholder="Duración en semanas"
                                 onChangeText={(text) => setDuracion(text)}
                                 value={duracion}
                                 keyboardType="numeric"

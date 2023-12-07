@@ -131,7 +131,6 @@ const VerDietaPaciente = ({navigation, route}) => {
         
                     />
                     <View style={{ alignItems: "center", marginTop: 50 }}>
-                      <Text style={{ fontWeight: "bold" }}>No existe dieta creada</Text>
                       <TouchableOpacity style={styles.containerButton} onPress={() => navigation.navigate('CrearDieta', {id : id})} >
                           <LinearGradient
                               // Button Linear Gradient

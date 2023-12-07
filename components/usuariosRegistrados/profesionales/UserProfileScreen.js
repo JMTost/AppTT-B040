@@ -173,8 +173,17 @@ const UserProfileScreenProfesional = ( {navigation} ) => {
         "citas" : [],
         "dieta" : []
     };
-    setImagenPerfil(null);
-    navigation.push('InicioSesion');
+    const funcionActualizaFechas = async () => {
+      const actualizaFechas = await fetch(`${infoApp.APIurl}/actualizaFechas`, {
+        method : 'PUT'
+      });
+      if(actualizaFechas.ok){
+        setImagenPerfil(null);
+        navigation.push('InicioSesion');
+      }
+    }
+    funcionActualizaFechas();
+    
       /*
       infoApp.isLogged = false;
       infoApp.tipo = "";

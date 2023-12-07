@@ -59,6 +59,9 @@ const ExpedientePaciente = ({route, navigation}) => {
                     <TouchableOpacity onPress={() => navigation.navigate('HabitoAlimenticio', {id : id})}>
                         <Text style={styles.textEnlace}>Ir al formulario de habito alimenticio</Text>
                     </TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('VisualizaMediciones', {id : id})}>
+                      <Text style={styles.textEnlace}>Mostrar mediciones del paciente</Text>
+                    </TouchableOpacity>
                 </View>
                     
                 </View>

@@ -792,19 +792,28 @@ const ModificarComidaForm = ({comida, alimentos, dataDieta, onModificar, onAgreg
                 <View>    
                     {cantidades.proteinas.map((cantidad, index) => (
                         <View>
-                            <Text style={styles.labelS}>{alimentosAPI.proteinas[index]}:</Text>
-                        <TextInput
-                            key={`proteina-${index}`}
-                            value={cantidad}
-                            onChangeText={(text) => {
-                            const nuevasCantidades = [...cantidades.proteinas];
-                            nuevasCantidades[index] = text;
-                            setCantidades({ ...cantidades, proteinas: nuevasCantidades });
-                            }}
-                            placeholder={`Proteína ${index + 1}`}
-                            style={styles.input}
-                            keyboardType='numeric'
-                        />
+                        {alimentosAPI.proteinas[index] !== '0' && alimentosAPI.proteinas[index] !== '' && (
+                            <>
+                                <Text style={styles.labelS}>{alimentosAPI.proteinas[index]}:</Text>
+                                <TextInput
+                                    key={`proteina-${index}`}
+                                    value={cantidad}
+                                    onChangeText={(text) => {
+                                    const nuevasCantidades = [...cantidades.proteinas];
+                                    nuevasCantidades[index] = text;
+                                    setCantidades({ ...cantidades, proteinas: nuevasCantidades });
+                                    }}
+                                    placeholder={`Proteína ${index + 1}`}
+                                    style={styles.input}
+                                    keyboardType='numeric'
+                                />
+                            </>
+                        )}
+                        {
+                            (alimentosAPI.proteinas[index] === '0' || alimentosAPI.proteinas[index] === '') && (
+                                <Text key={`proteina-${index}`} style={styles.labelS}>No se cuenta con datos que mostrar</Text>
+                            )
+                        }
                         </View>
                     ))}
                 </View>
@@ -832,21 +841,30 @@ const ModificarComidaForm = ({comida, alimentos, dataDieta, onModificar, onAgreg
                 <Text style={styles.labelS}>Cantidades de Verduras:</Text>
                 <View>
                     {cantidades.verduras.map((cantidad, index) => (
-                            <View >
-                            <Text style={styles.labelS}>{alimentosAPI.verduras[index]}:</Text>
-                            <TextInput
-                                key={`verduras-${index}`}
-                                value={cantidad}
-                                onChangeText={(text) => {
-                                const nuevasCantidades = [...cantidades.verduras];
-                                nuevasCantidades[index] = text;
-                                setCantidades({ ...cantidades, verduras: nuevasCantidades });
-                                }}
-                                placeholder={`verduras ${index + 1}`}
-                                style={styles.input}
-                                keyboardType='numeric'
-                            />
-                            </View>
+                        <View >
+                        {alimentosAPI.verduras[index] !== '0' && alimentosAPI.verduras[index] !== '' && (
+                            <>
+                                <Text style={styles.labelS}>{alimentosAPI.verduras[index]}:</Text>
+                                <TextInput
+                                    key={`verduras-${index}`}
+                                    value={cantidad}
+                                    onChangeText={(text) => {
+                                    const nuevasCantidades = [...cantidades.verduras];
+                                    nuevasCantidades[index] = text;
+                                    setCantidades({ ...cantidades, verduras: nuevasCantidades });
+                                    }}
+                                    placeholder={`verduras ${index + 1}`}
+                                    style={styles.input}
+                                    keyboardType='numeric'
+                                />
+                            </>
+                        ) }
+                        {
+                            (alimentosAPI.verduras[index] === '0' || alimentosAPI.verduras[index] === '') && (
+                                <Text key={`verduras-${index}`} style={styles.labelS}>No se cuenta con datos que mostrar</Text>
+                            )
+                        }
+                        </View>
                         ))}
                 </View>
                 <View style={styles.botonDesplegable}>
@@ -872,19 +890,28 @@ const ModificarComidaForm = ({comida, alimentos, dataDieta, onModificar, onAgreg
                 <View>
                     {cantidades.lacteos.map((cantidad, index) => (
                         <View>
-                            <Text style={styles.labelS}>{alimentosAPI.lacteos[index]}:</Text>
-                            <TextInput
-                                key={`lacteos-${index}`}
-                                value={cantidad}
-                                onChangeText={(text) => {
-                                const nuevasCantidades = [...cantidades.lacteos];
-                                nuevasCantidades[index] = text;
-                                setCantidades({ ...cantidades, lacteos: nuevasCantidades });
-                                }}
-                                placeholder={`lacteos ${index + 1}`}
-                                style={styles.input}
-                                keyboardType='numeric'
-                            />
+                        {alimentosAPI.lacteos[index] !== '0' && alimentosAPI.lacteos[index] !== '' &&(
+                            <>
+                                <Text style={styles.labelS}>{alimentosAPI.lacteos[index]}:</Text>
+                                <TextInput
+                                    key={`lacteos-${index}`}
+                                    value={cantidad}
+                                    onChangeText={(text) => {
+                                    const nuevasCantidades = [...cantidades.lacteos];
+                                    nuevasCantidades[index] = text;
+                                    setCantidades({ ...cantidades, lacteos: nuevasCantidades });
+                                    }}
+                                    placeholder={`lacteos ${index + 1}`}
+                                    style={styles.input}
+                                    keyboardType='numeric'
+                                />
+                            </>
+                        )}
+                        {
+                            (alimentosAPI.lacteos[index] === '0' || alimentosAPI.lacteos[index] === '') && (
+                                <Text key={`lacteos-${index}`} style={styles.labelS}>No se cuenta con datos que mostrar</Text>
+                            )
+                        }
                         </View>
                     ))}
                 </View>
@@ -911,19 +938,28 @@ const ModificarComidaForm = ({comida, alimentos, dataDieta, onModificar, onAgreg
                 <View>
                     {cantidades.frutas.map((cantidad, index) => (
                         <View >
-                        <Text style={styles.labelS}>{alimentosAPI.frutas[index]}</Text>
-                        <TextInput
-                            key={`frutas-${index}`}
-                            value={cantidad}
-                            onChangeText={(text) => {
-                            const nuevasCantidades = [...cantidades.frutas];
-                            nuevasCantidades[index] = text;
-                            setCantidades({ ...cantidades, frutas: nuevasCantidades });
-                            }}
-                            placeholder={`frutas ${index + 1}`}
-                            style={styles.input}
-                            keyboardType='numeric'
-                        />
+                        {alimentosAPI.frutas[index] !== '0' && alimentosAPI.frutas[index] !== ''  && (
+                            <>
+                                <Text style={styles.labelS}>{alimentosAPI.frutas[index]}</Text>
+                                <TextInput
+                                    key={`frutas-${index}`}
+                                    value={cantidad}
+                                    onChangeText={(text) => {
+                                    const nuevasCantidades = [...cantidades.frutas];
+                                    nuevasCantidades[index] = text;
+                                    setCantidades({ ...cantidades, frutas: nuevasCantidades });
+                                    }}
+                                    placeholder={`frutas ${index + 1}`}
+                                    style={styles.input}
+                                    keyboardType='numeric'
+                                />
+                            </>
+                        )}
+                        {
+                            (alimentosAPI.frutas[index] === '0' || alimentosAPI.frutas[index] === '') &&(
+                                <Text key={`frutas-${index}`} style={styles.labelS}>No se cuenta con datos que mostrar</Text>
+                            )
+                        }
                         </View>
                     ))}
                 </View>
@@ -950,20 +986,30 @@ const ModificarComidaForm = ({comida, alimentos, dataDieta, onModificar, onAgreg
                 <View>
                     {cantidades.granos.map((cantidad, index) => (
                         <View>
-                        <Text style={styles.labelS}>{alimentosAPI.granos[index]}:  </Text>
-                        <TextInput
-                            key={`granos-${index}`}
-                            value={cantidad}
-                            onChangeText={(text) => {
-                            const nuevasCantidades = [...cantidades.granos];
-                            nuevasCantidades[index] = text;
-                            setCantidades({ ...cantidades, granos: nuevasCantidades });
-                            }}
-                            placeholder={`granos ${index + 1}`}
-                            style={styles.input}
-                            keyboardType='numeric'
-                        />
+                        {alimentosAPI.granos[index] !== '0' && alimentosAPI.granos[index] !== '' && (
+                            <>
+                                <Text style={styles.labelS}>{alimentosAPI.granos[index]}:  </Text>
+                                <TextInput
+                                    key={`granos-${index}`}
+                                    value={cantidad}
+                                    onChangeText={(text) => {
+                                    const nuevasCantidades = [...cantidades.granos];
+                                    nuevasCantidades[index] = text;
+                                    setCantidades({ ...cantidades, granos: nuevasCantidades });
+                                    }}
+                                    placeholder={`granos ${index + 1}`}
+                                    style={styles.input}
+                                    keyboardType='numeric'
+                                />
+                            </>
+                        ) }
+                        {
+                            (alimentosAPI.granos[index] === '0' || alimentosAPI.granos[index] === '') && (
+                                <Text key={`granos-${index}`} style={styles.labelS}>No se cuenta con datos que mostrar</Text>
+                            )
+                        }
                         </View>
+                        
                     ))}
                 </View>
 
@@ -1000,7 +1046,7 @@ const ModificarComidaForm = ({comida, alimentos, dataDieta, onModificar, onAgreg
                         <Text style={styles.labelS}>Duración: </Text>
                         <TextInput value={duracion}
                             onChangeText={(text) => setDuracion(text)}
-                            placeholder='Duración'
+                            placeholder='Duración en semanas'
                             style={styles.input}
                             keyboardType='numeric'
                             />
