@@ -389,8 +389,14 @@ const ModificarDieta = ({navigation, route}) => {
             "granos": idsComidasNoCero.granos !== undefined && idsComidasNoCero.granos.length > 0 ? [idsComidasNoCero.granos] : ["0"],
             "cantidadesGranos": cantidadesMOD.granos !== undefined && cantidadesMOD.granos.length > 0 ? cantidadesMOD.granos : ["0"],
             "duracion": nuevasCantidades.duracion,
-            "vigencia": nuevasCantidades.vigencia
+            "vigencia": nuevasCantidades.vigencia,
+            "pasadaCproteinas" : cantidades.proteinas,
+            "pasadaCverduras" : cantidades.verduras,
+            "pasadaCfrutas" : cantidades.frutas,
+            "pasadaClacteos" : cantidades.lacteos,
+            "pasadaCgranos" : cantidades.granos
           };
+          //console.log("cantidades base: ", data)
         /*
         console.log("IDS: ", idsComidasNoCero);
         console.log("cantidades: ", cantidadesMOD);
@@ -552,7 +558,12 @@ const ModificarDieta = ({navigation, route}) => {
             "granos": idsGranos !== undefined && idsGranos.length > 0 ? idsGranos : [0],
             "cantidadesGranos": granosCantidades !== undefined && granosCantidades.length > 0 ? granosCantidades : [0],
             "duracion": nuevasCantidades.duracion,
-            "vigencia": nuevasCantidades.vigencia
+            "vigencia": nuevasCantidades.vigencia,
+            "pasadaCproteinas" : cantidades.proteinas,
+            "pasadaCverduras" : cantidades.verduras,
+            "pasadaCfrutas" : cantidades.frutas,
+            "pasadaClacteos" : cantidades.lacteos,
+            "pasadaCgranos" : cantidades.granos
           };
 
           const realizaActualizacionCantidades = async () => {
@@ -774,11 +785,11 @@ const ModificarComidaForm = ({comida, alimentos, dataDieta, onModificar, onAgreg
     const handleAgregar = () => {
     //console.log(selectedAlimentoProteinas);
             onAgregar([
-                { alimento: parseFloat(selectedAlimentoProteinas) || null, cantidad: nuevaCantidadProteinas || null, tipo : "proteinas" },
-                { alimento: parseFloat(selectedAlimentoVerduras) || null, cantidad: nuevaCantidadVerduras || null, tipo : "verduras" },
-                { alimento: parseFloat(selectedAlimentoLacteos) || null, cantidad: nuevaCantidadLacteos || null, tipo : "lacteos" },
-                { alimento: parseFloat(selectedAlimentoFrutas) || null, cantidad: nuevaCantidadFrutas || null, tipo : "frutas" },
-                { alimento: parseFloat(selectedAlimentoGranos) || null, cantidad: nuevaCantidadGranos || null, tipo : "granos" },
+                { alimento: (selectedAlimentoProteinas) || null, cantidad: nuevaCantidadProteinas || null, tipo : "proteinas" },
+                { alimento: (selectedAlimentoVerduras) || null, cantidad: nuevaCantidadVerduras || null, tipo : "verduras" },
+                { alimento: (selectedAlimentoLacteos) || null, cantidad: nuevaCantidadLacteos || null, tipo : "lacteos" },
+                { alimento: (selectedAlimentoFrutas) || null, cantidad: nuevaCantidadFrutas || null, tipo : "frutas" },
+                { alimento: (selectedAlimentoGranos) || null, cantidad: nuevaCantidadGranos || null, tipo : "granos" },
             ], {cantidades: cantidades, vigencia : vigencia, duracion : duracion});
             setSelectedValueAlimentoProteinas('');
             setNuevaCantidadProteinas('');

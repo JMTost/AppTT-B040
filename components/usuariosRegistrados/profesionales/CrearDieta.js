@@ -109,7 +109,7 @@ const CrearDieta = ({navigation, route}) => {
     //proteinas
     const agregarProteina = (elementos) => {
         if(proteinasAPI != null){
-            if(elementos.cantidadProteina != "" && elementos.selectedValueProteina != null && regexNumero.test(elementos.cantidadProteina) === true){
+            if(elementos.cantidadProteina != "" && elementos.selectedValueProteina != null ){
                 dato = proteinasAPI.find((dato) => dato.value === elementos.selectedValueProteina);
                 setListaProteinasSeleccinadas([...listaProteinasSeleccionadas, {"cantidad" : elementos.cantidadProteina, "id" : elementos.selectedValueProteina, "nombre" : dato.label}]);
                 setSelectedValueProteina('');
@@ -129,7 +129,7 @@ const CrearDieta = ({navigation, route}) => {
     //verduras
     const agregaVerdura = (elementos) => {
         if(verdurasAPI != null){
-            if(elementos.cantidadVerdura != "" && elementos.selectedValueVerdura != null && regexNumero.test(elementos.cantidadVerdura) === true){
+            if(elementos.cantidadVerdura != "" && elementos.selectedValueVerdura != null ){
                 dato = verdurasAPI.find((dato) => dato.value === elementos.selectedValueVerdura);
                 setListaVerdurasSeleccionadas([...listaVerdurasSeleccionadas, {"cantidad" : elementos.cantidadVerdura, "id" : elementos.selectedValueVerdura, "nombre" : dato.label}]);
                 setSelectedValueVerdura('');
@@ -149,7 +149,7 @@ const CrearDieta = ({navigation, route}) => {
     //lacteos
     const agregaLacteo = (elementos) => {
         if(lacteosAPI != null){
-            if(elementos.cantidadLacteo != "" && elementos.selectedValueLacteo != null && regexNumero.test(elementos.cantidadLacteo) === true){
+            if(elementos.cantidadLacteo != "" && elementos.selectedValueLacteo != null ){
                 dato = lacteosAPI.find((dato) => dato.value === elementos.selectedValueLacteo);
                 setListaLacteosSeleccionadas([...listaLacteosSeleccionadas, {"cantidad" : elementos.cantidadLacteo, "id" : elementos.selectedValueLacteo, "nombre" : dato.label}]);
                 setSelectedValueLacteo('');
@@ -169,7 +169,7 @@ const CrearDieta = ({navigation, route}) => {
     //frutas
     const agregaFruta = (elementos) => {
         if(frutasAPI != null){
-            if(elementos.cantidadFruta != "" && elementos.selectedValueFruta != null && regexNumero.test(elementos.cantidadFruta)){
+            if(elementos.cantidadFruta != "" && elementos.selectedValueFruta != null ){
                 dato = frutasAPI.find((dato) => dato.value === elementos.selectedValueFruta);
                 setListaFrutasSeleccionadas([...listaFrutasSeleccionadas, {"cantidad" : elementos.cantidadFruta, "id" : elementos.selectedValueFruta, "nombre" : dato.label}]);
                 setSelectedValueFruta('');
@@ -189,7 +189,7 @@ const CrearDieta = ({navigation, route}) => {
     //granos
     const agregaGrano = (elementos) => {
         if(granosAPI != null){
-            if(elementos.cantidadGrano != "" && elementos.selectedValueGrano != null && regexNumero.test(elementos.cantidadGrano)){
+            if(elementos.cantidadGrano != "" && elementos.selectedValueGrano != null ){
                 dato = granosAPI.find((dato) => dato.value === elementos.selectedValueGrano);
                 setListaGranosSeleccionadas([...listaGranosSeleccionadas, {"cantidad" : elementos.cantidadGrano, "id" : elementos.selectedValueGrano, "nombre" : dato.label}]);
                 setSelectedValueGrano('');
@@ -334,7 +334,7 @@ const CrearDieta = ({navigation, route}) => {
                                 placeholder="Cantidad"
                                 onChangeText={(text) => setCantidadProteina(text)}
                                 value={cantidadProteina}
-                                keyboardType="numeric"
+                                keyboardType="default"
                             />
                             <Text>     </Text>
                         </View>
@@ -368,7 +368,7 @@ const CrearDieta = ({navigation, route}) => {
                                 placeholder="Cantidad"
                                 onChangeText={(text) => setCantidadVerdura(text)}
                                 value={cantidadVerdura}
-                                keyboardType="numeric"
+                                keyboardType="default"
                             />
                             <Text>     </Text>
                         </View>
@@ -402,7 +402,7 @@ const CrearDieta = ({navigation, route}) => {
                                 placeholder="Cantidad"
                                 onChangeText={(text) => setCantidadLacteo(text)}
                                 value={cantidadLacteo}
-                                keyboardType="numeric"
+                                keyboardType="default"
                             />
                             <Text>     </Text>
                         </View>
@@ -436,7 +436,7 @@ const CrearDieta = ({navigation, route}) => {
                                 placeholder="Cantidad"
                                 onChangeText={(text) => setCantidadFruta(text)}
                                 value={cantidadFruta}
-                                keyboardType="numeric"
+                                keyboardType="default"
                             />
                             <Text>     </Text>
                         </View>
@@ -470,7 +470,7 @@ const CrearDieta = ({navigation, route}) => {
                                 placeholder="Cantidad"
                                 onChangeText={(text) => setCantidadGrano(text)}
                                 value={cantidadGrano}
-                                keyboardType="numeric"
+                                keyboardType="default"
                             />
                             <Text>     </Text>
                         </View>
@@ -493,7 +493,7 @@ const CrearDieta = ({navigation, route}) => {
                                 placeholder="Duración en semanas"
                                 onChangeText={(text) => setDuracion(text)}
                                 value={duracion}
-                                keyboardType="numeric"
+                                keyboardType="default"
                             />
                             <Text>     </Text>
                         </View>
@@ -507,7 +507,7 @@ const CrearDieta = ({navigation, route}) => {
                                     end={{ x: 1, y: 1 }}
                                     style={styles.button}
                                 >
-                                    <Text style={styles.text}>AGREGAR INGREDIENTE</Text>
+                                    <Text style={styles.text}>AGREGAR DIETA</Text>
                                 </LinearGradient>
                             </TouchableOpacity>
 
