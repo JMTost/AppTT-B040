@@ -1,9 +1,13 @@
 import React, { useEffect, useState, version } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, ScrollView, Pressable, Platform, Touchable, TouchableOpacity, Image, picker, SafeAreaView, FlatList, ViewBase, Alert} from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, ScrollView, Pressable, Platform, Touchable, TouchableOpacity, Image, picker, SafeAreaView, FlatList, ViewBase, Alert, Dimensions} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import RNPickerSelect from 'react-native-picker-select';
 import infoApp from '../../../infoApp.json';
 import { ExpandableView } from '@pietile-native-kit/expandable-view';
+
+
+const {width, height} = Dimensions.get('window');
+//console.log("tamaños: ", width, "x", height)
 
 
 const ModificarDieta = ({navigation, route}) => {
@@ -239,9 +243,12 @@ const ModificarDieta = ({navigation, route}) => {
       };
 
       const handleModificarComida = (nuevasCantidades) =>{
+        //console.log("Entramos")
         //comprobamos que no haya elementos vacios 
+        /*
         console.log("nuevas: ", nuevasCantidades);
         console.log("alimentosCOMIDAS: ", alimentoComidas);
+        */
         let nCantidades = {
             cantidades : {
                 frutas : [],
@@ -263,48 +270,55 @@ const ModificarDieta = ({navigation, route}) => {
         nCantidades.duracion = nuevasCantidades.duracion;
         nCantidades.vigencia = nuevasCantidades.vigencia;
         for(let i = 0; i < nuevasCantidades.cantidades.frutas.length; i++){
-            if(nuevasCantidades.cantidades.frutas[i] > 0){
+            if(nuevasCantidades.cantidades.frutas[i] !== '0'){
                 //console.log("nueva cantidad "+i, nuevasCantidades.cantidades.frutas[i])
                 nCantidades.cantidades.frutas.push(nuevasCantidades.cantidades.frutas[i]);
                 alimentosComida_final.frutas.push(alimentoComidas.frutas[i]);
             }
         }
         for(let i = 0; i < nuevasCantidades.cantidades.lacteos.length; i++){
-            if(nuevasCantidades.cantidades.lacteos[i] > 0){
+            if(nuevasCantidades.cantidades.lacteos[i] !== '0'){
                 //console.log("nueva cantidad "+i, nuevasCantidades.cantidades.lacteos[i])
                 nCantidades.cantidades.lacteos.push(nuevasCantidades.cantidades.lacteos[i]);
                 alimentosComida_final.lacteos.push(alimentoComidas.lacteos[i]);
             }
         }
         for(let i = 0; i < nuevasCantidades.cantidades.granos.length; i++){
-            if(nuevasCantidades.cantidades.granos[i] > 0){
+            if(nuevasCantidades.cantidades.granos[i] !== '0'){
                 //console.log("nueva cantidad "+i, nuevasCantidades.cantidades.granos[i])
                 nCantidades.cantidades.granos.push(nuevasCantidades.cantidades.granos[i]);
                 alimentosComida_final.granos.push(alimentoComidas.granos[i]);
             }
         }
         for(let i = 0; i < nuevasCantidades.cantidades.proteinas.length; i++){
-            if(nuevasCantidades.cantidades.proteinas[i] > 0){
+            if(nuevasCantidades.cantidades.proteinas[i] !== '0'){
                 //console.log("nueva cantidad "+i, nuevasCantidades.cantidades.proteinas[i])
                 nCantidades.cantidades.proteinas.push(nuevasCantidades.cantidades.proteinas[i]);
                 alimentosComida_final.proteinas.push(alimentoComidas.proteinas[i]);
             }
         }
         for(let i = 0; i < nuevasCantidades.cantidades.verduras.length; i++){
-            if(nuevasCantidades.cantidades.verduras[i] > 0){
+            if(nuevasCantidades.cantidades.verduras[i] !== '0'){
                 //console.log("nueva cantidad "+i, nuevasCantidades.cantidades.verduras[i])
                 nCantidades.cantidades.verduras.push(nuevasCantidades.cantidades.verduras[i]);
                 alimentosComida_final.verduras.push(alimentoComidas.verduras[i]);
             }
         }
-        // console.log("ncantidades filtradas: ", nCantidades)
-        // console.log("alimentosComida_final: ", alimentosComida_final)
+        /*
+         console.log("ncantidades filtradas: ", nCantidades)
+         console.log("alimentosComida_final: ", alimentosComida_final)
+         */
         let cantidadesMOD= {}, idsComidasNoCero = {};
         for (const [tipo, cantidades] of Object.entries(nCantidades.cantidades)) {
-            const cantidadesFiltradas = cantidades.filter((cantidad) => parseFloat(cantidad) !== 0);
+            //console.log("Cantidades dentro del for : ", cantidades);
+            //console.log("Cantidades antes del filter: ", cantidades)
+            const cantidadesFiltradas = cantidades.filter((cantidad) => String(cantidad) !== 0);
+            //console.log("Cantidad filtrada: ", cantidadesFiltradas)
+            
             if (cantidadesFiltradas.length > 0) {
               cantidadesMOD[tipo] = cantidadesFiltradas;
             }
+            
           }
         
         for (const [tipo, alimentos] of Object.entries(alimentosComida_final)) {
@@ -377,8 +391,11 @@ const ModificarDieta = ({navigation, route}) => {
             "duracion": nuevasCantidades.duracion,
             "vigencia": nuevasCantidades.vigencia
           };
-        //console.log("IDS: ", idsComidasNoCero);
-        //console.log("cantidades: ", cantidadesMOD);
+        /*
+        console.log("IDS: ", idsComidasNoCero);
+        console.log("cantidades: ", cantidadesMOD);
+        console.log("DATA JSON: ", data);
+        */
         const realizaModificacion = async () => {
             const response = await fetch(`${infoApp.APIurl}/alimentodieta/actualiza`, {
                 method : 'PUT',
@@ -405,8 +422,10 @@ const ModificarDieta = ({navigation, route}) => {
       }
 
       const handleAgregarAlimento = (nuevoAlimento, nuevasCantidades) => {
+        /*
         console.log("NUEVO ALIMENTO: ", nuevoAlimento);
         console.log("nuevasCantidades: ", nuevasCantidades);
+        */
         let idsNuevos = [];
         for(let i = 0; i < nuevoAlimento.length; i++){
             //console.log(nuevoAlimento[i]);
@@ -457,9 +476,11 @@ const ModificarDieta = ({navigation, route}) => {
         }
         granosCantidades.push(nuevasCantidades.cantidades.granos[i]);
        }
+       /*
        console.log("proteinas", proteinasCantidades,"verduras", VerdurasCantidades, "lacteos", lacteosCantidades, "frutas", frutasCantidades,"granos",  granosCantidades)
        console.log(idsProteinas, idsVerduras, idsLacteos, idsFrutas, idsGranos)
        console.log("IDs capturados: ", idsNuevos)
+       */
        if(idsNuevos.length <= 0){
         Alert.alert("Error", "Agrega el elemento deseado con cantidad");
        }else{
@@ -512,8 +533,10 @@ const ModificarDieta = ({navigation, route}) => {
             }
         }
         //!REALIZAMOS EL METODO DE ENVIO DE INFORMACIÓN
+        /*
         console.log("FINALES: ", proteinasCantidades, VerdurasCantidades, lacteosCantidades, frutasCantidades, granosCantidades)
         console.log("FINALES: ", idsProteinas, idsVerduras, idsLacteos, idsFrutas, idsGranos)
+        */
         let data = {
             "idProfesional": infoApp.usuarioProfesional.idUsuario,
             "idPaciente": dataDieta.idpaciente,
@@ -787,7 +810,7 @@ const ModificarComidaForm = ({comida, alimentos, dataDieta, onModificar, onAgreg
         return (
             <ScrollView style={styles.containerScroll}>
             <View style={styles.content}>
-                <Text>Si desea eliminar un elemento, debe colocar en la cantidad un cero y seleccionar la opción de modificar</Text>
+                <Text>Si desea eliminar un elemento, debe colocar en la cantidad un cero y seleccionar la opción de modificar, favor de colocar la abreviación de la cantidad, de la siguiente manera: kilogramo: kg, gramo: g, pieza: pz, etc.</Text>
                 <Text style={styles.labelS}>Cantidades de Proteínas:</Text>
                 <View>    
                     {cantidades.proteinas.map((cantidad, index) => (
@@ -805,7 +828,7 @@ const ModificarComidaForm = ({comida, alimentos, dataDieta, onModificar, onAgreg
                                     }}
                                     placeholder={`Proteína ${index + 1}`}
                                     style={styles.input}
-                                    keyboardType='numeric'
+                                    keyboardType='default'
                                 />
                             </>
                         )}
@@ -831,7 +854,7 @@ const ModificarComidaForm = ({comida, alimentos, dataDieta, onModificar, onAgreg
                             onChangeText={(text) => setNuevaCantidadProteinas(text)}
                             placeholder="Cantidad"
                             style={styles.input}
-                            keyboardType='numeric'
+                            keyboardType='default'
                             />
                         </ExpandableView>
                 </View>
@@ -855,7 +878,7 @@ const ModificarComidaForm = ({comida, alimentos, dataDieta, onModificar, onAgreg
                                     }}
                                     placeholder={`verduras ${index + 1}`}
                                     style={styles.input}
-                                    keyboardType='numeric'
+                                    keyboardType='default'
                                 />
                             </>
                         ) }
@@ -881,7 +904,7 @@ const ModificarComidaForm = ({comida, alimentos, dataDieta, onModificar, onAgreg
                         onChangeText={(text) => setNuevaCantidadVerduras(text)}
                         placeholder="Cantidad"
                         style={styles.input}
-                        keyboardType='numeric'
+                        keyboardType='default'
                         />
                     </ExpandableView>
                 </View>
@@ -903,7 +926,7 @@ const ModificarComidaForm = ({comida, alimentos, dataDieta, onModificar, onAgreg
                                     }}
                                     placeholder={`lacteos ${index + 1}`}
                                     style={styles.input}
-                                    keyboardType='numeric'
+                                    keyboardType='default'
                                 />
                             </>
                         )}
@@ -929,7 +952,7 @@ const ModificarComidaForm = ({comida, alimentos, dataDieta, onModificar, onAgreg
                         onChangeText={(text) => setNuevaCantidadLacteos(text)}
                         placeholder="Cantidad"
                         style={styles.input}
-                        keyboardType='numeric'
+                        keyboardType='default'
                         />
                     </ExpandableView>
                     </View>
@@ -951,7 +974,7 @@ const ModificarComidaForm = ({comida, alimentos, dataDieta, onModificar, onAgreg
                                     }}
                                     placeholder={`frutas ${index + 1}`}
                                     style={styles.input}
-                                    keyboardType='numeric'
+                                    keyboardType='default'
                                 />
                             </>
                         )}
@@ -977,7 +1000,7 @@ const ModificarComidaForm = ({comida, alimentos, dataDieta, onModificar, onAgreg
                         onChangeText={(text) => setNuevaCantidadFrutas(text)}
                         placeholder="Cantidad"
                         style={styles.input}
-                        keyboardType='numeric'
+                        keyboardType='default'
                         />
                     </ExpandableView>
                 </View>
@@ -999,7 +1022,7 @@ const ModificarComidaForm = ({comida, alimentos, dataDieta, onModificar, onAgreg
                                     }}
                                     placeholder={`granos ${index + 1}`}
                                     style={styles.input}
-                                    keyboardType='numeric'
+                                    keyboardType='default'
                                 />
                             </>
                         ) }
@@ -1027,7 +1050,7 @@ const ModificarComidaForm = ({comida, alimentos, dataDieta, onModificar, onAgreg
                         onChangeText={(text) => setNuevaCantidadGranos(text)}
                         placeholder="Cantidad"
                         style={styles.input}
-                        keyboardType='numeric'
+                        keyboardType='default'
                         />
                     </ExpandableView>
                     </View>
@@ -1094,8 +1117,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         fontWeight: 'bold',
-        marginTop: 10,
-        marginBottom: 10,
+        marginTop: height * 0.01,
+        marginBottom: height * 0.010,
     },
     containerS: {
         flexDirection: "row",
@@ -1113,8 +1136,8 @@ const styles = StyleSheet.create({
         marginRight: 15,
     },
     input: {
-        width: 260,
-        height: 50,
+        width: width * 0.5,
+        height: height * 0.06,
         backgroundColor: 'white', // Color de fondo del campo de entrada
         paddingStart: 30,
         borderRadius: 30,
@@ -1122,17 +1145,17 @@ const styles = StyleSheet.create({
     },
     containerButton: {
         alignItems: 'center',
-        width: 200,
-        marginTop: 10,
+        width: width * 0.5,//200,
+        marginTop: height * 0.01,
     },
     text: {
-        fontSize: 14,
+        fontSize: width * 0.03,
         color: 'white',
         fontWeight: 'bold',
     },
     button: {
-        width: '80%',
-        height: 40,
+        width: width*0.4,
+        height: height * 0.05,
         borderRadius: 25,
         padding: 10,
         alignItems: 'center',

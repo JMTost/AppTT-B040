@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, StyleSheet,ScrollView, Pressable, Platform, Touchable, TouchableOpacity, Alert} from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet,ScrollView, Pressable, Platform, Touchable, TouchableOpacity, Alert, Dimensions} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 //import ButtonGradient from './ButtonRegister';
@@ -10,6 +10,8 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import infoApp from '../../infoApp.json';
 import { useNavigation } from '@react-navigation/native';
 import Ionicons from '@expo/vector-icons/Ionicons';
+
+const {width, height} = Dimensions.get('window');
 
 export default function RegistroPaciente() {
   const navigation = useNavigation();
@@ -381,19 +383,19 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 50,
+    fontSize: width*0.10,//50,
     fontWeight: 'bold',
-    marginBottom: 40,
-    marginTop:20,
+    marginBottom: height*0.03,//40,
+    marginTop: height*0.04,//20,
   },
 
   input: {
-    width: '80%',
-    height: 50,
+    width: width*0.8,//'80%',
+    height: height*0.06,// 50,
     backgroundColor: 'white', // Color de fondo del campo de entrada
     paddingStart: 30,
     borderRadius: 30,
-    marginTop: 10,
+    marginTop: height*0.01,//10,
   },
 
   inputDate: {

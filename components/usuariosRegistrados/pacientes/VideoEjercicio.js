@@ -32,7 +32,7 @@ const VideoEjercicio = ({route, navigation}) => {
         return (
             <View style={{flex : 1, alignItems : 'center', alignContent : 'center', justifyContent : 'center', backgroundColor : 'gray'}}>
                 {
-                    id && <DescargaVideos key={value} videoUrl={`${infoApp.APIurl}/obtenVideoPorId/${value}`} />
+                    id && <DescargaVideos key={id} videoUrl={`${infoApp.APIurl}/obtenVideoPorId/${id}`} />
                 }
             </View>
         );

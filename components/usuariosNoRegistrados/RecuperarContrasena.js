@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet,ScrollView, Pressable, Platform, Touchable, TouchableOpacity, Image, Alert} from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet,ScrollView, Pressable, Platform, Touchable, TouchableOpacity, Image, Alert, Dimensions} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 //import ButtonGradient from './ButtonRecoveryPass';
@@ -9,6 +9,8 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 
 import infoApp from '../../infoApp.json';
 import { useNavigation } from '@react-navigation/native';
+
+const {width, height} = Dimensions.get('window');
 
 export default function RecuperarContrasena() {
 
@@ -309,7 +311,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 25,
+    fontSize: width*0.06,//25,
     fontWeight: 'bold',
     marginTop:20,
     marginBottom:10,
@@ -422,13 +424,13 @@ const styles = StyleSheet.create({
   //ESTILOS DEL BOTON
   containerBUTTON:{          
     alignItems: 'center', 
-    width:250,
-    marginTop: 60,
+    width: width*0.6,//250,
+    marginTop: height * 0.06,//60,
     margin: 60,
   },
 
   textBUTTON: {
-    fontSize: 14,
+    fontSize: width * 0.03,//14,
     color: '#fff',  
     fontWeight: 'bold',
   },

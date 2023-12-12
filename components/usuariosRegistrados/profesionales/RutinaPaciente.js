@@ -53,8 +53,19 @@ const RutinaPaciente = ({navigation, route}) => {
         if(dataApi.hasOwnProperty('mensaje')){
             //No se cuenta con un dato que mostrar
             return(
-                <View style={styles.container}>
-                    <Text>{dataApi.mensaje}</Text>
+                <View style={{ alignItems: "center", flex: 1, marginTop: 320 }}>
+                    <Text style={{ fontWeight: "bold" }}>No existe rutina creada</Text>
+                    <TouchableOpacity style={styles.containerButton} onPress={() => navigation.navigate('CrearRutinas', {id : id})} >
+                        <LinearGradient
+                            // Button Linear Gradient
+                            colors={['#9d9f89', '#bcbfa3']}
+                            start={{ x: 0, y: 0 }}
+                            end={{ x: 1, y: 1 }}
+                            style={styles.button}
+                        >
+                            <Text style={styles.text}>Crear Rutina</Text>
+                        </LinearGradient>
+                    </TouchableOpacity>
                 </View>
             );
         }else{
@@ -75,9 +86,9 @@ const RutinaPaciente = ({navigation, route}) => {
             return(
                 <SafeAreaView style={styles.container}>
                     <FlatList data={ejercicios} renderItem={({item}) =>
-                        <ScrollView style={styles.containerScroll}>
-                                <View style={styles.imageContainer}>
-                                    <View style={{alignItems : 'center', justifyContent : 'center'}}>
+                        <ScrollView style={styles.containerScroll} key={`Ejercicio`}>
+                                <View style={styles.imageContainer} key={`${item.id_rutina}-${infoApp.usuarioProfesional.idUsuario}`}>
+                                    <View style={{alignItems : 'center', justifyContent : 'center'}} key={`Ejercicio-${item.nombreEjercicio}`}>
                                         <Image source={require("../../../Imagenes/Desplantes.jpg")}
                                             opacity={.3} style={styles.excerciseImage}/>
                                         <Text style={styles.excerciseTitle}>{item.nombreEjercicio}</Text>

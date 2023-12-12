@@ -86,14 +86,14 @@ const VerDietaPaciente = ({navigation, route}) => {
                     });
                 }
             }
-            //console.log("info dieta", dieta)
+            console.log("info dieta", dieta)
             return (
                 <SafeAreaView style={styles.container}>
                     <FlatList
                         data={dieta}
                         renderItem={({ item }) =>
-                            <ScrollView style={styles.containerScroll}>
-                                <View style={styles.imageContainer}>
+                            <ScrollView style={styles.containerScroll} key={`comida`}>
+                                <View style={styles.imageContainer} key={`${item.idComida}- ${infoApp.usuarioProfesional.idUsuario}`}>
                                     <View style={{ alignItems: "center", justifyContent: "center" }} key={item.idComida}>
                                         <Image
                                             source={item.tituloComida === 'Desayuno.' ? require("../../../Imagenes/desayuno.jpg" )

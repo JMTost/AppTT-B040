@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet,ScrollView, Pressable, Platform, Touchable, TouchableOpacity,Image,picker, Alert} from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet,ScrollView, Pressable, Platform, Touchable, TouchableOpacity,Image,picker, Alert, Dimensions} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 //import ButtonGradient from './ButtonRegister';
 import { Dropdown } from 'react-native-element-dropdown';
@@ -10,6 +10,8 @@ import RNPickerSelect from 'react-native-picker-select';
 import infoApp from '../../infoApp.json';
 import { useNavigation } from '@react-navigation/native';
 import Ionicons from '@expo/vector-icons/Ionicons';
+
+const {width, height} = Dimensions.get('window');
 
 export default function RegistroProfesional() {
   const navigation = useNavigation();
@@ -469,7 +471,137 @@ export default function RegistroProfesional() {
 
 
 //--------- ESTILOS ----------//
+const styles = StyleSheet.create({
+  content: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: 5,
+  },
 
+container: {
+  flex: 1,
+  backgroundColor: '#93ccc6',
+},
+
+title: {
+  fontSize: width*0.10,//50,
+  fontWeight: 'bold',
+  marginBottom: height*0.03,//40,
+  marginTop: height*0.04,//20,
+},
+
+input: {
+  width: width*0.8,//'80%',
+  height: height*0.06,// 50,
+  backgroundColor: 'white', // Color de fondo del campo de entrada
+  paddingStart: 30,
+  borderRadius: 30,
+  marginTop: height*0.01,//10,
+},
+
+inputDate: {
+  width: 330,
+  height: 50,
+  backgroundColor: 'white', // Color de fondo del campo de entrada
+  paddingStart: 30,
+  borderRadius: 30,
+  marginTop: 10,
+},
+
+picker: {
+  width: 320,
+  height: 50,
+  marginBottom: 70,
+  backgroundColor: 'white',
+  marginTop: 10,
+},
+
+datePicker:{
+  height: 120,
+  width: '100%',
+  marginTop: -10,
+},
+
+pickerButton:{
+  paddingHorizontal: 20,
+  width: 100,
+},
+  //ESTILOS DEL BOTON
+  containerBUTTON:{          
+    alignItems: 'center', 
+    width:250,
+    marginTop: 30,
+    margin: 60,
+  },
+
+  textBUTTON: {
+    fontSize: 14,
+    color: '#fff',  
+    fontWeight: 'bold',
+  },
+  button:{
+    width: '80%',
+    height: 50,
+    borderRadius: 25, 
+    padding: 10,        
+    alignItems: 'center', 
+    justifyContent: 'center'
+  },
+//
+containerDrop:{
+  borderRadius:30,
+  flex: 1,
+  backgroundColor: '#93ccc6',
+},
+
+dropdown: {
+  height: 50,
+  width: 330,
+  backgroundColor: 'white', // Color de fondo del campo de entrada
+  paddingStart: 30,
+  borderRadius: 30,
+  paddingHorizontal: 20,
+  marginTop:10,
+},
+
+placeholderStyle: {
+  fontSize: 16,
+  color: 'gray',
+  borderRadius: 30,
+},
+
+selectedTextStyle: {
+  fontSize: 16,
+},
+
+inputSearchStyle: {
+  height: 40,
+  fontSize: 16,
+  borderRadius: 30,
+},
+text:{
+  marginTop:10,
+  width: 320,
+  marginLeft: 10,
+},
+passwordGuidelines: {
+  // Estilos para las recomendaciones sobre contraseñas
+  marginTop: 15,
+  fontSize: 14,
+  color: 'black',
+  fontStyle: 'italic',
+  textAlign: 'center',
+},
+inputDireccion: {
+  width: '80%',
+  height: 80,
+  backgroundColor: 'white', // Color de fondo del campo de entrada
+  paddingStart: 30,
+  borderRadius: 30,
+  marginTop: 10,
+},
+});
+/*
 const styles = StyleSheet.create({
     content: {
         justifyContent: 'center',
@@ -643,6 +775,7 @@ passwordGuidelines: {
   textAlign: 'center',
 },
 });
+*/
 
 const pickerSelectStyles = StyleSheet.create({
   inputIOS: {

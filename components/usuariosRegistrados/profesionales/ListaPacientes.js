@@ -1,6 +1,8 @@
 import React from "react";
-import { Text, View, StyleSheet, Image, TouchableOpacity, ScrollView, Alert, SafeAreaView, FlatList, Linking} from 'react-native';
+import { Text, View, StyleSheet, Image, TouchableOpacity, ScrollView, Alert, SafeAreaView, FlatList, Linking, Dimensions} from 'react-native';
 import infoApp from '../../../infoApp.json';
+
+const {width, height} = Dimensions.get('window');
 
 const ListaPacientes = ({navigation}) => {
 
@@ -85,43 +87,44 @@ const styles = StyleSheet.create({
       zIndex: 10,
       },
       iconOption1: {
-          width: 35,
-          height: 35,
+          width: 35,//width * 0.09,//35,
+          height: 35,//height * 0.05,//35,
           borderRadius: 15,
-          position: "absolute",
+          //position: "relative",
           top: "auto",
-          right: 80,
-          zIndex: 10,
+          right: -width * 0.04,//80,
+          zIndex: 100,
+          //backgroundColor : 'black'//!Los colores usados son para visualizar los contornos de cada boton
       },
       iconOption2: {
           width: 35,
           height: 35,
           borderRadius: 15,
-          position: "absolute",
+          //position: "absolute",
           top: "auto",
-          right: 55,
-          zIndex: 10,
-          //backgroundColor : 'black'
+          right: -width * 0.06,//55,
+          zIndex: 100,
+          //backgroundColor : 'green'
       },
       iconOption3: {
           width: 35,
           height: 35,
           borderRadius: 15,
-          position: "absolute",
+          //position: "absolute",
           top: "auto",
-          right: 30,
-          zIndex: 10,
-          //backgroundColor : 'green'
+          right: -width * 0.08,//30,
+          zIndex: 100,
+         // backgroundColor : 'blue'
       },
       iconOption4: {
           width: 35,
           height: 35,
           borderRadius: 15,
-          position: "absolute",
+          //position: "absolute",
           top: "auto",
-          right: 5,
-          zIndex: 10,
-          //backgroundColor : 'blue'
+          right: -width * 0.10,//5,
+          //zIndex: 10,
+          //backgroundColor : 'pink'
       },
   });
 

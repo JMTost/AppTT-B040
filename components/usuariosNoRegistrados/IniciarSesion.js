@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Pressable, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Pressable, TouchableOpacity, Alert, Dimensions, ScrollView} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Dropdown } from 'react-native-element-dropdown';
 import { NavigationContainer } from '@react-navigation/native';
@@ -67,6 +67,8 @@ import CrearDieta from '../usuariosRegistrados/profesionales/CrearDieta';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
+const {width, height} = Dimensions.get('window');
+//console.log("tamaños: ", width, "x", height)
 
 export default function IniciarSesion() {
   const navigation = useNavigation();
@@ -297,6 +299,7 @@ export default function IniciarSesion() {
         ) : null
           
     ) : (
+      <ScrollView contentContainerStyle={{flex : 1}}>
       <View style={styles.container}>
       <Text style={styles.title}>Bienvenido</Text>
       <Text style={styles.subtitle}>Inicia sesión con tu cuenta</Text>
@@ -356,6 +359,7 @@ export default function IniciarSesion() {
           <Text style={styles.btnregistraProfesional}>Registrate como profesional de la salud</Text>
         </Pressable>
       </View>
+      </ScrollView>
     )}
     </View>
   );
@@ -367,26 +371,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#f0f0f0', // Color de fondo
-    marginTop: 60,
+    marginTop: height * 0.06, //60
   },
 
   title: {
-    fontSize: 70,
+    fontSize: width * 0.15,//70
     fontWeight: 'bold',
     color: '#000',
     marginRight:40,
   },
 
   subtitle:{
-    fontSize: 20, 
+    fontSize: width * 0.05,//20, 
     color: 'gray',
     marginRight:140,
 
   },
 
   input: {
-    width: '80%',
-    height: 50,
+    width: width*0.8,
+    height: height * 0.06,//50,
     backgroundColor: 'white', // Color de fondo del campo de entrada
     paddingStart: 30,
     borderRadius: 30,
@@ -417,7 +421,7 @@ const styles = StyleSheet.create({
     //ESTILOS DEL BOTON
     containerBUTTON:{          
       alignItems: 'center', 
-      width:250,
+      width: width * 0.6, //250,
       marginTop: 60,
       margin: 60,
     },
