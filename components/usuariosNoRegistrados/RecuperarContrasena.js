@@ -262,7 +262,7 @@ export default function RecuperarContrasena() {
 
         
         <View style={styles.containerDrop}>
-        <Text style={{paddingTop : 10}}>Seleccione el tipo de usuario:</Text>
+        <Text style={{paddingTop : 10, marginLeft: 10}}>Seleccione el tipo de usuario:</Text>
           <Dropdown
                 style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
                 placeholderStyle={styles.placeholderStyle}
@@ -284,6 +284,8 @@ export default function RecuperarContrasena() {
                     setIsFocus(false);
                 }}
             />
+
+          <Text> </Text>
           </View>
         
         <ButtonGradient></ButtonGradient>
@@ -318,13 +320,13 @@ const styles = StyleSheet.create({
   },
   
   subtitle:{
-    fontSize: 17, 
-    marginBottom: 30,
+    fontSize: width * 0.035,//14, 
+    marginBottom: 40,
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
-    marginLeft: 20,
-    marginRight: 20,
+    marginLeft: 30,
+    marginRight: 30,
 
   },
 
@@ -387,7 +389,7 @@ const styles = StyleSheet.create({
 
   dropdown: {
     height: 50,
-    width: 330,
+    width: 320,
     backgroundColor: '#326D6C', // Color de fondo del campo de entrada
     paddingStart: 30,
     borderRadius: 30,
@@ -396,13 +398,13 @@ const styles = StyleSheet.create({
   },
 
   placeholderStyle: {
-    fontSize: 16,
+    fontSize: 14,
     color: '#b5b5b5',
     borderRadius: 30,
   },
 
   selectedTextStyle: {
-    fontSize: 16,
+    fontSize: 14,
     color : 'white'
   },
 

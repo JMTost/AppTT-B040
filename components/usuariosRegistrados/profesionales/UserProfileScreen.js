@@ -265,7 +265,7 @@ const styles = StyleSheet.create({
       },
       userOccupation: {
         fontSize: 16,
-        marginBottom: 20,
+        marginBottom: 50,
       },
       button: {
         flexDirection: 'row',
@@ -274,6 +274,7 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 5,
         marginBottom: 10,
+        width: 240, 
       },
       buttonText: {
         color: 'white',

@@ -1,11 +1,14 @@
 import React, { useState, useEffect} from 'react';
-import { View, Image, Button, Text, Alert, StyleSheet, TouchableOpacity, Pressable, ScrollView} from 'react-native';
+import { View, Image, Button, Text, Alert, StyleSheet, TouchableOpacity, Pressable, ScrollView, Dimensions} from 'react-native';
 import * as FileSystem from 'expo-file-system';
 import * as ImagePicker from 'expo-image-picker';
 import {AntDesign} from '@expo/vector-icons';
 import infoApp from '../../../infoApp.json';
 import { useNavigation } from '@react-navigation/native';
 import * as archivoImagen from '../obtenImgUsuario';
+
+
+const {height, width} = Dimensions.get('window');
 
 const CambioImagenUsuario = ( ) => {
     const navigation = useNavigation();
@@ -139,6 +142,8 @@ const styles = StyleSheet.create({
       borderRadius: 10,
       borderWidth: 1,
       borderColor: '#b0b0b0',
+      marginBottom: 35,
+      marginTop: 30,
       
     },
     image: {
@@ -149,10 +154,11 @@ const styles = StyleSheet.create({
     button: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#6cbdb5',
+        backgroundColor: '#048f04',
         padding: 10,
         borderRadius: 5,
-        marginBottom: 10,
+        marginBottom: 30,
+        width: width * 0.4,
 
       },
       buttonText: {

@@ -346,7 +346,7 @@ export default function RegistroPaciente() {
           <Text style={styles.passwordGuidelines}>
           <Ionicons name='information-circle' size={24} color="black" />
             Por favor, asegúrate de que tu contraseña tenga entre 8 y 16 caracteres de longitud.
-            Para mejorar la seguridad, te recomendamos incluir una combinación de letras mayúsculas,
+            Para mejorar la seguridad te recomendamos incluir una combinación de letras mayúsculas,
             minúsculas, números y caracteres especiales.
           </Text>
           
@@ -464,13 +464,13 @@ const styles = StyleSheet.create({
   },
 
   placeholderStyle: {
-    fontSize: 16,
+    fontSize: 14,
     color: 'gray',
     borderRadius: 30,
   },
 
   selectedTextStyle: {
-    fontSize: 16,
+    fontSize: 14,
   },
 
   inputSearchStyle: {
@@ -486,9 +486,10 @@ const styles = StyleSheet.create({
   passwordGuidelines: {
     // Estilos para las recomendaciones sobre contraseñas
     marginTop: 15,
+    width: width * 0.75,
     fontSize: 14,
     color: 'black',
     fontStyle: 'italic',
-    textAlign: 'center',
+    textAlign: 'justify',
   },
 });

@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Alert, Dimensions, TouchableOpacity} from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import infoApp from '../../../infoApp.json';
+
+const {width, height} = Dimensions.get('window');
 
 export default function CambioContrasenaFormulario() {
     const [currentContrasena, setCurrentContrasena] = useState('');
@@ -36,7 +39,6 @@ export default function CambioContrasenaFormulario() {
 
     return (
         <View style={styles.container}>
-        <Text style={styles.title}>Cambio de Contraseña</Text>
         <TextInput
           style={styles.input}
           placeholder="Contraseña Actual"
@@ -51,7 +53,18 @@ export default function CambioContrasenaFormulario() {
           onChangeText={(text) => setNuevaContrasena(text)}
           maxLength={16}
         />
-        <Button title="Cambiar Contraseña" onPress={handleCambiaContrasena} />
+        <TouchableOpacity style={styles.containerButton} onPress={handleCambiaContrasena} >
+          <LinearGradient
+              // Button Linear Gradient
+              colors={['#255000', '#588100']}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={styles.button}
+          >
+              <Text style={styles.text}>Cambiar Contraseña</Text>
+          </LinearGradient>
+        </TouchableOpacity>
+
       </View>
     );
 
@@ -71,11 +84,30 @@ const styles = StyleSheet.create({
       marginBottom: 20,
     },
     input: {
-      width: '80%',
-      height: 40,
-      borderColor: 'gray',
-      borderWidth: 1,
-      marginBottom: 20,
-      paddingLeft: 10,
+      width: width*0.6,//'80%',
+      height: height*0.06,// 50,
+      backgroundColor: 'white', // Color de fondo del campo de entrada
+      paddingStart: 30,
+      borderRadius: 30,
+      marginTop: height*0.01,//10,
     },
+    containerButton: {
+      alignItems: 'center',
+      width: width * 0.5,
+      marginTop: 20,
+      margin: height * 0.009,
+  },
+  text: {
+      fontSize: 14,
+      color: '#fff',
+      fontWeight: 'bold',
+  },
+  button: {
+    width: '80%',
+    height: 40,
+    borderRadius: 25,
+    padding: 10,
+    alignItems: 'center',
+    justifyContent: 'center'
+},
   });

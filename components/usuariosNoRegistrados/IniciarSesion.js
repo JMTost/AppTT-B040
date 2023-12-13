@@ -324,7 +324,7 @@ export default function IniciarSesion() {
       {
         //obtener el tipo de usuario que es
       }
-          <Text style={{paddingTop : 10}}>Seleccione el tipo de usuario:</Text>
+          <Text style={{paddingTop : 10,}}>Seleccione el tipo de usuario:</Text>
           <Dropdown
                 style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
                 placeholderStyle={styles.placeholderStyle}
@@ -380,13 +380,13 @@ const styles = StyleSheet.create({
     fontSize: width * 0.15,//70
     fontWeight: 'bold',
     color: '#000',
-    marginRight:40,
+    marginRight:35,
   },
 
   subtitle:{
     fontSize: width * 0.05,//20, 
     color: 'gray',
-    marginRight:140,
+    marginRight:90,
 
   },
 
@@ -403,21 +403,21 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: 'blue',
     marginTop: 20,
-    marginStart: 190,
+    marginStart: 160,
   },
 
   btnregistraPaciente: {
     fontSize: 15,
     color: 'blue',
     marginTop: 10,
-    marginLeft: 190,
+    marginStart: 160,
   },
 
   btnregistraProfesional: {
     fontSize: 15,
     color: 'blue',
     marginTop: 10,
-    marginLeft: 110,
+    marginLeft: 65,
   },
 
     //ESTILOS DEL BOTON
@@ -460,18 +460,18 @@ const styles = StyleSheet.create({
     },
   
     placeholderStyle: {
-      fontSize: 16,
+      fontSize: 14,
       color: 'gray',
       borderRadius: 30,
     },
   
     selectedTextStyle: {
-      fontSize: 16,
+      fontSize: 14,
     },
   
     inputSearchStyle: {
       height: 40,
-      fontSize: 16,
+      fontSize: 12,
       borderRadius: 30,
     }
 

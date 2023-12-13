@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert, ScrollView } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Alert, ScrollView, TouchableOpacity, Dimensions} from 'react-native';
 import infoApp from '../../../infoApp.json';
+import { LinearGradient } from 'expo-linear-gradient';
 import * as DocumentPicker from 'expo-document-picker';
+
+const {width, height} = Dimensions.get('window');
 
 const SubidaDocumentosProfesional = () => {
 
@@ -117,27 +120,91 @@ const SubidaDocumentosProfesional = () => {
                 <ScrollView contentContainerStyle={{ alignContent : 'center', alignItems : 'center', justifyContent : 'center'}}>
                     <Text>Archivos cargados: </Text>
                     {elementos}
-                    <Button title="Selecciona un PDF" onPress={tomaDocumento} />
+                    <TouchableOpacity style={styles.containerButton} onPress={tomaDocumento} >
+                    <LinearGradient
+                        // Button Linear Gradient
+                        colors={['#255000', '#588100']}
+                        start={{ x: 0, y: 0 }}
+                        end={{ x: 1, y: 1 }}
+                        style={styles.button}
+                    >
+                        <Text style={styles.text}>Selecciona un PDF</Text>
+                    </LinearGradient>
+                    </TouchableOpacity>
                     {archivoSeleccionado && (
                         <Text>Archivo Seleccionado: {archivoSeleccionado.assets[0].name}</Text>
                     )}
-                    <Button title="Subir archivo" onPress={subidaArchivo} />
+                    <TouchableOpacity style={styles.containerButton} onPress={subidaArchivo} >
+                    <LinearGradient
+                        // Button Linear Gradient
+                        colors={['#255000', '#588100']}
+                        start={{ x: 0, y: 0 }}
+                        end={{ x: 1, y: 1 }}
+                        style={styles.button}
+                    >
+                        <Text style={styles.text}>Subir archivo</Text>
+                    </LinearGradient>
+                    </TouchableOpacity>
                 </ScrollView>
             );
         }
     }else{
         return(
             <View style={{ alignContent : 'center', alignItems : 'center', justifyContent : 'center'}}>
-                <Button title="Selecciona un PDF" onPress={tomaDocumento} />
+                <TouchableOpacity style={styles.containerButton} onPress={tomaDocumento} >
+                    <LinearGradient
+                        // Button Linear Gradient
+                        colors={['#255000', '#588100']}
+                        start={{ x: 0, y: 0 }}
+                        end={{ x: 1, y: 1 }}
+                        style={styles.button}
+                    >
+                        <Text style={styles.text}>Selecciona un PDF</Text>
+                    </LinearGradient>
+                    </TouchableOpacity>
+                
                 {archivoSeleccionado && (
                     <Text>Archivo Seleccionado: {archivoSeleccionado.assets[0].name}</Text>
                 )}
-                <Button title="Subir archivo" onPress={subidaArchivo} />
+                <TouchableOpacity style={styles.containerButton} onPress={subidaArchivo} >
+                    <LinearGradient
+                        // Button Linear Gradient
+                        colors={['#255000', '#588100']}
+                        start={{ x: 0, y: 0 }}
+                        end={{ x: 1, y: 1 }}
+                        style={styles.button}
+                    >
+                        <Text style={styles.text}>Subir archivo</Text>
+                    </LinearGradient>
+                    </TouchableOpacity>
+                    
             </View>
         )
     }
 
 
 }
+
+const styles = StyleSheet.create({
+    containerButton: {
+        alignItems: 'center',
+        width: width * 0.5,
+        marginTop: 20,
+        margin: height * 0.009,
+    },
+    text: {
+        fontSize: 14,
+        color: '#fff',
+        fontWeight: 'bold',
+    },
+    button: {
+      width: '80%',
+      height: 40,
+      borderRadius: 25,
+      padding: 10,
+      alignItems: 'center',
+      justifyContent: 'center'
+  },
+});
 
 export default SubidaDocumentosProfesional;

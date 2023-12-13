@@ -26,12 +26,12 @@ function Home() {
       </View>
   */
   return (
-        <Stack.Navigator screenOptions={{headerShown : false}} initialRouteName='InicioSesion'>
+        <Stack.Navigator screenOptions={{headerShown : true}} initialRouteName='InicioSesion'>
         {
           //de esta manera podemos dar servicio a ambos elementos previamente creados
           //este menu es para los usuarios no registrados 
         }
-          <Stack.Screen name="InicioSesion" component={IniciarSesion} />
+          <Stack.Screen name="InicioSesion" component={IniciarSesion}  options={{headerShown : false}}/>
           <Stack.Screen name="Registro de Paciente" component={RegistroPaciente}/>
           <Stack.Screen name="Registro de Profesional" component={RegistroProfesional} />
           <Stack.Screen name="Recuperar contraseña" component={recuperarContrasena} />

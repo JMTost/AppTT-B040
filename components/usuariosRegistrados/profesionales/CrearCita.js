@@ -7,6 +7,8 @@ import infoApp from '../../../infoApp.json';
 
 const CrearCita = ({navigation, route}) => {
     const {id} = route.params;
+    //console.log(infoApp.usuarioProfesional.idUsuario);
+    //const id = infoApp.usuarioProfesional.idUsuario;
 
     const [DataApi, setDataApi] = useState(null);
     const [DataApiTiposCita, setDataApiTiposCita] = useState(null);
@@ -23,6 +25,7 @@ const CrearCita = ({navigation, route}) => {
     
 
     //obtener tipos de cita, pacientes
+    
     useEffect( () => {
         const fetchObtenPacientes = async () => {
             try {
@@ -159,6 +162,7 @@ const CrearCita = ({navigation, route}) => {
         
         
     };
+    
     
     if(DataApi != null && DataApiTiposCita != null){
         const pacientes = [], tiposCita = [];
@@ -329,6 +333,7 @@ const CrearCita = ({navigation, route}) => {
             );
         }
     }
+    
     
 };
 

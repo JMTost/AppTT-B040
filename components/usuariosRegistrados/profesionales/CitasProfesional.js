@@ -9,7 +9,7 @@ const CitasProfesional = ({navigation}) => {
         return (
             <View style={{flex : 1, alignContent : 'center', alignItems : 'center', justifyContent : 'center'}}>
                 <Text style={{fontSize : 20, fontWeight : 'bold'}}>{infoApp.usuarioProfesional.citas}</Text>
-                <TouchableOpacity style={styles.containerButton} onPress={() => navigation.navigate('CrearCitas')}>
+                <TouchableOpacity style={styles.containerButton} onPress={() => navigation.navigate('CrearCitas' , {id : infoApp.usuarioProfesional.idUsuario})}>
                     <LinearGradient
                         // Button Linear Gradient
                         colors={['#c66900', '#e28000']}
@@ -22,7 +22,6 @@ const CitasProfesional = ({navigation}) => {
                 </TouchableOpacity>
             </View>
         );
-
     }else{
         const elementos = [];
         for(let i = 0; i < infoApp.usuarioProfesional.citas.length; i++){
@@ -56,7 +55,7 @@ const CitasProfesional = ({navigation}) => {
         return (
             <ScrollView contentContainerStyle={styles.fullContainer}>
                 {elementos}
-                <TouchableOpacity style={styles.containerButton} onPress={() => navigation.navigate('CrearCitas', {id : infoApp.usuarioProfesional.idUsuario})}>
+                <TouchableOpacity style={styles.containerButton} onPress={() => navigation.navigate('CrearCitas', {id : infoApp.usuarioProfesional.idUsuario})}> 
                     <LinearGradient
                         // Button Linear Gradient
                         colors={['#c66900', '#e28000']}

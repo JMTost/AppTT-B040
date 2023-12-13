@@ -587,10 +587,11 @@ text:{
 passwordGuidelines: {
   // Estilos para las recomendaciones sobre contraseñas
   marginTop: 15,
+  width: width * 0.75,
   fontSize: 14,
   color: 'black',
   fontStyle: 'italic',
-  textAlign: 'center',
+  textAlign: 'justify',
 },
 inputDireccion: {
   width: '80%',
@@ -599,6 +600,12 @@ inputDireccion: {
   paddingStart: 30,
   borderRadius: 30,
   marginTop: 10,
+},
+labelS: {
+  width: 320,
+  marginLeft: 10,
+  marginTop: 10,
+  marginBottom: 10,
 },
 });
 /*
@@ -779,7 +786,7 @@ passwordGuidelines: {
 
 const pickerSelectStyles = StyleSheet.create({
   inputIOS: {
-    fontSize: 16,
+    fontSize: 14,
     paddingVertical: 12,
     paddingHorizontal: 10,
     alignContent: 'center',
@@ -792,19 +799,20 @@ const pickerSelectStyles = StyleSheet.create({
     marginTop: 10,
   },
   inputAndroid: {
-    fontSize: 16,
+      fontSize: 14,
       paddingHorizontal: 10,
       paddingVertical: 12,
+      /*
       alignContent: 'center',
       alignContent:'center',
-    borderWidth: 0.5,
-    borderColor: 'gray',
+      */
+      borderColor: 'gray',
       backgroundColor : 'white',
-      borderRadius: 30,
-      paddingStart: 30,
-      borderRadius: 30,
-      width: 330,
+      borderRadius: 40,
+      marginLeft: 10,
+      width: 310,
       height: 50,
-    color: 'black',
+      color: 'black',
+      marginBottom:10,
   },
 });
