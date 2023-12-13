@@ -227,7 +227,8 @@ const UserProfileScreenProfesional = ( {navigation} ) => {
               <Text style={styles.buttonText}>Cerrar sesión</Text>
           </TouchableOpacity>
           
-          <TouchableOpacity style={styles.button} onPress={handleSubidaConstancias}>
+          {/*<TouchableOpacity style={styles.button} onPress={handleSubidaConstancias}>*/}
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('SubidaConstancias')}>
               <MaterialIcons name = 'upload-file' size={20} color="white" />
               <Text style={styles.buttonText}>Subida de documentos</Text>
           </TouchableOpacity>

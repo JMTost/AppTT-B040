@@ -62,6 +62,7 @@ import CrearMedicion from '../usuariosRegistrados/profesionales/CrearMedicion';
 import VerDietaPaciente from '../usuariosRegistrados/profesionales/VerDietaPaciente';
 import ModificarDieta from '../usuariosRegistrados/profesionales/ModificarDieta';
 import CrearDieta from '../usuariosRegistrados/profesionales/CrearDieta';
+import SubidaDocumentosProfesional from '../usuariosRegistrados/profesionales/SubidaDocumentosProfesional';
 //import InfoMPaciente from '../usuariosRegistrados/profesionales/formulariosPaciente/InfoMPaciente';
 
 const Tab = createBottomTabNavigator();
@@ -293,6 +294,7 @@ export default function IniciarSesion() {
             <Stack.Screen name='VisualizarDieta' component={VerDietaPaciente} options={{title : 'Visualizar dieta del paciente'}} />
             <Stack.Screen name='ModificarDieta' component={ModificarDieta} options={{title : 'Modificar dieta'}} />
             <Stack.Screen name='CrearDieta' component={CrearDieta} options={{title : 'Crear dieta'}} />
+            <Stack.Screen name='SubidaConstancias' component={SubidaDocumentosProfesional} options={{title : 'Carga constancias'}} />
             {/*<Stack.Screen name='RutinaPacienteProfesional' component={RutinaPaciente} options={{title : 'Rutian del paciente'}} />*/}
           </Stack.Navigator>
           

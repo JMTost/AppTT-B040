@@ -9,6 +9,10 @@ const SubidaDocumentosProfesional = () => {
     const [dataArchivos, setDataArchivos] = useState([]);
     const [loadingArchivos, setLoadingArchivos] = useState(false);
 
+    //VARIABLES PARA ELIMINAR EL VIDEO
+    const [value, setValue] = useState(null);
+    const [isFocus, setIsFocus] = useState(false);
+
     const [archivoSeleccionado, setArchivoSeleccionado] = useState(null);
 
     useEffect( () => {
