@@ -8,7 +8,7 @@ const VisualizaMedicionesPaciente = ({navigation, route}) => {
     const {id} = route.params;//obtenemos el id del paciente
 
     const [dataApi, setDataApi] = useState(null);
-
+    
     useEffect( () => {
         const fetchObtenMediciones = async () => {
             try {

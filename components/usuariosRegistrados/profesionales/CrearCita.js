@@ -22,7 +22,6 @@ const CrearCita = ({navigation, route}) => {
     const [horaCita, setHoraCita] = useState('');
     const [hora, setHora] = useState(new Date());
 
-    
 
     //obtener tipos de cita, pacientes
     

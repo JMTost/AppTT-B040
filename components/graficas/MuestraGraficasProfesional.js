@@ -30,17 +30,78 @@ const MuestraGraficasProfesioanl = ({navigation, route}) => {
         }
     };
 
-    if(loading){
-        return(
-            <ScrollView>
-                <View style={{flex : 1, justifyContent: 'center', alignItems: 'center', backgroundColor : 'white'}}>
-                <Text style={{fontWeight : 'bold'}}>Graficas del paciente {nombreC}: </Text>
-                {
-                    <GraficayTabla data = {data} />
-                }
-                </View>
-            </ScrollView>
-        );
+    
+    //variables para realizar el algoritmo
+    const aIniciales = [0,0,0];
+    const learningRate = 0.00001;
+    const tolerance = 1e-6;
+    const maxIterations = 100;
+    // Definir la función que se quiere minimizar
+    function objectiveFunction(a, x0, y0, x1) {
+        return Math.pow(a[0] + a[1] * x0 + a[2] * y0 - x1, 2);
+    }
+    
+    function gradient(a, x0, y0, x1){
+        const derivacionesParciales = [
+            2 * (a[0] + a[1] * x0 + a[2] * y0 - x1),
+            2 * x0 * (a[0] + a[1] * x0 + a[2] * y0 - x1),
+            2 * y0 * (a[0] + a[1] * x0 + a[2] * y0 - x1)
+        ];
+        
+        return derivacionesParciales;
+    }
+
+    //metodo para realizar la minimizaxión sin restricciones
+    function gradientDescendiente(a, x0, y0, x1, learningRate, tolerance, maxIterations) {
+        let currentPoint = a.slice();
+
+        for (let i = 0; i < maxIterations; i++) {
+            const gradientValue = gradient(currentPoint, x0, y0, x1);
+
+            // Actualizar el punto utilizando el descenso de gradiente
+            for (let j = 0; j < currentPoint.length; j++) {
+                currentPoint[j] -= learningRate * gradientValue[j];
+            }
+
+            // Verificar si la diferencia entre iteraciones es menor que la tolerancia
+            if (Math.abs(objectiveFunction(currentPoint, x0, y0, x1) - objectiveFunction(a, x0, y0, x1)) < tolerance) {
+                break;
+            }
+        }
+        return currentPoint;
+    }
+
+    if(loading && data !== undefined){
+        if(data.hasOwnProperty('peso')){
+            const datosPeso = [];
+            const datosCintura = [];
+
+            let ultimoIndice = data.abdominal.length - 1 ;
+            let segundoUltimo = ultimoIndice - 1;
+            datosPeso.push(data.peso[segundoUltimo]);
+            datosPeso.push(data.peso[ultimoIndice]);
+            datosCintura.push(data.cintura[segundoUltimo]);
+            datosCintura.push(data.cintura[ultimoIndice]);
+            const resultado = gradientDescendiente(aIniciales, datosPeso[0], datosCintura[0], datosPeso[1], learningRate, tolerance, maxIterations);
+            const prediccionPeso = (resultado[0] + resultado[1] * datosPeso[1] + resultado[2] * datosCintura[1]);
+
+            const resultadoCintura = gradientDescendiente(aIniciales, datosCintura[0], datosPeso[0], datosCintura[1], learningRate, tolerance, maxIterations);
+            const preduccionCintura = (resultadoCintura[0] + resultadoCintura[1] * datosCintura[1] + resultadoCintura[2] * datosPeso[1]);
+            console.log("Resultado de la operacion: ", prediccionPeso, preduccionCintura);
+            return(
+                <ScrollView>
+                    <View style={{flex : 1, justifyContent: 'center', alignItems: 'center', backgroundColor : 'white'}}>
+                    <Text style={{fontWeight : 'bold'}}>Graficas del paciente {nombreC}: </Text>
+                    <Text style={{fontWeight : 'bold'}}>Preducciones del peso y cintura: </Text>
+                    <Text>Peso: {prediccionPeso.toFixed(1)}</Text>
+                    <Text>Cintura: {preduccionCintura.toFixed(1)}</Text>
+                    {
+                        <GraficayTabla data = {data} />
+                    }
+                    </View>
+                </ScrollView>
+            );
+        }
     }else{
         return(
             <View style={{flex : 1, justifyContent: 'center', alignItems: 'center', paddingTop : 50}}>

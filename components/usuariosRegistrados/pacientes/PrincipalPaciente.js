@@ -7,6 +7,7 @@ export default function PrincipalPaciente({navigation}) {
     const [user, setUser] = useState({
         name: infoApp.usuarioPaciente.nombreC,
     });
+    //console.log(infoApp.usuarioPaciente.ejercicios)
 
     //elemento para resetear la imagen
     const [imagenPerfil, setImagenPerfil] = useState(infoApp.usuarioPaciente.urlImagen_usuario);

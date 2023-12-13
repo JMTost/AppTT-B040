@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, StyleSheet,ScrollView, Pressable, Platform, Touchable, TouchableOpacity, Alert, Dimensions} from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet,ScrollView, Pressable, Platform, Touchable, TouchableOpacity, Alert, Dimensions, Modal} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 //import ButtonGradient from './ButtonRegister';
@@ -30,6 +30,8 @@ export default function RegistroPaciente() {
   const [showPicker, setShowPicker] = useState(false);
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [aceptarTerminos, setAceptarTerminos] = useState(false);
   
   //Estado de los datos obtenidos de la API
   const [apiData, setApiData] = useState(null);
@@ -125,7 +127,7 @@ export default function RegistroPaciente() {
     console.log('Confirmación de Contraseña:', confirmacionContrasena);
     console.log('Selección:', value);
     */
-    if(nombre === '' || apellidoPaterno === '' || apellidoMaterno === '' || edad === '' || fechaNacimiento === '' || telefono === '' || email === '' || contrasena === '' || confirmacionContrasena === '' || value === ''){
+    if(nombre === '' || apellidoPaterno === '' || apellidoMaterno === '' || edad === '' || fechaNacimiento === '' || telefono === '' || email === '' || contrasena === '' || confirmacionContrasena === '' || value === '' || aceptarTerminos === false){
       Alert.alert("Error", "Rellene los campos faltantes");
     }else{
       //comprobamos que los tipos de datos y longitud se comprueben
@@ -186,6 +188,44 @@ export default function RegistroPaciente() {
     }
   };
 
+  const infoPolitica = `
+  Política de Uso y Leyenda de Privacidad de Datos
+  1. Recopilación de Datos:
+Se recopilarán datos personales de manera transparente y solo con el consentimiento del usuario.
+La información recolectada se limitará a lo necesario para proporcionar los servicios solicitados.
+Se recolectará información sensible, como datos personales, médicos, alimenticios, así como mediciones de pacientes, con el fin de brindar servicios específicos y personalizados.
+2. Uso de la Información:
+
+Los datos recopilados se utilizarán exclusivamente para los fines especificados al recopilar la información.
+No compartiremos, venderemos ni divulgaremos sus datos personales a terceros sin su consentimiento expreso.
+3. Seguridad de Datos:
+
+Implementamos medidas de seguridad sólidas para proteger la información del usuario contra accesos no autorizados, pérdidas o alteraciones.
+Se promoverá la actualización regular de contraseñas y se emplearán protocolos de cifrado para garantizar la confidencialidad de la información.
+4. Acceso y Control:
+
+Los usuarios tendrán acceso a sus datos personales y podrán corregir, actualizar o eliminar la información según sea necesario.
+Se proporcionará un proceso claro y sencillo para que los usuarios retiren su consentimiento en cualquier momento.
+5. Cookies y Tecnologías Similares:
+
+Utilizaremos cookies y tecnologías similares para mejorar la experiencia del usuario.
+Los usuarios pueden gestionar las preferencias de cookies y elegir aceptar o rechazarlas según sus necesidades.
+6. Comunicación:
+
+Mantendremos a los usuarios informados sobre cualquier cambio en nuestra política de privacidad.
+Las preguntas o inquietudes sobre la privacidad serán respondidas de manera oportuna a través de los canales de contacto designados.
+7. Cumplimiento Legal:
+
+Nos comprometemos a cumplir con todas las leyes y regulaciones aplicables relacionadas con la privacidad de datos.
+Cooperaremos plenamente en caso de investigaciones legales y protegeremos la privacidad de los usuarios en la medida de lo posible.
+8. Exención de Responsabilidad:
+
+No nos hacemos responsables del uso que los usuarios hagan de la información proporcionada voluntariamente, incluyendo la información sensible recopilada.
+Los usuarios asumen la responsabilidad de la precisión y legalidad de la información compartida a través de nuestros servicios.
+Al utilizar nuestros servicios, usted acepta y consiente las prácticas descritas en esta Política de Uso y Leyenda de Privacidad de Datos, incluida la recolección de información sensible y la exención de responsabilidad mencionada. Esta política puede estar sujeta a actualizaciones, y se le notificará cualquier cambio significativo. 
+Última actualización: 13 de diciembre de 2023.
+
+`;
 
   let data = [];
   if(apiData != null){
@@ -350,6 +390,32 @@ export default function RegistroPaciente() {
             minúsculas, números y caracteres especiales.
           </Text>
           
+          <TouchableOpacity style={styles.containerButton} onPress={() =>  setModalVisible(true)} >
+                        <LinearGradient
+                            // Button Linear Gradient
+                            colors={['#255000', '#588100']}
+                            start={{ x: 0, y: 0 }}
+                            end={{ x: 1, y: 1 }}
+                            style={styles.button}
+                        >
+                            <Text style={styles.enlacePolitica}>Ver politica de privacidad</Text>
+                        </LinearGradient>
+                    </TouchableOpacity>
+          
+          <Modal animationType='slide' transparent={true}
+          visible={modalVisible} onRequestClose={() => setModalVisible(false)}>
+            <View style={styles.modalContainer}>
+              <ScrollView style={styles.modalContent}>
+                <Text style={styles.politicaTexto}>{infoPolitica}</Text>
+              </ScrollView>
+              <TouchableOpacity style={[styles.aceptarBoton, aceptarTerminos ? styles.aceptarBotonHabilitado : null]}onPress={() => setAceptarTerminos(!aceptarTerminos)}>
+                <Text style={styles.aceptarTexto}>Acepto los términos y condiciones</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.cerrarBoton}onPress={() => setModalVisible(false)} disabled={!aceptarTerminos}>
+                <Text style={styles.textoCerrar}>Cerrar</Text>
+              </TouchableOpacity>
+            </View>
+          </Modal>
           <ButtonGradient></ButtonGradient>
           </View>
       </ScrollView>
@@ -491,5 +557,60 @@ const styles = StyleSheet.create({
     color: 'black',
     fontStyle: 'italic',
     textAlign: 'justify',
+    marginBottom : width * 0.07
+  },
+  //MODAL
+  enlacePolitica: {
+    /*color: 'blue',
+    textDecorationLine: 'underline',
+    fontSize: 16,*/
+    color : 'white',
+    width : width * 0.4,
+    height : height * 0.02
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10,
+    maxHeight: '80%',
+    width: '80%',
+  },
+  politicaTexto: {
+    fontSize: 14,
+    lineHeight: 20,
+    fontWeight: 'bold',
+    marginBottom : 5
+  },
+  cerrarBoton: {
+    marginTop: 10,
+    padding: 10,
+    backgroundColor: 'red',
+    borderRadius: 5,
+    alignSelf: 'flex-end',
+  },
+  textoCerrar: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  aceptarBoton: {
+    marginTop: 10,
+    padding: 10,
+    backgroundColor: 'lightblue',
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  aceptarBotonHabilitado: {
+    backgroundColor: 'blue',
+  },
+  aceptarTexto: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: 'white',
   },
 });
