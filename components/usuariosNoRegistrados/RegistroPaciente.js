@@ -128,7 +128,7 @@ export default function RegistroPaciente() {
     console.log('Selección:', value);
     */
     if(nombre === '' || apellidoPaterno === '' || apellidoMaterno === '' || edad === '' || fechaNacimiento === '' || telefono === '' || email === '' || contrasena === '' || confirmacionContrasena === '' || value === '' || aceptarTerminos === false){
-      Alert.alert("Error", "Rellene los campos faltantes");
+      Alert.alert("Error", "Rellene los campos faltantes y/o acepte los los terminos de la politica de privacidad");
     }else{
       //comprobamos que los tipos de datos y longitud se comprueben
       const regexCorreo = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$";//const regexCorreo = "^(?!.{41})[a-z0-9]+(?:\.[a-z0-9]+)*@[a-z0-9-]+(?:\.[a-z0-9-]+)*\.[a-zA-Z]{2,6}$";
