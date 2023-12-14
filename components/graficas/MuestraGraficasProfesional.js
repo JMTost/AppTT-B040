@@ -93,8 +93,8 @@ const MuestraGraficasProfesioanl = ({navigation, route}) => {
                     <View style={{flex : 1, justifyContent: 'center', alignItems: 'center', backgroundColor : 'white'}}>
                     <Text style={{fontWeight : 'bold'}}>Graficas del paciente {nombreC}: </Text>
                     <Text style={{fontWeight : 'bold'}}>Preducciones del peso y cintura: </Text>
-                    <Text>Peso: {prediccionPeso.toFixed(1)}</Text>
-                    <Text>Cintura: {preduccionCintura.toFixed(1)}</Text>
+                    <Text>Peso: {prediccionPeso.toFixed(1)} kg</Text>
+                    <Text>Cintura: {preduccionCintura.toFixed(1)} cm</Text>
                     {
                         <GraficayTabla data = {data} />
                     }

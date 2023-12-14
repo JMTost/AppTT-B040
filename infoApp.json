@@ -1,5 +1,5 @@
 {
-    "APIurl" : "http://192.168.17.185:3000",
+    "APIurl" : "http://192.168.100.9:3000",
     "isLogged" : false,
     "usuarioPaciente" : {
         "nombreC" : "",
