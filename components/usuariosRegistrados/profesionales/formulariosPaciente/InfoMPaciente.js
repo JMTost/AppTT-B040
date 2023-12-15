@@ -268,7 +268,7 @@ const InfoMPaciente = ({navigation, route}) => {
             return (
                 <ScrollView style = {styles.container}>
                     <View style={styles.content}>
-                        <Text style={styles.subtitle}>Datos para crear el expediente clinico</Text>
+                        <Text style={styles.subtitle}>Datos para crear el expediente clínico</Text>
                         <Text style={styles.textoCampo}>Estatura : </Text>
                         <TextInput style={styles.input} value={estatura} onChangeText={text => setEstatura(text)} keyboardType="numbers-and-punctuation" />
                         <Text style={styles.textoCampo}>Ocupación : </Text>
@@ -370,7 +370,7 @@ const InfoMPaciente = ({navigation, route}) => {
                     return (
                         <ScrollView style = {styles.container}>
                             <View style={styles.content}>
-                                <Text style={styles.subtitle}>Datos para crear el expediente clinico</Text>
+                                <Text style={styles.subtitle}>Datos para crear el expediente clínico</Text>
                                 <Text style={styles.textoCampo}>Estatura : </Text>
                                 <TextInput style={styles.input} value={estatura} onChangeText={text => setEstatura(text)}  keyboardType="numeric"/>
                                 <Text style={styles.textoCampo}>Ocupación : </Text>

@@ -54,10 +54,10 @@ const ExpedientePaciente = ({route, navigation}) => {
                         <Text style={styles.textEnlace}>Ir al formulario de información médica</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigation.navigate('HabitoPersonal', {id : id})}>
-                        <Text style={styles.textEnlace}>Ir al formulario de habito personal</Text>
+                        <Text style={styles.textEnlace}>Ir al formulario de hábito personal</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigation.navigate('HabitoAlimenticio', {id : id})}>
-                        <Text style={styles.textEnlace}>Ir al formulario de habito alimenticio</Text>
+                        <Text style={styles.textEnlace}>Ir al formulario de hábito alimenticio</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigation.navigate('VisualizaMediciones', {id : id})}>
                       <Text style={styles.textEnlace}>Mostrar mediciones del paciente</Text>
@@ -164,10 +164,10 @@ const ExpedientePaciente = ({route, navigation}) => {
                         <Text style={styles.textEnlace}>Ir al formulario de información médica</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigation.navigate('HabitoPersonal', {id : id})}>
-                        <Text style={styles.textEnlace}>Ir al formulario de habito personal</Text>
+                        <Text style={styles.textEnlace}>Ir al formulario de hábito personal</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigation.navigate('HabitoAlimenticio', {id : id})}>
-                        <Text style={styles.textEnlace}>Ir al formulario de habito alimenticio</Text>
+                        <Text style={styles.textEnlace}>Ir al formulario de hábito alimenticio</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigation.navigate('VerProgresoPacienteProfesional', {id : id, nombreC : dataExpediente.nombreCompleto})}>
                       <Text style={styles.textEnlace}>Mostrar progreso del paciente</Text>

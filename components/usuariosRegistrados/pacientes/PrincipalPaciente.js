@@ -45,7 +45,10 @@ export default function PrincipalPaciente({navigation}) {
                 <Text style={styles.userName}>{user.name}</Text>
             </View>
 
-            <TouchableOpacity style={styles.content2} onPress={() => navigation.navigate('RutinaEjerciciosPaciente')} >
+            <TouchableOpacity style={styles.content2} onPress={() => {//navigation.navigate('RutinaEjerciciosPaciente')
+            console.log("boton rutina", infoApp.usuarioPaciente.ejercicios)
+            navigation.navigate('RutinaEjerciciosPaciente')
+            }} >
                 <View style={styles.container2}>
                     <View style={styles.iconContainer}>
                         <Image

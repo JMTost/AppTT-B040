@@ -222,10 +222,6 @@ const UserProfileScreenProfesional = ( {navigation} ) => {
           {/*RENDERIZAMOS EL FORMULARIO DE CAMBIO DE IMAGEN */}
           {showCambioIMG && <CambioImagenUsuario />}
 
-          <TouchableOpacity style={styles.button} onPress={handleCerrarSesion}>
-              <Ionicons name = 'close' size={20} color="white" />
-              <Text style={styles.buttonText}>Cerrar sesión</Text>
-          </TouchableOpacity>
           
           {/*<TouchableOpacity style={styles.button} onPress={handleSubidaConstancias}>*/}
           <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('SubidaConstancias')}>
@@ -239,6 +235,13 @@ const UserProfileScreenProfesional = ( {navigation} ) => {
           </TouchableOpacity>
           
           {showSubidaArchivos && <SubidaDocumentosProfesional />}
+
+          <TouchableOpacity style={styles.button} onPress={handleCerrarSesion}>
+              <Ionicons name = 'close' size={20} color="white" />
+              <Text style={styles.buttonText}>Cerrar sesión</Text>
+          </TouchableOpacity>
+
+          
           </View>
       </ScrollView>
     );

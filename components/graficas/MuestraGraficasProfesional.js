@@ -87,12 +87,12 @@ const MuestraGraficasProfesioanl = ({navigation, route}) => {
 
             const resultadoCintura = gradientDescendiente(aIniciales, datosCintura[0], datosPeso[0], datosCintura[1], learningRate, tolerance, maxIterations);
             const preduccionCintura = (resultadoCintura[0] + resultadoCintura[1] * datosCintura[1] + resultadoCintura[2] * datosPeso[1]);
-            console.log("Resultado de la operacion: ", prediccionPeso, preduccionCintura);
+            console.log("Resultado de la operación: ", prediccionPeso, preduccionCintura);
             return(
                 <ScrollView>
                     <View style={{flex : 1, justifyContent: 'center', alignItems: 'center', backgroundColor : 'white'}}>
-                    <Text style={{fontWeight : 'bold'}}>Graficas del paciente {nombreC}: </Text>
-                    <Text style={{fontWeight : 'bold'}}>Preducciones del peso y cintura: </Text>
+                    <Text style={{fontWeight : 'bold'}}>Gráficas del paciente {nombreC}: </Text>
+                    <Text style={{fontWeight : 'bold'}}>Predicciones del peso y cintura: </Text>
                     <Text>Peso: {prediccionPeso.toFixed(1)} kg</Text>
                     <Text>Cintura: {preduccionCintura.toFixed(1)} cm</Text>
                     {

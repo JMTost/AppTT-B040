@@ -21,8 +21,10 @@ const RutinaPaciente = () => {
     'Pantorrillas.': 'Pierna',
     'Isquiotibiales.': 'Pierna',
     'Glúteos.': 'Pierna',
+    'Gluteos.': 'Pierna',
     'Deltoides.': 'Hombro',
     'Bíceps.': 'Brazo',
+    'Biceps.': 'Brazo',
     'Abdominales.': 'Cadera',
     'Flexores de cadera.': 'Cadera',
   }
@@ -69,29 +71,29 @@ const RutinaPaciente = () => {
           break;
         default : 
           //lógica por defecto
-          console.log("Error");
+          console.log("Error, musculo no encontrado");
       }
     }
     const nuevaLista = ajustarListaDeEjercicios(ejercicios);
     elementos = generaElementosScreen(nuevaLista, componente)
     
     //console.log(elementos);
-
+    
     return (
-      
+     
       <Tab.Navigator>
       {elementos}
-        {
-          /*
+      {
+      /*    
         <Tab.Screen name="Día 1 Espalda" component={RutinaEspalda} />
         <Tab.Screen name="Día 2 Pecho" component={RutinaPecho} />
         <Tab.Screen name="Día 3 Pierna" component={RutinaPierna} />
         <Tab.Screen name="Día 4 Hombro" component={RutinaHombro} />
         <Tab.Screen name="Día 5 Brazo" component={RutinaBrazo}  />
-        */
-        }
+      */
+  }    
       </Tab.Navigator>
-
+      
     );
   }else{
     return (

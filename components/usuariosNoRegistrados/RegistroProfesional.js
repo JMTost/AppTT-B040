@@ -143,7 +143,7 @@ export default function RegistroProfesional() {
     console.log('Selección:', selectedOption);
     */
     if(nombre === '' || apellidoPaterno === '' || apellidoMaterno === '' || edad === '' || fechaNacimiento === '' || telefono === '' || email === '' || contrasena === '' || confirmacionContrasena === '' || value === '' || (selectedOption === null || selectedOption === '' || aceptarTerminos === false)){
-      Alert.alert("Error", "Rellene los campos faltantes y/o acepte los los terminos de la politica de privacidad");
+      Alert.alert("Error", "Rellene los campos faltantes y/o acepte los los términos de la política de privacidad");
     }else{
       //Comprobamos que los tipos de datos y longitud se comprueben
       const regexCorreo = "^(?!.{41})[a-z0-9]+(?:\.[a-z0-9]+)*@[a-z0-9-]+(?:\.[a-z0-9-]+)*\.[a-zA-Z]{2,6}$";
@@ -500,7 +500,7 @@ Al utilizar nuestros servicios, usted acepta y consiente las prácticas descrita
                             end={{ x: 1, y: 1 }}
                             style={styles.button}
                         >
-                            <Text style={styles.enlacePolitica}>Ver politica de privacidad</Text>
+                            <Text style={styles.enlacePolitica}>Ver política de privacidad</Text>
                         </LinearGradient>
                     </TouchableOpacity>
           

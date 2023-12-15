@@ -152,7 +152,7 @@ const HabitoAlimenticio = ({navigation, route}) => {
         return(
             <ScrollView style={styles.container}>
                 <View style={styles.content}>
-                    <Text style={styles.subtitle}>Datos para crear el habito alimenticio del paciente</Text>
+                    <Text style={styles.subtitle}>Datos para crear el hábito alimenticio del paciente</Text>
                     <Text style={styles.textoCampo}>Alimentos que más consuma: </Text>
                     <TextInput style={styles.input} value={alimentosMconsumidos} onChangeText={text => setAlimentoMconsumidos(text)} maxLength={200}  keyboardType="default"/>
                     
@@ -185,7 +185,7 @@ const HabitoAlimenticio = ({navigation, route}) => {
         return(
             <ScrollView style={styles.container}>
                 <View style={styles.content}>
-                    <Text style={styles.subtitle}>Datos para crear el habito alimenticio del paciente</Text>
+                    <Text style={styles.subtitle}>Datos para crear el hábito alimenticio del paciente</Text>
                     <Text style={styles.textoCampo}>Alimentos que más consuma: </Text>
                     <TextInput style={styles.input} value={alimentosMconsumidos} onChangeText={text => setAlimentoMconsumidos(text)} maxLength={200}  keyboardType="default"/>
                     

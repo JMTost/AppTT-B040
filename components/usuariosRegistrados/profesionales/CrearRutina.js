@@ -176,7 +176,8 @@ const CrearRutina = ({navigation, route}) => {
         return (
             <SafeAreaView style={styles.container}>
                 <View style={styles.content}>
-                    <View style={styles.containerS}>
+                    {/*
+                        <View style={styles.containerS}>
                         <Text style={styles.labelS}>Musculo:         </Text>
                         <RNPickerSelect
                             onValueChange={(value) => setSelectedValueMusculo(value)}
@@ -185,7 +186,7 @@ const CrearRutina = ({navigation, route}) => {
                             style={pickerSelectStyles}
                         />
                     </View>
-    
+                    */}
                     <View style={styles.containerS}>
                         <Text style={styles.labelS}>Ejercicio:          </Text>
                         <RNPickerSelect

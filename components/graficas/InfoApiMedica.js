@@ -30,7 +30,7 @@ const InfoApiMed = () =>{
     if(loading){
       return(
         <View style={{flex : 1, justifyContent: 'center', alignItems: 'center'}}>
-          <Text>Graficas del paciente: </Text>
+          <Text>Gráficas y tablas del paciente: </Text>
           {
             <GraficayTabla data = {data} />
           }

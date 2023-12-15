@@ -279,8 +279,8 @@ export default function IniciarSesion() {
             <Stack.Screen name='CitasProfesional' component={CitasProfesional} options={{title : 'Citas profesional'}} />
             <Stack.Screen name='ExpedientePaciente' component={ExpedientePaciente} options={{title : 'Expediente del paciente'}} />
             <Stack.Screen name="InfoMpaciente" component={InfoMPaciente} options={{title : 'Información médica del paciente'}} />
-            <Stack.Screen name="HabitoPersonal" component={HabitoPersonal} options={{title : 'Habito personal del paciente'}} />
-            <Stack.Screen name="HabitoAlimenticio" component={HabitoAlimenticio} options={{title : 'Habito alimenticio del paciente'}} />
+            <Stack.Screen name="HabitoPersonal" component={HabitoPersonal} options={{title : 'Hábito personal del paciente'}} />
+            <Stack.Screen name="HabitoAlimenticio" component={HabitoAlimenticio} options={{title : 'Hábito alimenticio del paciente'}} />
             <Stack.Screen name="RutinaPacienteProfesional" component={RutinaPacienteProfesional} options={{title : 'Rutinas del paciente'}} />
             <Stack.Screen name="VerProgresoPacienteProfesional" component={MuestraGraficasProfesioanl} options={{title : 'Progreso del paciente'}} />
             <Stack.Screen name="ModificaRutinaPaciente" component={ModificaRutinaPaciente} options={{title : 'Modifica rutina del paciente'}} />

@@ -122,7 +122,7 @@ const CrearDieta = ({navigation, route}) => {
 
     const eliminaProteina = () => {
         listaProteinasSeleccionadas.pop();
-        Alert.alert("Eliminación de proteina", "Eliminación exitosa de proteina");
+        Alert.alert("Eliminación de proteína", "Eliminación exitosa de proteína");
         setShowProteinasLista(!showProteinasLista);
         setShowProteinasLista(!showProteinasLista);
     }
@@ -328,7 +328,7 @@ const CrearDieta = ({navigation, route}) => {
                         </View>
                         <View style={styles.containerS}>
                             <Text>     </Text>
-                            <Text style={styles.labelS}>Cantidad de proteinas:</Text>
+                            <Text style={styles.labelS}>Cantidad de proteínas:</Text>
                             <TextInput
                                 style={styles.input}
                                 placeholder="Cantidad"
@@ -342,7 +342,7 @@ const CrearDieta = ({navigation, route}) => {
                             <Button title="Agregar a la lista" onPress={ () => agregarProteina({selectedValueProteina, cantidadProteina})}/>
                         </View>
                         <View>
-                            <Text style={styles.textoCampoBoton} onPress={() => setShowProteinasLista(!showProteinasLista)}>Mostrar lista de proteinas</Text>
+                            <Text style={styles.textoCampoBoton} onPress={() => setShowProteinasLista(!showProteinasLista)}>Mostrar lista de proteínas</Text>
                             <ExpandableView show={showProteinasLista} style={styles.contenedorDesplegable}>
                                 {listaProteinasSeleccionadas.length > 0 ? listaProteinasSeleccionadas.map((item) => <Text key={item.id} style={styles.textoDesplegable}>Alimento: {item.nombre}, cantidad: {item.cantidad}</Text>): <Text>No se cuenta con elementos</Text>}
                                 {listaProteinasSeleccionadas.length > 0 ? <Button title="Quitar último elmento" style={styles.button} onPress={eliminaProteina} /> : null}

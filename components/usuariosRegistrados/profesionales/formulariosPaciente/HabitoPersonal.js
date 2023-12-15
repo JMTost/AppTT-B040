@@ -136,7 +136,7 @@ const HabitoPersonal = ({navigation, route}) => {
         return (
             <ScrollView style={styles.container}>
                 <View style={styles.content}>
-                    <Text style={styles.subtitle}>Datos para crear el habito personal del paciente</Text>
+                    <Text style={styles.subtitle}>Datos para crear el hábito personal del paciente</Text>
                         <Text style={styles.textoCampo}>Hora en la que despierta</Text>
                         <TextInput style={styles.input} value={horaD} onChangeText={text => setHoraD(text)} keyboardType="numbers-and-punctuation" placeholder="Coloca la hora en formato de 24 hrs"/>
                         <Text style={styles.textoCampo}>Hora en la que duerme</Text>
@@ -169,7 +169,7 @@ const HabitoPersonal = ({navigation, route}) => {
         return(
             <ScrollView style={styles.container}>
                 <View style={styles.content}>
-                    <Text style={styles.subtitle}>Datos para crear el habito personal del paciente</Text>
+                    <Text style={styles.subtitle}>Datos para crear el hábito personal del paciente</Text>
                         <Text style={styles.textoCampo}>Hora en la que despierta</Text>
                         <TextInput style={styles.input} value={horaD} onChangeText={text => setHoraD(text)} keyboardType="numbers-and-punctuation" placeholder="Coloca la hora en formato de 24 hrs"/>
                         <Text style={styles.textoCampo}>Hora en la que duerme</Text>

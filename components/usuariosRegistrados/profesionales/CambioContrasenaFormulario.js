@@ -10,7 +10,7 @@ export default function CambioContrasenaFormulario() {
     const [nuevaContrasena, setNuevaContrasena] = useState('');
     const handleCambiaContrasena = () => {
       if(currentContrasena === "" || nuevaContrasena === ""){
-        Alert.alert("Error", "Campos de entrada vacia, compruebe los campos");
+        Alert.alert("Error", "Campos de entrada vacíos, compruebe los campos");
       }else if( (currentContrasena.length > 0 || currentContrasena < 16) || (nuevaContrasena.length > 0 || nuevaContrasena.length < 16) ){
         const dataEnvio = {
           "id" : infoApp.usuarioProfesional.idUsuario,
