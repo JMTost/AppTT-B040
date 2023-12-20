@@ -229,7 +229,7 @@ const GraficayTabla = ({data}) => {
        );
    }else{
     return (
-        <View>
+        <View style={{backgroundColor : 'white'}}>
             <Text>No hay información que mostrar</Text>
         </View>
     );

@@ -7,7 +7,7 @@ import infoApp from '../../../infoApp.json'
 import InfoApiMed from '../../graficas/InfoApiMedica';
 export default function PacientScreen(){//pagina principal
     return (
-        <ScrollView>
+        <ScrollView style={{backgroundColor : 'white'}}>
             <View style={{flex : 1, justifyContent:'center', alignItems : 'center', paddingTop : 50, backgroundColor: 'white'}}>
                 <InfoApiMed />
             </View>

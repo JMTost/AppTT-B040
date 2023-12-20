@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View} from "react-native";
+import { StyleSheet, Text, View, Dimensions } from "react-native";
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 //import 'react-native-gesture-handler';
 import RutinaPierna from "./componentesEjercicios/RutinaPierna";
@@ -10,6 +10,7 @@ import RutinaHombro from "./componentesEjercicios/RutinaHombro";
 import infoApp from '../../../infoApp.json';
 
 const Tab = createMaterialTopTabNavigator();
+const {width, height} = Dimensions.get('window');
 
 const RutinaPaciente = () => {
   
@@ -97,7 +98,9 @@ const RutinaPaciente = () => {
     );
   }else{
     return (
-      <Text>No se cuentan con ejercicios que mostrar</Text>
+      <View style={{flex : 1, alignContent : 'center', justifyContent : 'center', alignItems : 'center'}}> 
+        <Text style={styles.textTitulo}>No se cuentan con ejercicios que mostrar</Text>
+      </View>
     );
   }
   
@@ -177,6 +180,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: "center",
   },
+  textTitulo : {
+    fontSize : width * 0.05,
+    paddingBottom : 10
+},
 });
 
 export default RutinaPaciente;

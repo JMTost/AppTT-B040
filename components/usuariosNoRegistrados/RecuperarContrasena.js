@@ -59,12 +59,19 @@ export default function RecuperarContrasena() {
         console.log('Correo Electrónico:', email);
         console.log('Selección:', value);
       }else{
+        //console.log(fechaNacimiento)
+        let fechaPartes = fechaNacimiento.split('-');
+        if(parseInt(fechaPartes[1]) < 10){
+          //fechaPartes[1] = '';
+          fechaPartes[1] = '0'+fechaPartes[1];
+        }
+        //console.log(fechaPartes);
         const dataPost = {
           nombre : nombre.trimEnd(),
           apPaterno : apellidoPaterno.trimEnd(),
           apMaterno : apellidoMaterno.trimEnd(),
-          correo : email.trimEnd(),
-          fechaN : fechaNacimiento,
+          correo : email.trimEnd(),     
+          fechaN : fechaPartes[0]+"-"+fechaPartes[1]+"-"+fechaPartes[2],
           tipoUsuario : value
         };
 

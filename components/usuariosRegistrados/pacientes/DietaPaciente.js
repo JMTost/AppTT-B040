@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, Alert, ScrollView, Platform} from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, Alert, ScrollView, Platform, Dimensions} from 'react-native';
 import infoApp from '../../../infoApp.json';
+
+const {width, height} = Dimensions.get('window');
 
 const DietaPaciente = () => {
   if(infoApp.usuarioPaciente.dieta === 'No se encontro registros'){
     return (
-      <View style={styles.container}>
-          <Text>No se cuenta con una dieta que mostrar</Text>
+      <View style={{flex : 1, alignContent : 'center', justifyContent : 'center', alignItems : 'center', backgroundColor: 'white'}}> 
+          <Text style={{fontSize : width * 0.05, paddingBottom : 10}}>No se cuenta con una dieta que mostrar</Text>
           {/*<Text>{infoApp.usuarioPaciente.dieta}</Text>*/}
       </View>
   );

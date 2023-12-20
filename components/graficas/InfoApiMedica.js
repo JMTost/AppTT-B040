@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
-import {ScrollView, View, Text} from 'react-native';
+import {ScrollView, View, Text, Dimensions} from 'react-native';
 import GraficayTabla from "./GraficasyTablas";
 import infoApp from '../../infoApp.json';
+
+const {width, height} = Dimensions.get('window');
 
 const InfoApiMed = () =>{
     const [data, setData] = useState([]);
@@ -38,8 +40,8 @@ const InfoApiMed = () =>{
       );
     }else{
       return (
-        <View style={{flex : 1, justifyContent: 'center', alignItems: 'center', paddingTop : 50}}>
-        <Text>No hay información que mostrar</Text>
+        <View style={{flex : 1,  alignContent : 'center', justifyContent: 'center', alignItems: 'center', paddingTop : 50, backgroundColor : 'white'}}>
+        <Text style={{fontSize : width * 0.05, paddingBottom : 10}}>No hay información que mostrar</Text>
         {
           //console.log(infoApp)
         }
