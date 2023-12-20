@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from "react";
 import infoApp from '../../../infoApp.json';
-import { ScrollView, View, Text, TextInput, Button, Alert, StyleSheet, FlatList, TouchableOpacity, SafeAreaView, Pressable} from "react-native";
+import { ScrollView, View, Text, TextInput, Button, Alert, StyleSheet, FlatList, TouchableOpacity, SafeAreaView, Pressable, Dimensions} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import {Dropdown} from 'react-native-element-dropdown';
 import { ExpandableView } from "@pietile-native-kit/expandable-view";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import RNPickerSelect from 'react-native-picker-select';
+
+const {width, height} = Dimensions.get('window');
 
 const CrearDieta = ({navigation, route}) => {
     const {id} = route.params;
@@ -308,21 +310,25 @@ const CrearDieta = ({navigation, route}) => {
                 <ScrollView style={styles.containerScroll}>
                     <View style={styles.content}>
                         <View style={styles.containerS}>
-                            <Text style={styles.labelS}>Tipo de alimento: </Text>
+                            <Text style={styles.labelS}>Tipo de alimento:     </Text>
                             <RNPickerSelect items={tiposComia}      
                                 style={pickerSelectStyles}
                                 onValueChange={(value) => setSelectedTipoAlimento(value)}
                                 value={selectedTipoAlimento}
+                                placeholder={{label : "Selecciona una opción", value : null}}
+                                useNativeAndroidPickerStyle = {false}
                             />
                         </View>
                         <View style={styles.containerS}>
                             <Text>     </Text>
-                            <Text style={styles.labelS}>Proteina:               </Text>
+                            <Text style={styles.labelS}>Proteina:                    </Text>
                             <RNPickerSelect
                                 onValueChange={(value) => setSelectedValueProteina(value)}
                                 items={proteinasAPI}
                                 value={selectedValueProteina}
                                 style={pickerSelectStyles}
+                                placeholder={{label : "Selecciona una opción", value : null}}
+                                useNativeAndroidPickerStyle = {false}
                             />
                             <Text>     </Text>
                         </View>
@@ -351,12 +357,14 @@ const CrearDieta = ({navigation, route}) => {
                         {/* VERDURAS */}
                         <View style={styles.containerS}>
                             <Text>     </Text>
-                            <Text style={styles.labelS}>Verduras:               </Text>
+                            <Text style={styles.labelS}>Verduras:                  </Text>
                             <RNPickerSelect
                                 onValueChange={(value) => setSelectedValueVerdura(value)}
                                 items={verdurasAPI}
                                 value={selectedValueVerdura}
                                 style={pickerSelectStyles}
+                                placeholder={{label : "Selecciona una opción", value : null}}
+                                useNativeAndroidPickerStyle = {false}
                             />
                             <Text>     </Text>
                         </View>
@@ -385,12 +393,14 @@ const CrearDieta = ({navigation, route}) => {
                         {/* LACTEOS */}
                         <View style={styles.containerS}>
                             <Text>     </Text>
-                            <Text style={styles.labelS}>Lacteos:               </Text>
+                            <Text style={styles.labelS}>Lacteos:                 </Text>
                             <RNPickerSelect
                                 onValueChange={(value) => setSelectedValueLacteo(value)}
                                 items={lacteosAPI}
                                 value={selectedValueGrano}
                                 style={pickerSelectStyles}
+                                placeholder={{label : "Selecciona una opción", value : null}}
+                                useNativeAndroidPickerStyle = {false}
                             />
                             <Text>     </Text>
                         </View>
@@ -425,6 +435,8 @@ const CrearDieta = ({navigation, route}) => {
                                 items={frutasAPI}
                                 value={selectedValueFruta}
                                 style={pickerSelectStyles}
+                                placeholder={{label : "Selecciona una opción", value : null}}
+                                useNativeAndroidPickerStyle = {false}
                             />
                             <Text>     </Text>
                         </View>
@@ -453,12 +465,14 @@ const CrearDieta = ({navigation, route}) => {
                         {/* GRANOS */}
                         <View style={styles.containerS}>
                             <Text>     </Text>
-                            <Text style={styles.labelS}>Granos:               </Text>
+                            <Text style={styles.labelS}>Granos:                 </Text>
                             <RNPickerSelect
                                 onValueChange={(value) => setSelectedValueGrano(value)}
                                 items={granosAPI}
                                 value={selectedValueGrano}
                                 style={pickerSelectStyles}
+                                placeholder={{label : "Selecciona una opción", value : null}}
+                                useNativeAndroidPickerStyle = {false}
                             />
                             <Text>     </Text>
                         </View>
@@ -475,7 +489,7 @@ const CrearDieta = ({navigation, route}) => {
                             <Text>     </Text>
                         </View>
                         <View style={styles.bottonAlinea}>
-                            <Button title="Agregar a la lista" onPress={ () => agregaGrano({selectedValueGrano, cantidadGrano})}/>
+                            <Button title="Agregar a la lista" onPress={ () => agregaGrano({selectedValueGrano, cantidadGrano})} />
                         </View>
                         <View>
                             <Text style={styles.textoCampoBoton} onPress={() => setShowGranosLista(!showGranosLista)}>Mostrar lista de granos</Text>
@@ -559,6 +573,7 @@ const styles = StyleSheet.create({
         paddingStart: 30,
         borderRadius: 30,
         marginTop: 0,
+        marginBottom : 10
     },
     containerButton: {
         alignItems: 'center',
@@ -588,45 +603,60 @@ const styles = StyleSheet.create({
       textoCampoBoton : {
         alignSelf : 'baseline', 
         paddingLeft : 20, 
-        paddingBottom : 5,
-        paddingTop : 5,
+        marginBottom : 15,
+        marginTop : 5,
         fontSize : 15,
         fontWeight : 'bold'
       },
       contenedorDesplegable : {
         alignSelf : 'baseline',
         paddingLeft : 20,
+        marginBottom : 15
       },
       bottonAlinea : {
         justifyContent : 'center',
         alignItems : 'center',
-        paddingTop : 5,
-        paddingBottom : 5
+        marginTop : 10,
+        marginBottom : 20
       }
 
 });
 
 const pickerSelectStyles = StyleSheet.create({
-    inputIOS: {
+     inputIOS: {
         fontSize: 16,
         paddingVertical: 12,
         paddingHorizontal: 10,
         alignContent: "flex-end",
-        width: 230,
+        width: width * 0.63,//width: 260,
         height: 50,
         backgroundColor: 'white', // Color de fondo del campo de entrada
         paddingStart: 30,
         borderRadius: 30,
-        marginTop: 0,
+        marginTop: 10,
     },
     inputAndroid: {
-        fontSize: 16,
-        paddingHorizontal: 10,
+        fontSize: width * 0.03,
+        paddingHorizontal: 5,
         paddingVertical: 8,
         borderWidth: 0.5,
         borderColor: 'gray',
-        borderRadius: 8,
+        borderRadius: 30,
         color: 'black',
+        backgroundColor : 'white',
+        width: width * 0.40,
+        height: 50,
+        alignContent: "stretch",
+
+       /*
+       paddingHorizontal : 10,
+       paddingVertical : 8,
+       borderWidth : 1,
+       borderColor : 'gray',
+       borderRadius : 8,
+       color : 'black',
+       paddingRight : 30
+       */
     },
 });
 

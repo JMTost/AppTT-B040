@@ -821,11 +821,11 @@ const ModificarComidaForm = ({comida, alimentos, dataDieta, onModificar, onAgreg
         return (
             <ScrollView style={styles.containerScroll}>
             <View style={styles.content}>
-                <Text>Si desea eliminar un elemento, debe colocar en la cantidad un cero y seleccionar la opción de modificar, favor de colocar la abreviación de la cantidad, de la siguiente manera: kilogramo: kg, gramo: g, pieza: pz, etc.</Text>
-                <Text style={styles.labelS}>Cantidades de Proteínas:</Text>
+                <Text style={styles.instrucciones}>Si desea eliminar un elemento, debe colocar en la cantidad un cero y seleccionar la opción de modificar, favor de colocar la abreviación de la cantidad, de la siguiente manera: kilogramo: kg, gramo: g, pieza: pz, etc.</Text>
+                <Text style={styles.labelTitulo}>CANTIDADES DE PROTEÍNAS</Text>
                 <View>    
                     {cantidades.proteinas.map((cantidad, index) => (
-                        <View>
+                        <View style={styles.contenedorAlimentos}>
                         {alimentosAPI.proteinas[index] !== '0' && alimentosAPI.proteinas[index] !== '' && (
                             <>
                                 <Text style={styles.labelS}>{alimentosAPI.proteinas[index]}:</Text>
@@ -851,9 +851,17 @@ const ModificarComidaForm = ({comida, alimentos, dataDieta, onModificar, onAgreg
                         </View>
                     ))}
                 </View>
+                <TouchableOpacity style={styles.containerButtonAGREGAR} onPress={() => setShowProteinas(!showProteinas)}>
+                        <LinearGradient colors={['#5a7f78', '#00996f']}
+                                            start={{ x: 0, y: 0 }}
+                                            end={{ x: 1, y: 1 }}
+                                            style={styles.buttonAgregar}
+                                        >
+                            <Text style={styles.text}>Agregar Nuevo Alimento</Text>
+                        </LinearGradient>
+                    </TouchableOpacity>
                 <View style={styles.botonDesplegable}>
-                    <Text style={styles.textoDesplegable} onPress={() => setShowProteinas(!showProteinas)}>Agregar Nuevo Alimento</Text>
-                        <ExpandableView show={showProteinas}>
+                        <ExpandableView show={showProteinas} style = {{minHeight: height * 0.013, marginBottom : height * 0.005, marginTop : height * 0.01, width : width * 1}}>
                             <RNPickerSelect
                                 onValueChange={(value) => setSelectedValueAlimentoProteinas(value)}
                                 items={filtrarAlimentos(1)}
@@ -864,7 +872,7 @@ const ModificarComidaForm = ({comida, alimentos, dataDieta, onModificar, onAgreg
                             value={nuevaCantidadProteinas}
                             onChangeText={(text) => setNuevaCantidadProteinas(text)}
                             placeholder="Cantidad"
-                            style={styles.input}
+                            style={styles.inputAgregar}
                             keyboardType='default'
                             />
                         </ExpandableView>
@@ -872,10 +880,10 @@ const ModificarComidaForm = ({comida, alimentos, dataDieta, onModificar, onAgreg
 
                 {/* Otros bloques de código similares para lacteos, frutas, verduras y granos */}
                 {/* VERDURAS */}
-                <Text style={styles.labelS}>Cantidades de Verduras:</Text>
+                <Text style={styles.labelTitulo}>CANTIDADES DE VERDURAS</Text>
                 <View>
                     {cantidades.verduras.map((cantidad, index) => (
-                        <View >
+                        <View style={styles.contenedorAlimentos}>
                         {alimentosAPI.verduras[index] !== '0' && alimentosAPI.verduras[index] !== '' && (
                             <>
                                 <Text style={styles.labelS}>{alimentosAPI.verduras[index]}:</Text>
@@ -901,9 +909,17 @@ const ModificarComidaForm = ({comida, alimentos, dataDieta, onModificar, onAgreg
                         </View>
                         ))}
                 </View>
+                <TouchableOpacity style={styles.containerButtonAGREGAR} onPress={() => setShowVerduras(!showVerduras)}>
+                        <LinearGradient colors={['#5a7f78', '#00996f']}
+                                            start={{ x: 0, y: 0 }}
+                                            end={{ x: 1, y: 1 }}
+                                            style={styles.buttonAgregar}
+                                        >
+                            <Text style={styles.text}>Agregar Nuevo Alimento</Text>
+                        </LinearGradient>
+                    </TouchableOpacity>
                 <View style={styles.botonDesplegable}>
-                    <Text style={styles.textoDesplegable} onPress={() => setShowVerduras(!showVerduras)}>Agregar Nuevo Alimento</Text>
-                    <ExpandableView show={showVerduras}>
+                    <ExpandableView show={showVerduras} style = {{minHeight: height * 0.013, marginBottom : height * 0.005, marginTop : height * 0.01, width : width * 1}}>
                         <RNPickerSelect
                             onValueChange={(value) => setSelectedValueAlimentoVerduras(value)}
                             items={filtrarAlimentos(2)}
@@ -914,16 +930,16 @@ const ModificarComidaForm = ({comida, alimentos, dataDieta, onModificar, onAgreg
                         value={nuevaCantidadVerduras}
                         onChangeText={(text) => setNuevaCantidadVerduras(text)}
                         placeholder="Cantidad"
-                        style={styles.input}
+                        style={styles.inputAgregar}
                         keyboardType='default'
                         />
                     </ExpandableView>
                 </View>
                 {/* lACTEOS */}
-                <Text style={styles.labelS}>Cantidades de Lacteos:</Text>
+                <Text style={styles.labelTitulo}>CANTIDADES DE LACTEOS</Text>
                 <View>
                     {cantidades.lacteos.map((cantidad, index) => (
-                        <View>
+                        <View style={styles.contenedorAlimentos}>
                         {alimentosAPI.lacteos[index] !== '0' && alimentosAPI.lacteos[index] !== '' &&(
                             <>
                                 <Text style={styles.labelS}>{alimentosAPI.lacteos[index]}:</Text>
@@ -949,9 +965,17 @@ const ModificarComidaForm = ({comida, alimentos, dataDieta, onModificar, onAgreg
                         </View>
                     ))}
                 </View>
+                <TouchableOpacity style={styles.containerButtonAGREGAR} onPress={() => setShowLacteos(!showLacteos)}>
+                        <LinearGradient colors={['#5a7f78', '#00996f']}
+                                            start={{ x: 0, y: 0 }}
+                                            end={{ x: 1, y: 1 }}
+                                            style={styles.buttonAgregar}
+                                        >
+                            <Text style={styles.text}>Agregar Nuevo Alimento</Text>
+                        </LinearGradient>
+                    </TouchableOpacity>
                 <View style={styles.botonDesplegable}>
-                    <Text style={styles.textoDesplegable}onPress={() => setShowLacteos(!showLacteos)}>Agregar Nuevo Alimento</Text>
-                    <ExpandableView show={showLacteos}>
+                    <ExpandableView show={showLacteos} style = {{minHeight: height * 0.013, marginBottom : height * 0.005, marginTop : height * 0.01, width : width * 1}}>
                         <RNPickerSelect
                             onValueChange={(value) => setSelectedValueAlimentoLacteos(value)}
                             items={filtrarAlimentos(3)}
@@ -962,16 +986,16 @@ const ModificarComidaForm = ({comida, alimentos, dataDieta, onModificar, onAgreg
                         value={nuevaCantidadLacteos}
                         onChangeText={(text) => setNuevaCantidadLacteos(text)}
                         placeholder="Cantidad"
-                        style={styles.input}
+                        style={styles.inputAgregar}
                         keyboardType='default'
                         />
                     </ExpandableView>
                     </View>
                 {/* FRUTAS */}
-                <Text style={styles.labelS}>Cantidades de Frutas:</Text>
+                <Text style={styles.labelTitulo}>CANTIDADES DE FRUTAS</Text>
                 <View>
                     {cantidades.frutas.map((cantidad, index) => (
-                        <View >
+                        <View style={styles.contenedorAlimentos}>
                         {alimentosAPI.frutas[index] !== '0' && alimentosAPI.frutas[index] !== ''  && (
                             <>
                                 <Text style={styles.labelS}>{alimentosAPI.frutas[index]}</Text>
@@ -997,9 +1021,17 @@ const ModificarComidaForm = ({comida, alimentos, dataDieta, onModificar, onAgreg
                         </View>
                     ))}
                 </View>
+                <TouchableOpacity style={styles.containerButtonAGREGAR} onPress={() => setShowFrutas(!showFrutas)}>
+                        <LinearGradient colors={['#5a7f78', '#00996f']}
+                                            start={{ x: 0, y: 0 }}
+                                            end={{ x: 1, y: 1 }}
+                                            style={styles.buttonAgregar}
+                                        >
+                            <Text style={styles.text}>Agregar Nuevo Alimento</Text>
+                        </LinearGradient>
+                    </TouchableOpacity>
                 <View style={styles.botonDesplegable}>
-                    <Text style={styles.textoDesplegable} onPress={() => setShowFrutas(!showFrutas)}>Agregar Nuevo Alimento</Text>
-                    <ExpandableView show={showFrutas}>
+                    <ExpandableView show={showFrutas} style = {{minHeight: height * 0.013, marginBottom : height * 0.005, marginTop : height * 0.01, width : width * 1}}>
                         <RNPickerSelect
                             onValueChange={(value) => setSelectedValueAlimentoFrutas(value)}
                             items={filtrarAlimentos(4)}
@@ -1010,16 +1042,16 @@ const ModificarComidaForm = ({comida, alimentos, dataDieta, onModificar, onAgreg
                         value={nuevaCantidadFrutas}
                         onChangeText={(text) => setNuevaCantidadFrutas(text)}
                         placeholder="Cantidad"
-                        style={styles.input}
+                        style={styles.inputAgregar}
                         keyboardType='default'
                         />
                     </ExpandableView>
                 </View>
                 {/* GRANOS */}
-                <Text style={styles.labelS}>Cantidades de Granos:</Text>
+                <Text style={styles.labelTitulo}>CANTIDADES DE GRANOS</Text>
                 <View>
                     {cantidades.granos.map((cantidad, index) => (
-                        <View>
+                        <View style={styles.contenedorAlimentos}>
                         {alimentosAPI.granos[index] !== '0' && alimentosAPI.granos[index] !== '' && (
                             <>
                                 <Text style={styles.labelS}>{alimentosAPI.granos[index]}:  </Text>
@@ -1046,10 +1078,18 @@ const ModificarComidaForm = ({comida, alimentos, dataDieta, onModificar, onAgreg
                         
                     ))}
                 </View>
+                <TouchableOpacity style={styles.containerButtonAGREGAR} onPress={() => setShowGranos(!showGranos)}>
+                        <LinearGradient colors={['#5a7f78', '#00996f']}
+                                            start={{ x: 0, y: 0 }}
+                                            end={{ x: 1, y: 1 }}
+                                            style={styles.buttonAgregar}
+                                        >
+                            <Text style={styles.text}>Agregar Nuevo Alimento</Text>
+                        </LinearGradient>
+                    </TouchableOpacity>
 
                 <View style={styles.botonDesplegable}>
-                    <Text style={styles.textoDesplegable} onPress={() => setShowGranos(!showGranos)}>Agregar Nuevo Alimento</Text>
-                    <ExpandableView show={showGranos} style={styles.contenedorDesplegable}>
+                    <ExpandableView show={showGranos} style = {{minHeight: height * 0.013, marginBottom : height * 0.005, marginTop : height * 0.01, width : width * 1}}>
                         <RNPickerSelect
                             onValueChange={(value) => setSelectedValueAlimentoGranos(value)}
                             items={filtrarAlimentos(5)}
@@ -1060,7 +1100,7 @@ const ModificarComidaForm = ({comida, alimentos, dataDieta, onModificar, onAgreg
                         value={nuevaCantidadGranos}
                         onChangeText={(text) => setNuevaCantidadGranos(text)}
                         placeholder="Cantidad"
-                        style={styles.input}
+                        style={styles.inputAgregar}
                         keyboardType='default'
                         />
                     </ExpandableView>
@@ -1124,19 +1164,20 @@ const styles = StyleSheet.create({
     content: {
         flex: 1,
         backgroundColor:"#96c4c4",
-        borderRadius: 20,
+        //borderRadius: 20,
         justifyContent: 'center',
         alignItems: 'center',
         fontWeight: 'bold',
         marginTop: height * 0.01,
         marginBottom: height * 0.010,
+        padding : 10
     },
     containerS: {
         flexDirection: "row",
         justifyContent: "flex-start",
         alignItems: "center",
         padding: 5,
-        marginTop: 0,
+        //marginTop: 0,
 
     },
     labelS: {
@@ -1145,14 +1186,28 @@ const styles = StyleSheet.create({
         marginTop: 10,
         justifyContent: "flex-start",
         marginRight: 15,
+        
+    },
+    labelTitulo: {
+        fontSize: 18,
+        fontWeight: "bold",
+        marginTop: 10,
+        justifyContent: "flex-start",
+        marginRight: 15,
+        height : height * 0.04,
+        width : width * 0.9,
+        borderRadius : 30,
+        textAlign : 'center',
+        backgroundColor: '#bbdec6'
     },
     input: {
-        width: width * 0.5,
+        width: width * 0.25,
         height: height * 0.06,
         backgroundColor: 'white', // Color de fondo del campo de entrada
         paddingStart: 30,
         borderRadius: 30,
         marginTop: 0,
+        marginBottom : 10
     },
     containerButton: {
         alignItems: 'center',
@@ -1175,18 +1230,57 @@ const styles = StyleSheet.create({
     contenedorDesplegable : {
         alignSelf : 'baseline',
         paddingLeft : 20,
+        height : height * 0.2,
       },
       textoDesplegable: {
         color : 'white',
         fontSize : 15,
-        fontWeight : 'bold'
+        fontWeight : 'bold',
       },
     botonDesplegable : {
-        paddingTop : 10,
-        paddingBottom : 10,
+        marginTop: 10,
+        marginBottom : 20,
         right : 20,
-    }
+        //height : height * 0.2
+        width : width * 0.5
+    }, 
+    instrucciones : {
+        marginRight : 10,
+        marginLeft : 10,
+        textAlign : 'justify',
+        fontStyle : 'italic',
+        paddingBottom : height * 0.02
+    },
+    elementoAlimento : {
 
+    },
+    contenedorAlimentos : {
+        marginTop : height * 0.02,
+        marginBottom : height * 0.02,
+        flexDirection : 'row'
+    },
+    containerButtonAGREGAR: {
+        alignItems: 'center',
+        width: width * 0.9,//200,
+        marginTop: height * 0.01,
+    },
+    buttonAgregar: {
+        width: width*0.7,
+        height: height * 0.05,
+        borderRadius: 25,
+        padding: 10,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    inputAgregar: {
+        width: width * 0.63,
+        height: height * 0.06,
+        backgroundColor: 'white', // Color de fondo del campo de entrada
+        paddingStart: 30,
+        borderRadius: 30,
+        marginTop: 0,
+        marginBottom : 10,
+    },
 });
 
 const pickerSelectStyles = StyleSheet.create({
@@ -1195,12 +1289,12 @@ const pickerSelectStyles = StyleSheet.create({
         paddingVertical: 12,
         paddingHorizontal: 10,
         alignContent: "flex-end",
-        width: 260,
+        width: width * 0.63,//width: 260,
         height: 50,
         backgroundColor: 'white', // Color de fondo del campo de entrada
         paddingStart: 30,
         borderRadius: 30,
-        marginTop: 0,
+        marginTop: 10,
     },
     inputAndroid: {
         fontSize: 16,
@@ -1208,8 +1302,11 @@ const pickerSelectStyles = StyleSheet.create({
         paddingVertical: 8,
         borderWidth: 0.5,
         borderColor: 'gray',
-        borderRadius: 8,
+        borderRadius: 30,
         color: 'black',
+        backgroundColor : 'white',
+        marginBottom : 10,
+        width: width * 0.63,//width: 260,
     },
 });
 

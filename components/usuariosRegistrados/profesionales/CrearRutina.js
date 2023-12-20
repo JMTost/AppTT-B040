@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, ScrollView, Pressable, Platform, Touchable, TouchableOpacity, Image, picker, SafeAreaView, Alert} from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, ScrollView, Pressable, Platform, Touchable, TouchableOpacity, Image, picker, SafeAreaView, Alert, Dimensions} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import infoApp from '../../../infoApp.json';
+
+const {width, height} = Dimensions.get('window');
 
 const CrearRutina = ({navigation, route}) => {
     const {id} = route.params;
@@ -194,11 +196,14 @@ const CrearRutina = ({navigation, route}) => {
                             items={ejercicios}
                             value={selectedValueEjercicio}
                             style={pickerSelectStyles}
+                            placeholder={{label : "Selecciona una opción", value : null}}
+                            useNativeAndroidPickerStyle = {false}
+                            onClose={() => console.log("data")}
                         />
                     </View>
     
                     <View style={styles.containerS}>
-                        <Text style={styles.labelS}>Repeticiones:</Text>
+                        <Text style={styles.labelS}>Repeticiones:   </Text>
                         <TextInput
                             style={styles.input}
                             placeholder="Repeticiones"
@@ -313,6 +318,8 @@ const CrearRutina = ({navigation, route}) => {
                             items={videos}
                             value={selectedValueVideo}
                             style={pickerSelectStyles}
+                            placeholder={{label : "Selecciona una opción", value : null}}
+                            useNativeAndroidPickerStyle = {false}
                         />
                     </View>
     {
@@ -476,7 +483,7 @@ const pickerSelectStyles = StyleSheet.create({
         paddingVertical: 12,
         paddingHorizontal: 10,
         alignContent: "flex-end",
-        width: 260,
+        width: width * 0.63,//width: 260,
         height: 50,
         backgroundColor: 'white', // Color de fondo del campo de entrada
         paddingStart: 30,
@@ -484,13 +491,27 @@ const pickerSelectStyles = StyleSheet.create({
         marginTop: 10,
     },
     inputAndroid: {
-        fontSize: 16,
-        paddingHorizontal: 10,
+        fontSize: width * 0.03,
+        paddingHorizontal: 5,
         paddingVertical: 8,
         borderWidth: 0.5,
         borderColor: 'gray',
-        borderRadius: 8,
+        borderRadius: 30,
         color: 'black',
+        backgroundColor : 'white',
+        width: width * 0.63,
+        height: 50,
+        alignContent: "stretch",
+
+       /*
+       paddingHorizontal : 10,
+       paddingVertical : 8,
+       borderWidth : 1,
+       borderColor : 'gray',
+       borderRadius : 8,
+       color : 'black',
+       paddingRight : 30
+       */
     },
 });
 

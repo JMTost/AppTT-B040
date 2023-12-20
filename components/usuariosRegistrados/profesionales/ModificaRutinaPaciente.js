@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from "react";
 import infoApp from '../../../infoApp.json';
-import { ScrollView, View, Text, TextInput, Button, Alert, StyleSheet, FlatList, TouchableOpacity, SafeAreaView, Pressable} from "react-native";
+import { ScrollView, View, Text, TextInput, Button, Alert, StyleSheet, FlatList, TouchableOpacity, SafeAreaView, Pressable, Dimensions} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import {Dropdown} from 'react-native-element-dropdown';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import RNPickerSelect from 'react-native-picker-select';
 
+const {width, height} = Dimensions.get('window');
 
 const ModificaRutinaPaciente = ({navigation, route}) => {
     //!debemos obtener el id del paciente, del profesional
@@ -268,11 +269,14 @@ const ModificaRutinaPaciente = ({navigation, route}) => {
                             items={ejercicios}
                             value={selectedValueEjercicio}
                             style={pickerSelectStyles}
+                            placeholder={{label : "Selecciona una opción", value : null}}
+                            useNativeAndroidPickerStyle = {false}
+                            onClose={() => console.log("data")}
                         />
                     </View>
     
                     <View style={styles.containerS}>
-                        <Text style={styles.labelS}>Repeticiones:</Text>
+                        <Text style={styles.labelS}>Repeticiones:  </Text>
                         <TextInput
                             style={styles.input}
                             value={repeticiones}
@@ -388,6 +392,9 @@ const ModificaRutinaPaciente = ({navigation, route}) => {
                             items={videos}
                             value={selectedValueVideo}
                             style={pickerSelectStyles}
+                            placeholder={{label : "Selecciona una opción", value : null}}
+                            useNativeAndroidPickerStyle = {false}
+                            onClose={() => console.log("data")}
                         />
                     </View>
     
@@ -549,6 +556,7 @@ const styles = StyleSheet.create({
         paddingStart: 30,
         borderRadius: 30,
         marginTop: 10,
+        color : 'black'
     },
     button: {
         width: '80%',
@@ -572,7 +580,7 @@ const pickerSelectStyles = StyleSheet.create({
         paddingVertical: 12,
         paddingHorizontal: 10,
         alignContent: "flex-end",
-        width: 260,
+        width: width * 0.63,//width: 260,
         height: 50,
         backgroundColor: 'white', // Color de fondo del campo de entrada
         paddingStart: 30,
@@ -580,14 +588,28 @@ const pickerSelectStyles = StyleSheet.create({
         marginTop: 10,
     },
     inputAndroid: {
-        fontSize: 16,
-        paddingHorizontal: 10,
+        fontSize: width * 0.03,
+        paddingHorizontal: 5,
         paddingVertical: 8,
         borderWidth: 0.5,
         borderColor: 'gray',
-        borderRadius: 8,
+        borderRadius: 30,
         color: 'black',
+        backgroundColor : 'white',
+        width: width * 0.63,
+        height: 50,
+        alignContent: "stretch",
+       /*
+       paddingHorizontal : 10,
+       paddingVertical : 8,
+       borderWidth : 1,
+       borderColor : 'gray',
+       borderRadius : 8,
+       color : 'black',
+       paddingRight : 30
+       */
     },
 });
+
 
 export default ModificaRutinaPaciente;
